@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="web:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/web_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="web/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="web" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/artifacts-23/filestore/javax.servlet/jstl/1.1.2/jar/3375e43c620df4f1114959400ff9bb90d12a2feb/jstl-1.1.2.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/artifacts-23/filestore/org.eclipse.jetty/jetty-io/9.0.0.v20130308/jar/cef2aac30539404541705388c13bbd311f1d5856/jetty-io-9.0.0.v20130308.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/artifacts-23/filestore/org.eclipse.jetty/jetty-http/9.0.0.v20130308/jar/7344f63f20eb00e03b7222a7dd8fb7ed998e8bc2/jetty-http-9.0.0.v20130308.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/artifacts-23/filestore/org.eclipse.jetty/jetty-util/9.0.0.v20130308/jar/19859238118e33ad1be4c0b629fe69c0f73853f4/jetty-util-9.0.0.v20130308.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/artifacts-23/filestore/org.eclipse.jetty/jetty-server/9.0.0.v20130308/jar/157403813bb93758f9281e299ec458e6ef5e0aa/jetty-server-9.0.0.v20130308.jar" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
