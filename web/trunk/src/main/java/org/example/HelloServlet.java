@@ -13,9 +13,7 @@ public class HelloServlet extends HttpServlet
 {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        response.setContentType("text/html");
-        response.setStatus(HttpServletResponse.SC_OK);
-        System.out.print(request.getParameter("time"));
-        request.getRequestDispatcher("/jsp/ala.jsp").forward(request, response);
+        request.getRequestDispatcher("/jsp/game.jsp").forward(request, response);
     }
+
 }

@@ -6,15 +6,14 @@
 
 <body>
 <%
-
-
-         out.print(request.getParameter("time"));
+    out.print(request.getParameter("time"));
     int a=5;
     int b=2;
 
     int result=a+b;
 
-    out.print("Additon of a and b :"+result);
+    out.print("Additon of a and b :"+ System.getProperties());
+
 %>
 </body>
 </html>
