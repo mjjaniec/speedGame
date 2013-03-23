@@ -1,10 +1,13 @@
 package org.example;
 
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.File;
 
 public class HelloServlet extends HttpServlet
 {
@@ -12,8 +15,7 @@ public class HelloServlet extends HttpServlet
     {
         response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().println("<h1>Hello Servlet</h1>");
-        response.getWriter().println("session=" + request.getSession(true).getId());
+        System.out.print(request.getParameter("time"));
         request.getRequestDispatcher("/jsp/ala.jsp").forward(request, response);
     }
 }

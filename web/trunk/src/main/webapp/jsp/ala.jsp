@@ -6,6 +6,9 @@
 
 <body>
 <%
+
+
+         out.print(request.getParameter("time"));
     int a=5;
     int b=2;
 

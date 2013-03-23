@@ -1,2 +1,48 @@
-<h1>Hello World Webapp</h1>
-<a href="hello">Hello Servlet</a>
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>jQuery UI Autocomplete - Default functionality</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
+    <link rel="stylesheet" href="/resources/demos/style.css" />
+
+    <script>
+        /*$(function() {
+            $( "input[type=submit], a, button" )
+                    .button()
+                    .click(function( event ) {
+                        event.preventDefault();
+                    });
+        });*/
+    </script>
+
+</head>
+<body>
+
+<div class="ui-widget">
+    <form name="input" action="servlet" method="get">
+        <table>
+            <tr>
+                <td><label for="players">Number of players: </label></td>
+                <td><input id="players" /></td>
+            </tr>
+            <tr>
+                <td><label for="time">Time per player: </label> </td>
+                <td> <input id="time" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="A submit button" /></td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+
+
+</body>
+</html>

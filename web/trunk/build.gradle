@@ -3,6 +3,8 @@ apply plugin: 'war'
 apply plugin: 'jetty'
 apply plugin: 'idea'
 
+jettyRun.contextPath = "web"
+jettyRunWar.contextPath ="web"
 repositories {
     mavenCentral()
 
