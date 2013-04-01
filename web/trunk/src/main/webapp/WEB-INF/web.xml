@@ -5,15 +5,49 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
            version="2.5">
 
+    <servlet>
+        <servlet-name>GameServlet</servlet-name>
+        <servlet-class>pl.edu.agh.speedgame.GameServlet</servlet-class>
+    </servlet>
 
     <servlet>
-        <servlet-name>Hello</servlet-name>
-        <servlet-class>org.example.HelloServlet</servlet-class>
+        <servlet-name>UploadServlet</servlet-name>
+        <servlet-class>pl.edu.agh.speedgame.UploadServlet</servlet-class>
+        <init-param>
+            <description>Define storagepath for fileuploads</description>
+            <param-name>upload_path</param-name>
+            <param-value>/var/tmp</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>pl.edu.agh.speedgame.RegisterServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>pl.edu.agh.speedgame.LoginServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>Hello</servlet-name>
-        <url-pattern>/servlet</url-pattern>
+        <servlet-name>GameServlet</servlet-name>
+        <url-pattern>/game/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>UploadServlet</servlet-name>
+        <url-pattern>/upload/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/register/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login/*</url-pattern>
     </servlet-mapping>
 
 </web-app>

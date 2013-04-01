@@ -4,10 +4,10 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css"/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-    <script src="lib/jquery.lwtCountdown-1.0.js"></script>
-    <script src="lib/misc.js"></script>
-    <link rel="stylesheet" href="css/game.css"/>
-    <link rel="stylesheet" href="css/countdown.css"/>
+    <script src="../js/jquery.lwtCountdown-1.0.js"></script>
+    <script src="../js/misc.js"></script>
+    <link rel="stylesheet" href="../css/game.css"/>
+    <link rel="stylesheet" href="../css/countdown.css"/>
 </head>
 
 <body>
