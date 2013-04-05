@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="common__app_name">SpeedGame</string>
+    <string name="common__start_the_game">Start the game</string>
+
+    <string name="newgame__number_of_players">Number of players</string>
+    <string name="newgame__time_per_player">Time per player</string>
+
+    <string name="game__next_player">Next player</string>
+    <string name="game__loose_game">Loose game</string>
+    <string name="game__game_name">Name of the Game</string>
+    <string name="login__login">Login</string>
+    <string name="login__password">Password</string>
+    <string name="login__new_account">New account</string>
+    <string name="login__invalid">Invalid login or password. Please retype and try again. You may also create new
+        account.
+    </string>
+
+</resources>
