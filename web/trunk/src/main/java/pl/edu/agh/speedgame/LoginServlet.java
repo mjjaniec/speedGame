@@ -1,5 +1,9 @@
 package pl.edu.agh.speedgame;
 
+import pl.edu.agh.speedgame.dao.OurSessionReplacement;
+import pl.edu.agh.speedgame.dao.SessionFactorySingleton;
+import pl.edu.agh.speedgame.dto.User;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,11 +20,26 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String login = (String) request.getParameter("login");
-        String password = (String) request.getParameter("password");
-        System.out.println(login);
-        System.out.println(password);
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
 
-        request.getRequestDispatcher("/html/new_game.html").forward(request, response);
+        try(OurSessionReplacement sessionReplacement = SessionFactorySingleton.getInstance().createSessionReplacement()){
+            User user = (User) sessionReplacement.get(User.class, login);
+
+            if(user == null) {
+                response.sendRedirect("/main_page.jsp?error=" + "User doesn't exists");
+                return;
+            }
+
+            if(user.getPassword().equals(password)) {
+                request.getSession().setAttribute("login", login);
+                request.getSession().setAttribute("password", password);
+                request.getRequestDispatcher("/html/new_game.html").forward(request, response);
+            } else {
+                response.sendRedirect("/main_page.jsp?error=" + "Wrong login or password");
+            }
+        }
+
+
     }
 }

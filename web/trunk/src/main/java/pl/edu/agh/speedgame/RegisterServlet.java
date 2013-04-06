@@ -1,20 +1,15 @@
 package pl.edu.agh.speedgame;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import pl.edu.agh.speedgame.dao.OurSessionReplacement;
+import pl.edu.agh.speedgame.dao.SessionFactorySingleton;
+import pl.edu.agh.speedgame.dto.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 public class RegisterServlet extends HttpServlet {
 
@@ -32,13 +27,25 @@ public class RegisterServlet extends HttpServlet {
         String avatar = request.getParameter("avatar");
         String ring = request.getParameter("ring");
 
-        System.out.println(login);
-        System.out.println(password);
-        System.out.println(email);
-        System.out.println(avatar);
-        System.out.println(ring);
+        User.UserBuilder builder = new User.UserBuilder();
+        builder.login(login)
+               .password(password)
+               .email(email)
+               .avatar(avatar)
+               .ring(ring);
+
+        User user = builder.build();
+
+        try(OurSessionReplacement sessionReplacement = SessionFactorySingleton.getInstance().createSessionReplacement()) {
+            User currentlySavedUser = (User) sessionReplacement.get(User.class, login);
+            if(currentlySavedUser == null) {
+                sessionReplacement.save(user);
+                response.setStatus(HttpServletResponse.SC_OK);
+            } else {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "User with the same login already exists");
+            }
+        }
 
 
-        response.setStatus(HttpServletResponse.SC_OK);
     }
 }

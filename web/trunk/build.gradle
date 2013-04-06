@@ -30,5 +30,11 @@ dependencies {
     compile group: 'org.json', name: 'json', version: '20090211'
     compile group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'
 
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '4.1.10.Final'
+    compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.0-api', version: '1.0.1.Final'
+    compile group: 'org.hibernate.common', name: 'hibernate-commons-annotations', version: '4.0.1.Final'
+
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
+
 }
 
