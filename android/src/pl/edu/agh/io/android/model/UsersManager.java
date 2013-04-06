@@ -8,9 +8,10 @@ package pl.edu.agh.io.android.model;
  * To change this template use File | Settings | File Templates.
  */
 
+import pl.edu.agh.io.android.activities.R;
+
 import java.util.ArrayList;
 import java.util.List;
-import pl.edu.agh.io.android.activities.R;
 
 public class UsersManager {
     private static UsersManager instance;
