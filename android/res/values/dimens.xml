@@ -4,5 +4,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="main_timer">32dp</dimen>
+    <dimen name="register_big">220dp</dimen>
+    <dimen name="register_small">80dp</dimen>
 
 </resources>

@@ -3,14 +3,20 @@
           package="pl.edu.agh.io.android.activities"
           android:versionCode="1"
           android:versionName="1.0">
-    <uses-sdk android:minSdkVersion="17"/>
-    <application android:label="@string/common__app_name" android:icon="@drawable/ic_launcher">
+    <uses-sdk android:minSdkVersion="10"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application
+        android:label="@string/common__app_name"
+        android:icon="@drawable/ic_launcher"
+        android:theme="@style/AppBaseTheme"
+        >
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".ChooseFileActivity"/>
         <activity android:name=".NewAccountActivity"/>
         <activity android:name=".NewGameActivity"/>
         <activity android:name=".GameActivity" />

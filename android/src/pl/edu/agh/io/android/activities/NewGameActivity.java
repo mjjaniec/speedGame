@@ -1,12 +1,10 @@
 package pl.edu.agh.io.android.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import pl.edu.agh.io.android.model.UsersManager;
 
 /**
@@ -16,7 +14,7 @@ import pl.edu.agh.io.android.model.UsersManager;
  * Time: 10:16 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NewGameActivity extends Activity {
+public class NewGameActivity extends AbstractActivity {
 
     private final int maxUsers = 200;
     private final int minUsers = 2;

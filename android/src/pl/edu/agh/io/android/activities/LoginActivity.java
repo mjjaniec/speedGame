@@ -8,16 +8,16 @@ package pl.edu.agh.io.android.activities;
  * To change this template use File | Settings | File Templates.
  */
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import pl.edu.agh.io.android.misc.SetText;
 import pl.edu.agh.io.android.model.SpeedGameProxy;
+import pl.edu.agh.io.android.model.tasks.LoginTask;
 
-
-public class LoginActivity extends Activity {
+public class LoginActivity extends AbstractActivity {
     private View pendingView;
     private LoginActivity that;
 
@@ -51,14 +51,26 @@ public class LoginActivity extends Activity {
         });
     }
 
-    public void onLogin(boolean success) {
-        if (success) {
-            Intent myIntent = new Intent(pendingView.getContext(), NewGameActivity.class);
-            startActivityForResult(myIntent, 0);
-        } else {
-            TextView info = ((TextView) findViewById(R.id.login__info));
-            info.setText(R.string.login__invalid);
+    public void onLogin(LoginTask.LoginResult result) {
+        final TextView loginInfo = (TextView) findViewById(R.id.login__info);
+
+        switch (result){
+            case OK:
+                Intent myIntent = new Intent(pendingView.getContext(), NewGameActivity.class);
+                startActivityForResult(myIntent, 0);
+                break;
+            case ERROR:
+                runOnUiThread(new SetText(loginInfo,R.string.login__error));
+                break;
+            case INVALID_PASSWORD:
+                runOnUiThread(new SetText(loginInfo, R.string.login__invalid_password));
+                break;
+            case INVALID_LOGIN:
+                runOnUiThread(new SetText(loginInfo, R.string.login__invalid_login));
+                break;
+            default: assert(false);
         }
+
     }
 
 

@@ -8,7 +8,6 @@ package pl.edu.agh.io.android.activities;
  * To change this template use File | Settings | File Templates.
  */
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -18,7 +17,7 @@ import android.widget.TextView;
 import pl.edu.agh.io.android.model.User;
 import pl.edu.agh.io.android.model.UsersManager;
 
-public class GameActivity extends Activity {
+public class GameActivity extends AbstractActivity {
     private static int timeLeft;
     private static int players;
     private ArrayAdapter<User> adapter;

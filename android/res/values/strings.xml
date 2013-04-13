@@ -13,8 +13,24 @@
     <string name="login__login">Login</string>
     <string name="login__password">Password</string>
     <string name="login__new_account">New account</string>
-    <string name="login__invalid">Invalid login or password. Please retype and try again. You may also create new
+    <string name="login__invalid_login">Invalid login. Please retype and try again. You may also create new
         account.
     </string>
+    <string name="login__invalid_password">Invalid login or password. Please retype and try again. You may also create new
+        account.
+    </string>
+    <string name="login__error">An error occurred during communication with server.</string>
+    <string name="newaccount__login">Login</string>
+    <string name="newaccount__password">Password</string>
+    <string name="newaccount__email">Email</string>
+    <string name="newaccount__retype">Retype</string>
+    <string name="newaccount__register">Register</string>
+    <string name="newaccount__change">Change</string>
+    <string name="newaccount__default_avatar">avatar.jpg</string>
+    <string name="newaccount__default_ring">ring.mp3</string>
+    <string name="choosefile__ok">OK</string>
+    <string name="newaccount__choose_avatar">ChooseAvatar</string>
+    <string name="newaccount__choose_ring">choose</string>
+    <string name="choosefile__upload">Upload a file</string>
 
 </resources>
