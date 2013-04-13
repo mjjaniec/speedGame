@@ -27,6 +27,10 @@ public class RegisterServlet extends HttpServlet {
         String avatar = request.getParameter("avatar");
         String ring = request.getParameter("ring");
 
+        //!!!added
+        String android = request.getParameter("from_android_app");
+        boolean isAndroid = android != null && android.equals("true");
+
         User.UserBuilder builder = new User.UserBuilder();
         builder.login(login)
                .password(password)
@@ -40,9 +44,11 @@ public class RegisterServlet extends HttpServlet {
             User currentlySavedUser = (User) sessionReplacement.get(User.class, login);
             if(currentlySavedUser == null) {
                 sessionReplacement.save(user);
-                response.setStatus(HttpServletResponse.SC_OK);
+		if(isAndroid)response.sendError(HttpServletResponse.SC_OK,"OK");
+		else  response.setStatus(HttpServletResponse.SC_OK);
             } else {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "User with the same login already exists");
+		if(isAndroid)response.sendError(HttpServletResponse.SC_OK,"USER_EXISTS");
+                else response.sendError(HttpServletResponse.SC_BAD_REQUEST, "User with the same login already exists");
             }
         }
 

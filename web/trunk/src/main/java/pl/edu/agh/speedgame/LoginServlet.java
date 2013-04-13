@@ -22,21 +22,31 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
+        //!!!added
+        String android = request.getParameter("from_android_app");
+        boolean isAndroid = android != null && android.equals("true");
 
         try(OurSessionReplacement sessionReplacement = SessionFactorySingleton.getInstance().createSessionReplacement()){
             User user = (User) sessionReplacement.get(User.class, login);
 
             if(user == null) {
-                response.sendRedirect("/main_page.jsp?error=" + "User doesn't exists");
+		//!!!changed
+		if(isAndroid)response.sendError(HttpServletResponse.SC_OK,"INVALID_LOGIN");
+		else response.sendRedirect("/main_page.jsp?error=" + "User%20doesn't%20exists");
                 return;
             }
 
             if(user.getPassword().equals(password)) {
-                request.getSession().setAttribute("login", login);
-                request.getSession().setAttribute("password", password);
-                request.getRequestDispatcher("/html/new_game.html").forward(request, response);
+		if(isAndroid)response.sendError(HttpServletResponse.SC_OK,"OK");
+		else{
+                	request.getSession().setAttribute("login", login);
+               		 request.getSession().setAttribute("password", password);
+                	request.getRequestDispatcher("/html/new_game.html").forward(request, response);
+		}
             } else {
-                response.sendRedirect("/main_page.jsp?error=" + "Wrong login or password");
+		//!!!changed
+		if(isAndroid)response.sendError(HttpServletResponse.SC_OK,"INVALID_PASSWORD");
+                else response.sendRedirect("/main_page.jsp?error=" + "Wrong%20login%20or%20password");
             }
         }
 
