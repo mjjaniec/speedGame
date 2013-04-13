@@ -33,20 +33,20 @@ public class NewAccountActivity extends AbstractActivity{
 
         that=this;
 
-        EditText login = (EditText) findViewById(R.id.newaccount__login);
-        EditText password = (EditText) findViewById(R.id.newaccount__password);
-        EditText retype = (EditText) findViewById(R.id.newaccount__retype);
-        EditText email = (EditText) findViewById(R.id.newaccount__email);
+        final EditText login = (EditText) findViewById(R.id.newaccount__login);
+        final EditText password = (EditText) findViewById(R.id.newaccount__password);
+        final EditText retype = (EditText) findViewById(R.id.newaccount__retype);
+        final EditText email = (EditText) findViewById(R.id.newaccount__email);
 
         String basicRegex = "[a-z][0-9a-z_]+";
-        String emailRegex = "([a-z][a-z0-9_]?\\.)*([a-z][a-z0-9_]?)@([a-z][a-z0-9_]?\\.)+([a-z][a-z0-9_]?)";
+        String emailRegex = "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})";
 
 
         login.setOnFocusChangeListener(new TextValidator(basicRegex, 5, 16, "Username may consist of a-z, 0-9, underscores, begin with a letter."));
         password.setOnFocusChangeListener(new TextValidator(basicRegex, 5, 16,  "Password may consist of a-z, 0-9, underscores, begin with a letter."));
         email.setOnFocusChangeListener(new TextValidator(emailRegex, 6, 80, "Please enter valid email. eg. abc@example.com"));
 
-        retype.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        retype.setOnFocusChangeListener(new TextValidator(basicRegex,5 ,16, "not used") {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if(!hasFocus){
@@ -64,13 +64,22 @@ public class NewAccountActivity extends AbstractActivity{
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pendingView = view;
-                String login = getStr(R.id.newaccount__login);
-                String password = getStr(R.id.newaccount__password);
-                String email = getStr(R.id.newaccount__email);
-                String avatar = "avatar1";
-                String ring = "ring2";
-                SpeedGameProxy.getInstance().register(that,login,password,email,avatar,ring);
+                boolean b1=checkEdit(login);
+                boolean b2=checkEdit(password);
+                boolean b3=checkEdit(retype);
+                boolean b4=checkEdit(email);
+                if(b1&&b2&&b3&&b4){
+                    pendingView = view;
+                    String login = getStr(R.id.newaccount__login);
+                    String password = getStr(R.id.newaccount__password);
+                    String email = getStr(R.id.newaccount__email);
+                    String avatar = "avatar1";
+                    String ring = "ring2";
+                    SpeedGameProxy.getInstance().register(that,login,password,email,avatar,ring);
+                }else{
+                    TextView newaccountInfo = (TextView) findViewById(R.id.newaccount__info);
+                    newaccountInfo.setText(R.string.newaccount__validate);
+                }
             }
         });
 
@@ -96,6 +105,11 @@ public class NewAccountActivity extends AbstractActivity{
 
     }
 
+    private boolean checkEdit(EditText edit){
+        TextValidator validator = (TextValidator) edit.getOnFocusChangeListener();
+        return validator.validate(edit.getText().toString());
+    }
+
     private class FieldSetter implements IProcedure<String>{
         private TextView view;
 
@@ -110,7 +124,7 @@ public class NewAccountActivity extends AbstractActivity{
     }
 
     public void onRegister(RegisterTask.RegisterResult result){
-        final TextView loginInfo = (TextView) findViewById(R.id.newaccount__info);
+        final TextView newaccountInfo = (TextView) findViewById(R.id.newaccount__info);
 
         switch (result){
             case OK:
@@ -118,10 +132,10 @@ public class NewAccountActivity extends AbstractActivity{
                 startActivityForResult(myIntent, 0);
                 break;
             case ERROR:
-                runOnUiThread(new SetText(loginInfo,R.string.login__error));
+                runOnUiThread(new SetText(newaccountInfo,R.string.newaccount__error));
                 break;
             case USER_EXISTS:
-                runOnUiThread(new SetText(loginInfo, R.string.login__invalid_password));
+                runOnUiThread(new SetText(newaccountInfo, R.string.newaccount__user_exists));
                 break;
             default: assert(false);
         }

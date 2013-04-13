@@ -22,6 +22,13 @@ public class TextValidator implements View.OnFocusChangeListener{
         this.max=max;
     }
 
+    public boolean validate(String string){
+        if(string.length()<min)return false;
+        if(string.length()>max)return false;
+        if(!string.matches(regex))return false;
+        return true;
+    }
+
 
     @Override
     public void onFocusChange(View view, boolean hasFocus) {
@@ -30,9 +37,9 @@ public class TextValidator implements View.OnFocusChangeListener{
             String string = edit.getText().toString();
             if(string.length()<min)
                 edit.setError("Field is to short, at least "+min+" characters.");
-            if(string.length()>max)
+            else if(string.length()>max)
                 edit.setError("Field is to long, at least "+max+" characters.");
-            if(!string.matches(regex))
+            else if(!string.matches(regex))
                 edit.setError(message);
         }
     }

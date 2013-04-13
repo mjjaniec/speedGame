@@ -32,5 +32,9 @@
     <string name="newaccount__choose_avatar">ChooseAvatar</string>
     <string name="newaccount__choose_ring">choose</string>
     <string name="choosefile__upload">Upload a file</string>
+    <string name="newaccount__error">An error occurred during connection to server</string>
+    <string name="newaccount__user_exists">This login is already used by someone else. Please choose different one.
+    </string>
+    <string name="newaccount__validate">Please fill and validate all the fields before registration.</string>
 
 </resources>
