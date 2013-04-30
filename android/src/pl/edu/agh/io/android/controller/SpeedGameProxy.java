@@ -1,4 +1,4 @@
-package pl.edu.agh.io.android.model;
+package pl.edu.agh.io.android.controller;
 
 
 /**
@@ -14,19 +14,25 @@ import android.content.res.Resources;
 import pl.edu.agh.io.android.activities.LoginActivity;
 import pl.edu.agh.io.android.activities.NewAccountActivity;
 import pl.edu.agh.io.android.activities.R;
-import pl.edu.agh.io.android.model.tasks.LoginTask;
-import pl.edu.agh.io.android.model.tasks.RegisterTask;
+import pl.edu.agh.io.android.controller.tasks.LoginTask;
+import pl.edu.agh.io.android.controller.tasks.RegisterTask;
+import pl.edu.agh.io.android.controller.tasks.SendFileTask;
+import pl.edu.agh.io.android.model.FileItem;
 
 public class SpeedGameProxy {
 
     public enum Service{
         login,
+        getFile,
+        sendFile,
         register;
 
         int getPathID(){
             switch (this){
                 case login:return R.string.config__login_path;
+                case getFile:return R.string.config__get_file_path;
                 case register:return R.string.config__register_path;
+                case sendFile:return R.string.config__send_file_path;
             }
             return 0;
         }
@@ -62,8 +68,8 @@ public class SpeedGameProxy {
         new RegisterTask(view,login,password,email ,avatar,ring).execute(getServerUrl(Service.register));
     }
 
-
-    public void sendFile(){
+    public void sendFile(NewAccountActivity view,FileItem fileItem){
+        new SendFileTask(view,fileItem).execute(getServerUrl(Service.sendFile));
     }
 
     private String getServerUrl(Service service){

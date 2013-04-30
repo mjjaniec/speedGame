@@ -6,5 +6,8 @@
     <dimen name="main_timer">32dp</dimen>
     <dimen name="register_big">220dp</dimen>
     <dimen name="register_small">80dp</dimen>
+    <dimen name="icon_size">32px</dimen>
+    <dimen name="x1_5icon_size">48px</dimen>
+    <dimen name="x2icon_size">64px</dimen>
 
 </resources>

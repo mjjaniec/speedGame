@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import pl.edu.agh.io.android.model.User;
-import pl.edu.agh.io.android.model.UsersManager;
+import pl.edu.agh.io.android.controller.UsersController;
 
 public class GameActivity extends AbstractActivity {
     private static int timeLeft;
@@ -36,33 +36,33 @@ public class GameActivity extends AbstractActivity {
         setContentView(R.layout.activity_game);
 
 
-        UsersManager manager = UsersManager.getUsersManager();
+        UsersController controller = UsersController.getUsersController();
         TextView current_player = (TextView) findViewById(R.id.game__current);
-        current_player.setText(manager.getCurrentName());
+        current_player.setText(controller.getCurrentName());
 
         User.setDisplay((TextView) findViewById(R.id.game__clock));
 
-        manager.configure(players, timeLeft);
+        controller.configure(players, timeLeft);
 
 
         final Button start = (Button) findViewById(R.id.game__next);
-        start.setText(manager.getButtonCaption());
+        start.setText(controller.getButtonCaption());
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                UsersManager manager = UsersManager.getUsersManager();
-                manager.rotate();
+                UsersController controller = UsersController.getUsersController();
+                controller.rotate();
 
                 TextView current_player = (TextView) findViewById(R.id.game__current);
-                current_player.setText(manager.getCurrentName());
+                current_player.setText(controller.getCurrentName());
 
-                start.setText(manager.getButtonCaption());
+                start.setText(controller.getButtonCaption());
                 adapter.notifyDataSetChanged();
             }
         });
 
-        adapter = new ArrayAdapter<User>(getBaseContext(), android.R.layout.simple_list_item_1, manager.getUsers());
+        adapter = new ArrayAdapter<User>(getBaseContext(), android.R.layout.simple_list_item_1, controller.getUsers());
         ListView queue = (ListView) findViewById(R.id.game__queue);
         queue.setAdapter(adapter);
     }

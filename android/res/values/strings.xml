@@ -10,9 +10,10 @@
     <string name="game__next_player">Next player</string>
     <string name="game__loose_game">Loose game</string>
     <string name="game__game_name">Name of the Game</string>
-    <string name="login__login">Login</string>
+
+    <string name="login__login">Login/Nick</string>
     <string name="login__password">Password</string>
-    <string name="login__new_account">New account</string>
+    <string name="login__new_account">Register</string>
     <string name="login__invalid_login">Invalid login. Please retype and try again. You may also create new
         account.
     </string>
@@ -20,6 +21,7 @@
         account.
     </string>
     <string name="login__error">An error occurred during communication with server.</string>
+
     <string name="newaccount__login">Login</string>
     <string name="newaccount__password">Password</string>
     <string name="newaccount__email">Email</string>
@@ -28,13 +30,15 @@
     <string name="newaccount__change">Change</string>
     <string name="newaccount__default_avatar">avatar.jpg</string>
     <string name="newaccount__default_ring">ring.mp3</string>
-    <string name="choosefile__ok">OK</string>
-    <string name="newaccount__choose_avatar">ChooseAvatar</string>
-    <string name="newaccount__choose_ring">choose</string>
-    <string name="choosefile__upload">Upload a file</string>
+    <string name="newaccount__choose_avatar">Please select an avatar</string>
+    <string name="newaccount__choose_ring">Please select a ring</string>
     <string name="newaccount__error">An error occurred during connection to server</string>
     <string name="newaccount__user_exists">This login is already used by someone else. Please choose different one.
     </string>
     <string name="newaccount__validate">Please fill and validate all the fields before registration.</string>
+    <string name="newaccount__sending_file">Sending files, please wait...</string>
+
+    <string name="choosefile__open">Open</string>
+    <string name="choosefile__pick">Pick</string>
 
 </resources>

@@ -14,8 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import pl.edu.agh.io.android.misc.SetText;
-import pl.edu.agh.io.android.model.SpeedGameProxy;
-import pl.edu.agh.io.android.model.tasks.LoginTask;
+import pl.edu.agh.io.android.controller.SpeedGameProxy;
+import pl.edu.agh.io.android.controller.tasks.LoginTask;
 
 public class LoginActivity extends AbstractActivity {
     private View pendingView;

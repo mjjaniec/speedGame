@@ -15,28 +15,41 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import pl.edu.agh.io.android.controller.SpeedGameProxy;
+import pl.edu.agh.io.android.controller.tasks.RegisterTask;
 import pl.edu.agh.io.android.misc.IProcedure;
 import pl.edu.agh.io.android.misc.SetText;
 import pl.edu.agh.io.android.misc.TextValidator;
-import pl.edu.agh.io.android.model.SpeedGameProxy;
-import pl.edu.agh.io.android.model.tasks.RegisterTask;
+import pl.edu.agh.io.android.model.FileItem;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class NewAccountActivity extends AbstractActivity{
 
-    private View pendingView;
-    NewAccountActivity that;
+    private static class FileItemHolder{
+        public String name;
+        public FileItem fileItem = null;
+        public AtomicBoolean touched = new AtomicBoolean(false);
+        public AtomicBoolean uploaded = new AtomicBoolean(false);
+    }
+    private FileItemHolder avatar = new FileItemHolder();
+    private FileItemHolder ring = new FileItemHolder();
+    private EditText login;
+    private EditText password;
+    private EditText retype;
+    private EditText email;
+    private TextView info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newaccount);
 
-        that=this;
-
-        final EditText login = (EditText) findViewById(R.id.newaccount__login);
-        final EditText password = (EditText) findViewById(R.id.newaccount__password);
-        final EditText retype = (EditText) findViewById(R.id.newaccount__retype);
-        final EditText email = (EditText) findViewById(R.id.newaccount__email);
+        info =  (TextView) findViewById(R.id.newaccount__info);
+        login = (EditText) findViewById(R.id.newaccount__login);
+        password = (EditText) findViewById(R.id.newaccount__password);
+        retype = (EditText) findViewById(R.id.newaccount__retype);
+        email = (EditText) findViewById(R.id.newaccount__email);
 
         String basicRegex = "[a-z][0-9a-z_]+";
         String emailRegex = "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})";
@@ -64,30 +77,14 @@ public class NewAccountActivity extends AbstractActivity{
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean b1=checkEdit(login);
-                boolean b2=checkEdit(password);
-                boolean b3=checkEdit(retype);
-                boolean b4=checkEdit(email);
-                if(b1&&b2&&b3&&b4){
-                    pendingView = view;
-                    String login = getStr(R.id.newaccount__login);
-                    String password = getStr(R.id.newaccount__password);
-                    String email = getStr(R.id.newaccount__email);
-                    String avatar = "avatar1";
-                    String ring = "ring2";
-                    SpeedGameProxy.getInstance().register(that,login,password,email,avatar,ring);
-                }else{
-                    TextView newaccountInfo = (TextView) findViewById(R.id.newaccount__info);
-                    newaccountInfo.setText(R.string.newaccount__validate);
-                }
+                register();
             }
         });
-
         findViewById(R.id.newaccount__change_avatar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ChooseFileActivity.setWhat(getString(R.string.newaccount__choose_avatar));
-                ChooseFileActivity.setCallback(new FieldSetter((TextView)findViewById(R.id.newaccount__avatar)));
+                ChooseFileActivity.setCallback(new FieldSetter((TextView)findViewById(R.id.newaccount__avatar),avatar));
+                ChooseFileActivity.setWhat(R.string.newaccount__choose_avatar);
                 Intent myIntent = new Intent(view.getContext(), ChooseFileActivity.class);
                 startActivityForResult(myIntent, 0);
             }
@@ -96,8 +93,8 @@ public class NewAccountActivity extends AbstractActivity{
         findViewById(R.id.newaccount__change_ring).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ChooseFileActivity.setWhat(getString(R.string.newaccount__choose_ring));
-                ChooseFileActivity.setCallback(new FieldSetter((TextView)findViewById(R.id.newaccount__ring)));
+                ChooseFileActivity.setCallback(new FieldSetter((TextView)findViewById(R.id.newaccount__ring),ring));
+                ChooseFileActivity.setWhat(R.string.newaccount__choose_ring);
                 Intent myIntent = new Intent(view.getContext(), ChooseFileActivity.class);
                 startActivityForResult(myIntent, 0);
             }
@@ -105,40 +102,105 @@ public class NewAccountActivity extends AbstractActivity{
 
     }
 
+    public void register(){
+        if(!checkAll()){
+            info.setText(R.string.newaccount__validate);
+        }
+        else if(!ring.uploaded.get()){
+            handleFile(ring,R.string.newaccount__default_ring);
+        }
+        else if(!avatar.uploaded.get()){
+            handleFile(avatar,R.string.newaccount__default_avatar);
+        }else{
+            if(!checkAll()){
+                info.setText(R.string.newaccount__validate);
+            }else{
+                SpeedGameProxy.getInstance().register(
+                        this,
+                        login.getText().toString(),
+                        password.getText().toString(),
+                        email.getText().toString(),
+                        avatar.name,
+                        ring.name
+                );
+            }
+        }
+    }
+
+    private boolean checkAll(){
+        return checkEdit(login) &&
+                checkEdit(password) &&
+                checkEdit(retype) &&
+                checkEdit(email);
+    }
+
+    private void handleFile(FileItemHolder fileItemHolder, int defaultString) {
+        if(fileItemHolder.fileItem==null){
+            fileItemHolder.name = getString(defaultString);
+            fileItemHolder.uploaded.set(true);
+            register();
+        }else{
+            if(!fileItemHolder.touched.get()){
+                fileItemHolder.touched.set(true);
+                fileItemHolder.name=fileItemHolder.fileItem.getName();
+                info.setText(R.string.newaccount__sending_file);
+                SpeedGameProxy.getInstance().sendFile(this,fileItemHolder.fileItem);
+            }
+        }
+    }
+
     private boolean checkEdit(EditText edit){
         TextValidator validator = (TextValidator) edit.getOnFocusChangeListener();
         return validator.validate(edit.getText().toString());
     }
 
-    private class FieldSetter implements IProcedure<String>{
+    private class FieldSetter implements IProcedure<FileItem>{
         private TextView view;
+        private FileItemHolder fileItemHolder;
 
-        public FieldSetter(TextView view){
+        public FieldSetter(TextView view,FileItemHolder holder){
+            this.fileItemHolder=holder;
             this.view=view;
         }
 
         @Override
-        public void call(String arg) {
-            runOnUiThread(new SetText(view,arg));
+        public void call(FileItem arg) {
+            fileItemHolder.fileItem=arg;
+            runOnUiThread(new SetText(view,arg.getName()));
         }
     }
 
     public void onRegister(RegisterTask.RegisterResult result){
-        final TextView newaccountInfo = (TextView) findViewById(R.id.newaccount__info);
 
         switch (result){
             case OK:
-                Intent myIntent = new Intent(pendingView.getContext(), NewGameActivity.class);
+                Intent myIntent = new Intent(this, NewGameActivity.class);
                 startActivityForResult(myIntent, 0);
                 break;
             case ERROR:
-                runOnUiThread(new SetText(newaccountInfo,R.string.newaccount__error));
+                runOnUiThread(new SetText(info,R.string.newaccount__error));
                 break;
             case USER_EXISTS:
-                runOnUiThread(new SetText(newaccountInfo, R.string.newaccount__user_exists));
+                runOnUiThread(new SetText(info, R.string.newaccount__user_exists));
                 break;
             default: assert(false);
         }
 
+    }
+
+    public void onUpload(boolean success,FileItem fileItem){
+        if(success){
+            if(avatar.name==fileItem.getName()){
+                avatar.uploaded.set(true);
+                register();
+            }else if(ring.name==fileItem.getName()){
+                ring.uploaded.set(true);
+                register();
+            }else{
+                assert false:"bad file name?";
+            }
+        }else{
+            runOnUiThread(new SetText(info,R.string.newaccount__error));
+        }
     }
 }

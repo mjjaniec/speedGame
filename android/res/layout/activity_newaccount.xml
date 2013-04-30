@@ -27,6 +27,7 @@
             android:text="@string/newaccount__login"/>
 
         <EditText
+            android:inputType="textNoSuggestions"
             android:id="@+id/newaccount__login"
             android:layout_width="@dimen/register_big"
             android:layout_height="wrap_content"
@@ -46,7 +47,7 @@
             android:text="@string/newaccount__password"/>
 
         <EditText
-            android:inputType="textPassword"
+            android:inputType="textPassword|textNoSuggestions"
             android:id="@+id/newaccount__password"
             android:layout_width="@dimen/register_big"
             android:layout_height="wrap_content"
@@ -65,7 +66,7 @@
             android:text="@string/newaccount__retype"/>
 
         <EditText
-            android:inputType="textPassword"
+            android:inputType="textPassword|textNoSuggestions"
             android:id="@+id/newaccount__retype"
             android:layout_width="@dimen/register_big"
             android:layout_height="wrap_content"
@@ -88,6 +89,7 @@
             android:id="@+id/newaccount__email"
             android:layout_width="@dimen/register_big"
             android:layout_height="wrap_content"
+            android:inputType="textNoSuggestions"
             android:ems="10"/>
     </LinearLayout>
 
@@ -98,6 +100,8 @@
         android:layout_height="wrap_content">
 
         <EditText
+            android:editable="false"
+            android:inputType="textNoSuggestions"
             android:id="@+id/newaccount__avatar"
             android:text="@string/newaccount__default_avatar"
             android:layout_height="wrap_content"
@@ -119,6 +123,8 @@
         android:layout_height="wrap_content">
 
         <EditText
+            android:inputType="textNoSuggestions"
+            android:editable="false"
             android:layout_gravity="right"
             android:id="@+id/newaccount__ring"
             android:text="@string/newaccount__default_ring"

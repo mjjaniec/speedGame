@@ -11,8 +11,8 @@ import android.widget.TextView;
  * To change this template use File | Settings | File Templates.
  */
 public abstract class AbstractActivity extends Activity {
-    public String getStr(int id){
-        TextView view = (TextView) findViewById(id);
+    protected String getStr(int viewId){
+        TextView view = (TextView) findViewById(viewId);
         if(view==null)return null;
         return view.getText().toString();
     }

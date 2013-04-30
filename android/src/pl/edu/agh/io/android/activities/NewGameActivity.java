@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import pl.edu.agh.io.android.model.UsersManager;
+import pl.edu.agh.io.android.controller.UsersController;
 
 /**
  * Created with IntelliJ IDEA.
@@ -50,6 +50,6 @@ public class NewGameActivity extends AbstractActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        UsersManager.reset();
+        UsersController.reset();
     }
 }

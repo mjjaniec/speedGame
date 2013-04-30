@@ -1,4 +1,4 @@
-package pl.edu.agh.io.android.model;
+package pl.edu.agh.io.android.controller;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,12 +9,12 @@ package pl.edu.agh.io.android.model;
  */
 
 import pl.edu.agh.io.android.activities.R;
-
+import pl.edu.agh.io.android.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersManager {
-    private static UsersManager instance;
+public class UsersController {
+    private static UsersController instance;
     private static Object lock = new Object();
 
     private List<User> users = new ArrayList<User>();
@@ -35,11 +35,11 @@ public class UsersManager {
             if(instance.current!=null)
                 instance.current.stop();
         synchronized(lock){
-            instance=new UsersManager();
+            instance=new UsersController();
         }
     }
 
-    private UsersManager(){	}
+    private UsersController(){	}
 
     public void configure(int players, int time){
         if(!isReady){
@@ -80,11 +80,11 @@ public class UsersManager {
         current.start();
     }
 
-    public static UsersManager getUsersManager(){
+    public static UsersController getUsersController(){
         if(instance!=null)return instance;
         synchronized (lock) {
             if(instance==null)
-                instance=new UsersManager();
+                instance=new UsersController();
         }
         return instance;
 

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="config__server_url">speedgame.pl</string>
-    <string name="config__server_port">8080</string>
+    <string name="config__server_url">192.168.0.19</string>
+    <string name="config__server_port">80</string>
     <string name="config__login_path">login</string>
     <string name="config__register_path">register</string>
+    <string name="config__send_file_path">upload</string>
+    <string name="config__get_file_path"></string>
+    <string name="config__max_file_size">350000</string>
 </resources>
