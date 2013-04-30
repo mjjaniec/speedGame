@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import pl.edu.agh.io.android.custom.FilesviewAdapter;
+import pl.edu.agh.io.android.custom.FilesViewAdapter;
 import pl.edu.agh.io.android.misc.IProcedure;
 import pl.edu.agh.io.android.model.FileItem;
 
@@ -47,15 +47,15 @@ public class ChooseFileActivity extends AbstractActivity {
         final Context context = this;
 
         ListView listView = (ListView) findViewById(R.id.choosefile_list);
-        FilesviewAdapter adapter= FilesviewAdapter.createInstanced(this);
-        adapter.setOnItemClick(new FilesviewAdapter.OnItemClick(){
+        FilesViewAdapter adapter= FilesViewAdapter.createInstanced(this);
+        adapter.setOnItemClick(new FilesViewAdapter.OnItemClick(){
 
             @Override
             public void onItemClick(FileItem fileItem, boolean picked) {
                 if(picked){
                     File file = new File(fileItem.getPath());
                     if(file.getTotalSpace()>Integer.parseInt(getString(R.string.config__max_file_size))){
-                        Toast.makeText(context,"File is to big",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,context.getText(R.string.common__file_is_to_big),Toast.LENGTH_SHORT).show();
                     }else{
                         callback.call(fileItem);
                         finish();

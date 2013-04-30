@@ -37,7 +37,7 @@ public class NewGameActivity extends AbstractActivity {
                 if(players>maxUsers)players=maxUsers;
                 if(players<minUsers)players=minUsers;
 
-                GameActivity.setTimeLeft(timeLeft * 60);
+                GameActivity.setTimeLeft(timeLeft);
                 GameActivity.setPlayers(players);
 
                 Intent myIntent = new Intent(view.getContext(),GameActivity.class);

@@ -3,6 +3,9 @@
 
     <string name="common__app_name">SpeedGame</string>
     <string name="common__start_the_game">Start the game</string>
+    <string name="common__cant_read_file">can not be read.</string>
+    <string name="common__file_is_to_big">File is to big</string>
+    <string name="common__ok">OK</string>
 
     <string name="newgame__number_of_players">Number of players</string>
     <string name="newgame__time_per_player">Time per player</string>
@@ -10,6 +13,12 @@
     <string name="game__next_player">Next player</string>
     <string name="game__loose_game">Loose game</string>
     <string name="game__game_name">Name of the Game</string>
+    <string name="game__timeout_loose1">Player</string>
+    <string name="game__timeout_loose2">has reached timeout, looses the game.</string>
+    <string name="game__timeout_negative1">Player</string>
+    <string name="game__timeout_negative2" >has reached timeout, from now negative time would be counted.</string>
+    <string name="game__win1">Player</string>
+    <string name="game__win2">Has won the game. Congratulations!</string>
 
     <string name="login__login">Login/Nick</string>
     <string name="login__password">Password</string>

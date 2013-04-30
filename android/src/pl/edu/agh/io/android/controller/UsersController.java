@@ -8,20 +8,36 @@ package pl.edu.agh.io.android.controller;
  * To change this template use File | Settings | File Templates.
  */
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.widget.TextView;
+import android.widget.Toast;
+import pl.edu.agh.io.android.activities.GameActivity;
 import pl.edu.agh.io.android.activities.R;
 import pl.edu.agh.io.android.model.User;
-import java.util.ArrayList;
+
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class UsersController {
+
+
+    public static enum OnTimeout{
+        loose, negativePoints
+    }
+
     private static UsersController instance;
     private static Object lock = new Object();
 
-    private List<User> users = new ArrayList<User>();
+    private OnTimeout onTimeoutAction = OnTimeout.loose;
+    private Queue<User> users = new LinkedList<User>();
     private User current;
+    private GameActivity gameActivity;
     private boolean isReady =false;
     private boolean first = true;
     private int players;
+    private int lostPlayers;
 
     public int getButtonCaption(){
         if(isReady && !first)
@@ -41,21 +57,32 @@ public class UsersController {
 
     private UsersController(){	}
 
-    public void configure(int players, int time){
+    /**
+     * call only after adding all users
+     * @param gameActivity GameActivity as view
+     * @param onTimeout TimeOut method
+     * @param time time per player in seconds
+     */
+    public void configure(GameActivity gameActivity, OnTimeout onTimeout, int time){
         if(!isReady){
-            this.players=players;
+            this.gameActivity = gameActivity;
 
-            for(int i=0; i<players-1; ++i){
-                users.add(new User("Player "+(i+1),time));
-            }
-            current=new User("Player "+players,time);
-            users.add(current);
+            this.onTimeoutAction = onTimeout;
+            this.lostPlayers=0;
+            players=users.size();
+            for(User user: users)
+                user.setTime(time);
             isReady=true;
         }
     }
 
+    public void addUser(User user){
+        current=user;
+        users.add(user);
+    }
+
     public List<User> getUsers(){
-        return users;
+        return (LinkedList<User>)users;
     }
 
     public String getCurrentName(){
@@ -66,19 +93,74 @@ public class UsersController {
     public void rotate(){
         if(first){
             first=false;
-            users.remove(players-1);
+            //quite ugly, I know;
+            ((LinkedList<User>)(users)).remove(players-1);
         }
 
         current.stop();
-        User tmp = current;
-        current=users.get(0);
-        for(int i=0; i<players-2; ++i)
-            users.set(i, users.get(i+1));
 
-        users.set(players-2,tmp);
+        do{
+            User tmp = current;
+            current=users.poll();
+            users.offer(tmp);
+        }while(current.isLost());
 
         current.start();
     }
+
+    private User findWinner() {
+        for(User u : users)
+            if(!u.isLost())
+                return u;
+        return null;
+    }
+
+    public void onLost(User who){
+        if(++lostPlayers<players-1){
+            new AlertDialog.Builder(gameActivity)
+                    .setTitle(
+                            gameActivity.getString(R.string.game__timeout_loose1)+
+                                    " " + who.getName() + " " +
+                                    gameActivity.getString(R.string.game__timeout_loose2)
+                    )
+                    .setPositiveButton(R.string.common__ok, null).show();
+        }
+        else{
+            User winner = findWinner();
+
+            new AlertDialog.Builder(gameActivity)
+                    .setTitle(
+                            gameActivity.getString(R.string.game__win1)+
+                                    " " + winner.getName() + " " +
+                                    gameActivity.getString(R.string.game__win2)
+                    )
+                    .setPositiveButton(R.string.common__ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            gameActivity.finish();
+                        }
+                    }).show();
+        }
+    }
+
+    public OnTimeout onTimeout(User who){
+        switch(onTimeoutAction){
+            case loose:
+
+                who.setLost();
+                break;
+
+            case negativePoints:
+                Toast.makeText(gameActivity,
+                        (gameActivity.getText(R.string.game__timeout_negative1) +
+                                " " + who.getName() + " " +
+                                gameActivity.getText(R.string.game__timeout_negative2)),
+                        Toast.LENGTH_LONG).show();
+                break;
+        }
+        return onTimeoutAction;
+    }
+
 
     public static UsersController getUsersController(){
         if(instance!=null)return instance;
@@ -89,4 +171,15 @@ public class UsersController {
         return instance;
 
     }
+
+    public void refresh(final User user) {
+        final TextView textView =(TextView)gameActivity.findViewById(R.id.game__clock);
+        gameActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                textView.setText(user.timeString());
+            }
+        });
+    }
+
 }

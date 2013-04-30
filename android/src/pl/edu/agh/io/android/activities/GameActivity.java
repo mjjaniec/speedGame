@@ -40,9 +40,10 @@ public class GameActivity extends AbstractActivity {
         TextView current_player = (TextView) findViewById(R.id.game__current);
         current_player.setText(controller.getCurrentName());
 
-        User.setDisplay((TextView) findViewById(R.id.game__clock));
+        for(int i = 0; i<players; ++i)
+            controller.addUser(new User("player" + (i+1) , this));
 
-        controller.configure(players, timeLeft);
+        controller.configure(this,UsersController.OnTimeout.negativePoints,timeLeft);
 
 
         final Button start = (Button) findViewById(R.id.game__next);

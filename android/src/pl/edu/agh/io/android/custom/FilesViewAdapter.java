@@ -27,7 +27,7 @@ import java.util.Comparator;
 import java.util.List;
 
 
-public class FilesviewAdapter extends ArrayAdapter<FileItem> {
+public class FilesViewAdapter extends ArrayAdapter<FileItem> {
     private final Context context;
     private final List<FileItem> values;
 
@@ -44,14 +44,14 @@ public class FilesviewAdapter extends ArrayAdapter<FileItem> {
     }
 
 
-    public static FilesviewAdapter createInstanced(Context context){
+    public static FilesViewAdapter createInstanced(Context context){
         List<FileItem> list = new ArrayList<FileItem>();
-        return new FilesviewAdapter(context,list);
+        return new FilesViewAdapter(context,list);
 
     }
 
-    private FilesviewAdapter(Context context, List<FileItem> values) {
-        super(context, R.layout.custom_folderview_row, values);
+    private FilesViewAdapter(Context context, List<FileItem> values) {
+        super(context, R.layout.custom_filesview_row, values);
 
         this.context = context;
         this.values = values;
@@ -130,8 +130,8 @@ public class FilesviewAdapter extends ArrayAdapter<FileItem> {
                     getDir(fileItem.getPath());
                 }else{
                     new AlertDialog.Builder(context)
-                            .setTitle("[" + file.getName() + "] folder can't be read!")
-                            .setPositiveButton("OK", null).show();
+                            .setTitle("[" + file.getName() + "] " + context.getText(R.string.common__cant_read_file))
+                            .setPositiveButton(R.string.common__ok, null).show();
                 }
             }else {
                 if(onItemClick!=null)
@@ -145,7 +145,7 @@ public class FilesviewAdapter extends ArrayAdapter<FileItem> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View rowView = inflater.inflate(R.layout.custom_folderview_row, parent, false);
+        View rowView = inflater.inflate(R.layout.custom_filesview_row, parent, false);
         TextView textView = (TextView) rowView.findViewById(R.id.folderview_row__name);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.folderview_row__image);
         Button button = (Button) rowView.findViewById(R.id.folderview_row__button);

@@ -13,15 +13,15 @@
         android:icon="@drawable/clock">
         <!--android:theme="@style/AppBaseTheme" >-->
 
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".ChooseFileActivity"/>
+        <activity android:name=".NewAccountActivity"/>
+        <activity android:name=".NewGameActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ChooseFileActivity"/>
-        <activity android:name=".NewAccountActivity"/>
-        <activity android:name=".NewGameActivity"/>
         <activity android:name=".GameActivity"/>
 
     </application>

@@ -8,30 +8,94 @@ package pl.edu.agh.io.android.model;
  * To change this template use File | Settings | File Templates.
  */
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.os.CountDownTimer;
-import android.widget.TextView;
+import pl.edu.agh.io.android.activities.R;
+import pl.edu.agh.io.android.controller.UsersController;
+
+import java.net.URL;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class User {
-    private static TextView display;
-    private CountDownTimer timer;
+
+    private CountDownTimer countDownTimer;
+    private Timer negativePointsTimer;
+    private boolean lost;
+    private int seconds;
+    private boolean negative;
     private String name;
-    private int secondsLeft;
-    public User(String name, int secondsLeft) {
-        super();
+    private Bitmap avatar;
+    private MediaPlayer mediaPlayer;
+    private User self;
+
+    public User(String name, Context context){
+        this(name,context,null,null);
+    }
+
+    public User(String name, Context context,URL avatar, URL ring) {
         this.name = name;
-        this.secondsLeft = secondsLeft;
+        this.self = this;
+
+
+        //that below may by moved to UsersController
+
+        if(avatar==null){
+            //use default avatar - from local resources
+            this.avatar = BitmapFactory.decodeResource(context.getResources(), R.drawable.default_avatar);
+        }else {
+            //download remote avatar
+            throw new Error("Unimplemented");
+        }
+
+        if(ring==null){
+            //use default ring - from local resources
+            mediaPlayer = MediaPlayer.create(context,R.raw.default_ring);
+            /*try{
+                mediaPlayer.prepare();
+            }catch(IOException e){
+                Log.d("ERROR","can't read default ring file");
+            }*/
+        }else {
+            //download remote avatar
+            throw new Error("Unimplemented");
+        }
     }
-    public static void setDisplay(TextView display){
-        User.display=display;
-    }
+
     public String getName() {
         return name;
     }
 
+    public void setLost(){
+        lost = true;
+        UsersController.getUsersController().onLost(this);
+    }
+
+    public boolean isLost(){
+        return lost;
+    }
+
+    public void setTime(int time){
+        seconds=time;
+    }
+
     public void start(){
-        if(secondsLeft==0)return;
-        display.setText(timeString());
-        timer=new CountDownTimer(1000*(secondsLeft+2),1000) {
+        UsersController.getUsersController().refresh(self);
+
+        if(!negative){
+            countDownTimer = CreateCountDownTimer();
+            countDownTimer.start();
+        }else{
+            negativePointsTimer = new Timer(true);
+            negativePointsTimer.scheduleAtFixedRate(negativeTimerTask,1000,1000);
+        }
+    }
+
+    private CountDownTimer CreateCountDownTimer(){
+        return new CountDownTimer(1000*(seconds +2),1000) {
             private boolean first = true;
             private boolean finished=false;
             @Override
@@ -40,33 +104,58 @@ public class User {
                     first=false;
                     return;
                 }
-                if(secondsLeft==0){
+                if(seconds == 0){
                     onFinish();
                     return;
                 }
-                --secondsLeft;
-                display.setText(timeString());
+                --seconds;
+                UsersController.getUsersController().refresh(self);
             }
 
             @Override
             public void onFinish() {
                 if(!finished){
                     finished=false;
+                    switch(UsersController.getUsersController().onTimeout(self)){
+                        case loose: break;
+                        case negativePoints:
+                            seconds = 0;
+                            negative = true;
+                            negativePointsTimer = new Timer(true);
+                            negativePointsTimer.scheduleAtFixedRate(negativeTimerTask,1000,1000);
+                    }
                 }
             }
+
         };
-        timer.start();
     }
 
+    private TimerTask negativeTimerTask = new TimerTask() {
+        @Override
+        public void run() {
+            seconds++;
+            UsersController.getUsersController().refresh(self);
+        }
+    };
+
+
     public void stop(){
-        if(timer!=null)timer.cancel();
-        timer=null;
+        if(countDownTimer != null) {
+            countDownTimer.cancel();
+            countDownTimer = null;
+        }
+        if(negativePointsTimer != null){
+            negativePointsTimer.cancel();
+            negativePointsTimer = null;
+        }
     }
 
     public String timeString(){
         StringBuilder sb=new StringBuilder();
-        int minutes =secondsLeft/60;
-        int seconds =secondsLeft%60;
+        int minutes = seconds /60;
+        int seconds = this.seconds %60;
+
+        if(negative)sb.append("-");
         if(minutes<10)sb.append("0");
         sb.append(minutes);
         sb.append(":");
