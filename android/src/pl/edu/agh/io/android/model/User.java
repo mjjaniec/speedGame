@@ -10,7 +10,6 @@ package pl.edu.agh.io.android.model;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import pl.edu.agh.io.android.activities.R;
 import pl.edu.agh.io.android.controller.UsersController;
@@ -28,7 +27,7 @@ public class User {
     private boolean negative;
     private String name;
     private Drawable avatar;
-    private MediaPlayer mediaPlayer;
+    private URL ringURL;
     private User self;
 
     public User(String name, Context context){
@@ -39,14 +38,14 @@ public class User {
         return avatar;
     }
 
-    public MediaPlayer getRing(){
-        return mediaPlayer;
+    public URL getRingURL(){
+        return ringURL;
     }
 
     public User(String name, Context context,URL avatar, URL ring) {
         this.name = name;
         this.self = this;
-
+        this.ringURL = ring;
 
         //that below may by moved to UsersController
 
@@ -57,20 +56,8 @@ public class User {
             //download remote avatar
             throw new Error("Unimplemented");
         }
-
-        if(ring==null){
-            //use default ring - from local resources
-            mediaPlayer = MediaPlayer.create(context,R.raw.default_ring);
-            /*try{
-                mediaPlayer.prepare();
-            }catch(IOException e){
-                Log.d("ERROR","can't read default ring file");
-            }*/
-        }else {
-            //download remote avatar
-            throw new Error("Unimplemented");
-        }
     }
+
 
     public String getName() {
         return name;

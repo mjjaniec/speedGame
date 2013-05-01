@@ -10,12 +10,17 @@ package pl.edu.agh.io.android.controller;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 import pl.edu.agh.io.android.activities.GameActivity;
 import pl.edu.agh.io.android.activities.R;
 import pl.edu.agh.io.android.model.User;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -43,6 +48,7 @@ public class UsersController {
     private boolean first = true;
     private int players;
     private int lostPlayers;
+    private MediaPlayer mediaPlayer;
 
     public int getButtonCaption(){
         if(isReady && !first)
@@ -52,9 +58,13 @@ public class UsersController {
     }
 
     public static void reset(){
-        if(instance!=null)
+        if(instance!=null){
             if(instance.current!=null)
                 instance.current.stop();
+            if(instance.mediaPlayer!=null){
+                instance.mediaPlayer.release();
+            }
+        }
         synchronized(lock){
             instance=new UsersController();
         }
@@ -82,6 +92,14 @@ public class UsersController {
             this.lostPlayers=0;
             players=users.size();
             isReady=true;
+
+            if(soundOn==Sound.on){
+                if(mediaPlayer==null){
+                    mediaPlayer=new MediaPlayer();
+                }else{
+                    mediaPlayer.reset();
+                }
+            }
         }
     }
 
@@ -105,7 +123,7 @@ public class UsersController {
     public void rotate(){
         if(first){
             first=false;
-            users.remove(players-1);
+            users.remove(players - 1);
         }
 
         current.stop();
@@ -117,6 +135,30 @@ public class UsersController {
         }while(current.isLost());
 
         current.start();
+
+        if(soundOn==Sound.on)
+            play(current);
+    }
+
+    private void play(User current) {
+        URL ringUrl=current.getRingURL();
+        if(ringUrl==null){
+            try{
+                mediaPlayer.reset();
+                AssetFileDescriptor descriptor = gameActivity.getAssets().openFd("default_ring.mp3");
+                mediaPlayer.setDataSource(descriptor.getFileDescriptor());
+                descriptor.close();
+                mediaPlayer.prepare();
+                mediaPlayer.start();
+            }catch(IOException e){
+                //pass it quite silently, it's not critical problem.
+                Log.e("mediaPlayer", "error while opening default_ring.mp3 file");
+            }catch (Exception e){
+                Log.e("mediaPlayer", e.toString());
+            }
+        }else {
+            throw new Error("unimplemented");
+        }
     }
 
     private User findWinner() {
