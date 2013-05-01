@@ -10,8 +10,8 @@
 
     <application
         android:label="@string/common__app_name"
-        android:icon="@drawable/clock">
-        <!--android:theme="@style/AppBaseTheme" >-->
+        android:icon="@drawable/clock"
+        android:theme="@style/AppBaseTheme" >
 
         <activity android:name=".LoginActivity"/>
         <activity android:name=".ChooseFileActivity"/>

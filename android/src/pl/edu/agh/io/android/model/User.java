@@ -9,8 +9,7 @@ package pl.edu.agh.io.android.model;
  */
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import pl.edu.agh.io.android.activities.R;
@@ -28,12 +27,20 @@ public class User {
     private int seconds;
     private boolean negative;
     private String name;
-    private Bitmap avatar;
+    private Drawable avatar;
     private MediaPlayer mediaPlayer;
     private User self;
 
     public User(String name, Context context){
         this(name,context,null,null);
+    }
+
+    public Drawable getAvatar(){
+        return avatar;
+    }
+
+    public MediaPlayer getRing(){
+        return mediaPlayer;
     }
 
     public User(String name, Context context,URL avatar, URL ring) {
@@ -45,7 +52,7 @@ public class User {
 
         if(avatar==null){
             //use default avatar - from local resources
-            this.avatar = BitmapFactory.decodeResource(context.getResources(), R.drawable.default_avatar);
+            this.avatar = context.getResources().getDrawable(R.drawable.default_avatar);
         }else {
             //download remote avatar
             throw new Error("Unimplemented");
@@ -166,5 +173,9 @@ public class User {
     @Override
     public String toString() {
         return name + "\n" + timeString();
+    }
+
+    public boolean isNegative() {
+        return negative;
     }
 }

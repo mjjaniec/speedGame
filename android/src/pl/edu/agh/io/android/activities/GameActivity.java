@@ -14,21 +14,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import pl.edu.agh.io.android.model.User;
 import pl.edu.agh.io.android.controller.UsersController;
+import pl.edu.agh.io.android.adapters.UsersViewAdapter;
+import pl.edu.agh.io.android.model.User;
 
 public class GameActivity extends AbstractActivity {
-    private static int timeLeft;
-    private static int players;
-    private ArrayAdapter<User> adapter;
 
-    public static void setTimeLeft(int timeLeft) {
-        GameActivity.timeLeft = timeLeft;
-    }
-
-    public static void setPlayers(int players) {
-        GameActivity.players = players;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +29,14 @@ public class GameActivity extends AbstractActivity {
 
         UsersController controller = UsersController.getUsersController();
         TextView current_player = (TextView) findViewById(R.id.game__current);
-        current_player.setText(controller.getCurrentName());
+        current_player.setText("");
 
-        for(int i = 0; i<players; ++i)
-            controller.addUser(new User("player" + (i+1) , this));
 
-        controller.configure(this,UsersController.OnTimeout.negativePoints,timeLeft);
+        controller.configure(this);
+
+        final ArrayAdapter<User> adapter = new UsersViewAdapter(this,controller.getUsers());
+        ListView queue = (ListView) findViewById(R.id.game__queue);
+        queue.setAdapter(adapter);
 
 
         final Button start = (Button) findViewById(R.id.game__next);
@@ -54,17 +47,16 @@ public class GameActivity extends AbstractActivity {
 
                 UsersController controller = UsersController.getUsersController();
                 controller.rotate();
+                User current = controller.getCurrent();
 
                 TextView current_player = (TextView) findViewById(R.id.game__current);
-                current_player.setText(controller.getCurrentName());
+                current_player.setText(current.getName());
 
                 start.setText(controller.getButtonCaption());
+                start.setBackground(current.getAvatar());
+
                 adapter.notifyDataSetChanged();
             }
         });
-
-        adapter = new ArrayAdapter<User>(getBaseContext(), android.R.layout.simple_list_item_1, controller.getUsers());
-        ListView queue = (ListView) findViewById(R.id.game__queue);
-        queue.setAdapter(adapter);
     }
 }

@@ -7,4 +7,5 @@
     <string name="config__send_file_path">upload</string>
     <string name="config__get_file_path"></string>
     <string name="config__max_file_size">3500000</string>
+    <string name="config__root_open_file_path">/</string>
 </resources>

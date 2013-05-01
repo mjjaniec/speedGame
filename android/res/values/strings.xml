@@ -19,6 +19,7 @@
     <string name="game__timeout_negative2" >has reached timeout, from now negative time would be counted.</string>
     <string name="game__win1">Player</string>
     <string name="game__win2">Has won the game. Congratulations!</string>
+    <string name="game__lost">lost!</string>
 
     <string name="login__login">Login/Nick</string>
     <string name="login__password">Password</string>

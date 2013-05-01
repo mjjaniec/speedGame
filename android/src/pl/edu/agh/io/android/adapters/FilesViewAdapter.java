@@ -1,4 +1,4 @@
-package pl.edu.agh.io.android.custom;
+package pl.edu.agh.io.android.adapters;
 
 /**
  * Created with IntelliJ IDEA.
@@ -51,7 +51,7 @@ public class FilesViewAdapter extends ArrayAdapter<FileItem> {
     }
 
     private FilesViewAdapter(Context context, List<FileItem> values) {
-        super(context, R.layout.custom_filesview_row, values);
+        super(context, R.layout.row_filesview, values);
 
         this.context = context;
         this.values = values;
@@ -145,10 +145,10 @@ public class FilesViewAdapter extends ArrayAdapter<FileItem> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View rowView = inflater.inflate(R.layout.custom_filesview_row, parent, false);
-        TextView textView = (TextView) rowView.findViewById(R.id.folderview_row__name);
-        ImageView imageView = (ImageView) rowView.findViewById(R.id.folderview_row__image);
-        Button button = (Button) rowView.findViewById(R.id.folderview_row__button);
+        View rowView = inflater.inflate(R.layout.row_filesview, parent, false);
+        TextView textView = (TextView) rowView.findViewById(R.id.filesview__name);
+        ImageView imageView = (ImageView) rowView.findViewById(R.id.filesview__image);
+        Button button = (Button) rowView.findViewById(R.id.filesview__button);
 
         FileItem fileItem = values.get(position);
 

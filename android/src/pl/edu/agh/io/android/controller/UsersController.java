@@ -18,7 +18,6 @@ import pl.edu.agh.io.android.model.User;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 public class UsersController {
 
@@ -27,11 +26,17 @@ public class UsersController {
         loose, negativePoints
     }
 
+    public static enum Sound{
+        on,off;
+    }
+
     private static UsersController instance;
     private static Object lock = new Object();
 
     private OnTimeout onTimeoutAction = OnTimeout.loose;
-    private Queue<User> users = new LinkedList<User>();
+    private Sound soundOn = Sound.on;
+    //I'd like to use queue but it makes more problems than profits
+    private LinkedList<User> users = new LinkedList<User>();
     private User current;
     private GameActivity gameActivity;
     private boolean isReady =false;
@@ -57,21 +62,25 @@ public class UsersController {
 
     private UsersController(){	}
 
-    /**
-     * call only after adding all users
-     * @param gameActivity GameActivity as view
-     * @param onTimeout TimeOut method
-     * @param time time per player in seconds
-     */
-    public void configure(GameActivity gameActivity, OnTimeout onTimeout, int time){
+    public void setOnTimeout(OnTimeout onTimeout){
+        onTimeoutAction=onTimeout;
+    }
+
+    public void setSoundOn(Sound on){
+        soundOn = on;
+    }
+
+    public void setTime(int time){
+        for(User user:users)
+            user.setTime(time);
+    }
+
+
+    public void configure(GameActivity gameActivity){
         if(!isReady){
             this.gameActivity = gameActivity;
-
-            this.onTimeoutAction = onTimeout;
             this.lostPlayers=0;
             players=users.size();
-            for(User user: users)
-                user.setTime(time);
             isReady=true;
         }
     }
@@ -81,20 +90,22 @@ public class UsersController {
         users.add(user);
     }
 
-    public List<User> getUsers(){
-        return (LinkedList<User>)users;
+    public void removeUser(int who){
+        users.remove(who);
     }
 
-    public String getCurrentName(){
-        if(!first)return current.getName();
-        return "";
+    public List<User> getUsers(){
+        return users;
+    }
+
+    public User getCurrent(){
+        return current;
     }
 
     public void rotate(){
         if(first){
             first=false;
-            //quite ugly, I know;
-            ((LinkedList<User>)(users)).remove(players-1);
+            users.remove(players-1);
         }
 
         current.stop();
@@ -160,7 +171,6 @@ public class UsersController {
         }
         return onTimeoutAction;
     }
-
 
     public static UsersController getUsersController(){
         if(instance!=null)return instance;

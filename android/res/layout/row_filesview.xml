@@ -5,19 +5,19 @@
               android:padding="5dp" >
 
     <ImageView
-        android:id="@+id/folderview_row__image"
+        android:id="@+id/filesview__image"
         android:layout_width="@dimen/icon_size"
         android:layout_height="@dimen/icon_size"
         android:layout_marginRight="3dp" />
 
     <TextView
-        android:id="@+id/folderview_row__name"
+        android:id="@+id/filesview__name"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/folderview_row__button"
+        android:id="@+id/filesview__button"
         android:layout_height="@dimen/x1_5icon_size"
         android:layout_width="@dimen/x2icon_size"
         />

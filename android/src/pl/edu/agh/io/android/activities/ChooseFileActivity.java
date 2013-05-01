@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import pl.edu.agh.io.android.custom.FilesViewAdapter;
+import pl.edu.agh.io.android.adapters.FilesViewAdapter;
 import pl.edu.agh.io.android.misc.IProcedure;
 import pl.edu.agh.io.android.model.FileItem;
 
