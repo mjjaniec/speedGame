@@ -36,5 +36,6 @@ dependencies {
 
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
 
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.1'
 }
 

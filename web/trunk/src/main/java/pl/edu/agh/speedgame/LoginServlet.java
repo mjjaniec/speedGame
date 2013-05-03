@@ -1,5 +1,7 @@
 package pl.edu.agh.speedgame;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import pl.edu.agh.speedgame.dao.OurSessionReplacement;
 import pl.edu.agh.speedgame.dao.SessionFactorySingleton;
 import pl.edu.agh.speedgame.dto.User;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,25 +32,57 @@ public class LoginServlet extends HttpServlet {
         try(OurSessionReplacement sessionReplacement = SessionFactorySingleton.getInstance().createSessionReplacement()){
             User user = (User) sessionReplacement.get(User.class, login);
 
+            String exists = request.getParameter("exists");
+            boolean isExists = Boolean.parseBoolean(exists);
+
             if(user == null) {
-		//!!!changed
-		if(isAndroid)response.sendError(HttpServletResponse.SC_OK,"INVALID_LOGIN");
-		else response.sendRedirect("/main_page.jsp?error=" + "User%20doesn't%20exists");
-                return;
+
+                if(isExists) {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    return;
+                }
+
+                //!!!changed
+                if(isAndroid)response.sendError(HttpServletResponse.SC_OK,"INVALID_LOGIN");
+                else response.sendRedirect(response.encodeRedirectURL("/main_page.jsp?error=" + "User doesn't exists"));
+                        return;
             }
 
             if(user.getPassword().equals(password)) {
-		if(isAndroid)response.sendError(HttpServletResponse.SC_OK,"OK");
-		else{
-                	request.getSession().setAttribute("login", login);
-               		 request.getSession().setAttribute("password", password);
-                	request.getRequestDispatcher("/html/new_game.html").forward(request, response);
-		}
+
+
+                if(isExists) {
+                    response.setContentType("application/json");
+                    JSONObject object = new JSONObject();
+                    try {
+                        object.put("login", user.getLogin());
+                        object.put("email", user.getEmail());
+                        object.put("avatar", user.getAvatar());
+                        object.put("ring", user.getRing());
+                        response.getWriter().write(object.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+
+		        if(isAndroid)response.sendError(HttpServletResponse.SC_OK,"OK");
+		        else{
+                    	request.getSession().setAttribute("user", user);
+                    	response.sendRedirect("/jsp/logged.jsp");
+        		}
             } else {
-		//!!!changed
-		if(isAndroid)response.sendError(HttpServletResponse.SC_OK,"INVALID_PASSWORD");
-                else response.sendRedirect("/main_page.jsp?error=" + "Wrong%20login%20or%20password");
+
+                if(isExists) {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    return;
+                }
+
+    		    //!!!changed
+        		if(isAndroid)response.sendError(HttpServletResponse.SC_OK,"INVALID_PASSWORD");
+                else response.sendRedirect(response.encodeRedirectURL("/main_page.jsp?error=" + "Wrong login or password"));
             }
+
         }
 
 

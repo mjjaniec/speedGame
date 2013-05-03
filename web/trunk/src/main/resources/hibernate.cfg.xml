@@ -32,6 +32,9 @@
         <!-- Aktualizowanie schematu -->
         <property name="hbm2ddl.auto">update</property>
 
+        <!-- Register user - fix -->
+        <property name="hibernate.connection.isolation">8</property>
+
         <!-- Klasa zawierająca mapowanie -->
         <mapping class="pl.edu.agh.speedgame.dto.User"/>
 

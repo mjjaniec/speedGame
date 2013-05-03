@@ -16,7 +16,7 @@ table {
 }
 
 #countdown_dashboard {
-    visibility: hidden;
+    display: none;
 }
 
 
@@ -27,3 +27,68 @@ div {
 .ui-widget {
     font-size: 1.6em;
 }
+
+
+.carousel {
+    margin-bottom: 60px;
+}
+
+.carousel .container {
+    position: relative;
+    z-index: 9;
+    width: 300px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 3px 7px rgba(0, 0, 0, 0.3), inset 0 1px rgba(255,255,255,1), inset 0 -3px 2px rgba(0,0,0,0.25);
+    border-radius: 5px;
+    padding: 10px;
+    background: linear-gradient(#eeefef, #ffffff 10%);
+    margin-top:70px;
+}
+
+.carousel-control {
+    height: 80px;
+    margin-top: 0;
+    font-size: 120px;
+    text-shadow: 0 1px 1px rgba(0,0,0,.4);
+    background-color: transparent;
+    border: 0;
+    z-index: 10;
+}
+
+.carousel .item {
+    height: 500px;
+}
+
+.carousel-caption {
+    background-color: transparent;
+    position: static;
+/*    max-width: 550px;*/
+    padding: 0 20px;
+    margin-bottom: 50px;
+}
+
+img {
+    width: 150px;
+}
+
+div .carousel-caption .lead, div .carousel-caption .email {
+    text-shadow:#fff 0px 1px 0, #000 0 -1px 0;
+    font-weight:bold;
+    color:#808080;
+    font-size: 25px;
+}
+
+.carousel-caption h1,
+.carousel-caption .lead {
+    margin: 0;
+    line-height: 1.25;
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0,0,0,.4);
+}
+.carousel-caption .btn {
+    margin-top: 10px;
+}
+
+
+#players { list-style-type: none; margin: 0; padding: 0; width: 20%; }
+#players li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+#players li span { position: absolute; margin-left: -1.3em; }

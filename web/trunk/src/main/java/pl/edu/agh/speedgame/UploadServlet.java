@@ -132,9 +132,9 @@ public class UploadServlet extends HttpServlet {
                         JSONObject jsono = new JSONObject();
                         jsono.put("name", item.getName());
                         jsono.put("size", item.getSize());
-                        jsono.put("url", "upload?getfile=" + item.getName());
-                        jsono.put("thumbnail_url", "upload?getthumb=" + item.getName());
-                        jsono.put("delete_url", "upload?delfile=" + item.getName());
+                        jsono.put("url", "/upload?getfile=" + item.getName());
+                        jsono.put("thumbnail_url", "/upload?getthumb=" + item.getName());
+                        jsono.put("delete_url", "/upload?delfile=" + item.getName());
                         jsono.put("delete_type", "GET");
                         json.put(jsono);
 

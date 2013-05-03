@@ -44,6 +44,15 @@ public class User {
         private String ring;
         private String email;
 
+        public static UserBuilder fromUser(User user) {
+            UserBuilder builder = new UserBuilder().login(user.login)
+                                                   .password(user.password)
+                                                   .email(user.email)
+                                                   .avatar(user.avatar)
+                                                   .ring(user.ring);
+            return builder;
+        }
+
         public UserBuilder login(String login) {
             this.login = login;
             return this;
