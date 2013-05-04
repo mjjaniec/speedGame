@@ -4,7 +4,7 @@ $(function () {
     'use strict';
     $('#fileupload').fileupload({
         url: '/upload',
-        maxFileSize: 5000000,
+        maxFileSize: 10000000,
         //acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
         acceptFileTypes: /(\w*)$/i,
         process: [

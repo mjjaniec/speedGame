@@ -65,6 +65,7 @@ function stopClock(login) {
 
 function startRing(login) {
     console.log("playing " + login)
+    $('#ring_' + login)[0].load();
     $('#ring_' + login)[0].play();
 }
 
