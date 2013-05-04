@@ -48,7 +48,7 @@
                 var pass = $('#password').val()
                 $.ajax("/login", {
                     error:function(jqXHR, textStatus, errorThrown) {
-                        $("#errors").html("<div class='alert alert-error'><button type='btn' class='close' data-dismiss='alert'>&times;</button><strong>" + textStatus + "</strong>: " + errorThrown + "</div>")
+                        $("#errors").html("<div class='alert alert-error'><button type='btn' class='close' data-dismiss='alert'>&times;</button><strong>Wrong login or password</strong></div>")
                     },
                     success: function(data, textStatus, jqXHR) {
                         $("#errors").html("");
@@ -73,7 +73,9 @@
                 var last = counter
 
                 if(counter >= 0) {
-                    stopClock(players_list[last].login)    // first run
+                    // first run
+                    stopClock(players_list[last].login)
+                    stopRing(players_list[last].login)
                 }
 
                 counter = (counter + 1) % players_list.length;
@@ -81,6 +83,7 @@
                 player = players_list[counter % players_list.length]
 
                 startClock(player.login)
+                startRing(player.login)
 
                 $('#right-arrow').text(players_list[(counter + 1) % players_list.length].login + ">")
             }
@@ -122,7 +125,7 @@
 
 <body>
 
-<div id="countdown_dashboard" style="margin-left: 9%;display:none;">
+<div id="countdown_dashboard" style="margin-left: 15%;display:none;margin-top: 20px;">
 
     <div class="dash minutes_dash">
         <span class="dash_title">minutes</span>

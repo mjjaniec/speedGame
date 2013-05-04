@@ -34,6 +34,10 @@ function insert_new_player(player, time) {
     login.text(player.login)
     var email = $("<p class='lead email'></p>")
     email.html("<i>" + player.email + "</i>")
+    var ring = $("<audio controls height=\"100\" width=\"100\"></audio>")
+    var source = $("<source type=\"audio/mpeg\">")
+    var embed = $("<embed height=\"50\" width=\"100\">")
+    ring.append(source).append(embed)
     item.append(container)
     container.append(caption)
     caption.append(avatar)
@@ -41,19 +45,34 @@ function insert_new_player(player, time) {
     caption.append(email)
 
     avatar.attr("src","/upload?getfile=" + player.avatar)
+    source.attr("src","/upload?getfile=" + player.ring)
+    embed.attr("src","/upload?getfile=" + player.ring)
+    ring.attr("id", "ring_" + player.login)
     $("#carousel_to_display").append(item)
     add_new_clock(caption, player.login, time)
+    caption.append(ring)
 }
 
 function startClock(login) {
-    console.log("starting " + login)
+    console.log("starting clock " + login)
     $('#countdown_dashboard_' + login).startCountDown();
 }
 
 function stopClock(login) {
-    console.log("stopping " + login)
+    console.log("stopping clock " + login)
     $('#countdown_dashboard_' + login).stopCountDown();
 }
+
+function startRing(login) {
+    console.log("playing " + login)
+    $('#ring_' + login)[0].play();
+}
+
+function stopRing(login) {
+    console.log("stopping ring " + login)
+    $('#ring_' + login)[0].pause();
+}
+
 
 $(function() {
     $( "#players" ).sortable();
