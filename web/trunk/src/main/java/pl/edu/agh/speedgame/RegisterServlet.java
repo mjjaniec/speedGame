@@ -71,7 +71,8 @@ public class RegisterServlet extends HttpServlet {
 
 
     void handleUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String login = (String) request.getSession().getAttribute("login");
+        User user = (User) request.getSession().getAttribute("user");
+        String login = user.getLogin();
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         String avatar = request.getParameter("avatar");
