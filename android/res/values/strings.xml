@@ -12,21 +12,27 @@
     <string name="newgame__sound">Sounds</string>
     <string name="newgame__on_timeout">After timeout</string>
     <string name="newgame__change_account">Change My Account</string>
+    <string name="newgame__next">Next</string>
 
-    <string name="game__next_player">Next player</string>
     <string name="game__loose_game">Loose game</string>
     <string name="game__game_name">Name of the Game</string>
     <string name="game__timeout_loose1">Player</string>
-    <string name="game__timeout_loose2">has reached timeout, looses the game.</string>
+    <string name="game__timeout_loose2">looses the game.</string>
     <string name="game__timeout_negative1">Player</string>
     <string name="game__timeout_negative2" >has reached timeout, from now negative time would be counted.</string>
     <string name="game__win1">Player</string>
     <string name="game__win2">Has won the game. Congratulations!</string>
     <string name="game__lost">lost!</string>
+    <string name="game__start_the_game">Click anywhere to start the Game!</string>
+    <string name="game__next_player">Click anywhere to end move.</string>
 
+
+    <string name="login__play">Play</string>
+    <string name="login__login_btn">Login</string>
     <string name="login__login">Login/Nick</string>
     <string name="login__password">Password</string>
     <string name="login__new_account">Register</string>
+    <string name="login__no_account">Don\'t want account? Just enter your nick and go!</string>
     <string name="login__invalid_login">Invalid login. Please retype and try again. You may also create new
         account.
     </string>
@@ -50,19 +56,22 @@
     </string>
     <string name="newaccount__validate">Please fill and validate all the fields before registration.</string>
     <string name="newaccount__sending_file">Sending files, please wait...</string>
+    <string name="newaccount__update">Update</string>
 
     <string name="choosefile__open">Open</string>
     <string name="choosefile__pick">Pick</string>
 
-    <string name="login__no_account">Don\'t want account? Just enter your nick and go!</string>
+
     <string name="offline__warning">Warning! You are currently offline. Your settings would not be saved on server.
     </string>
     <string name="offline__nick">Nick</string>
     <string name="offline__change">Change</string>
     <string name="offline__play">Play</string>
-    <string name="login__play">Play</string>
-    <string name="login__login_btn">Login</string>
+
     <string name="users__play">Play</string>
+    <string name="game__really_loose">Do you really loose?</string>
 
-
+    <string name="common__yes">Yes</string>
+    <string name="common__no">No</string>
+    <string name="users__back">back</string>
 </resources>

@@ -65,7 +65,7 @@ public class User {
 
     public void setLost(){
         lost = true;
-        UsersController.getUsersController().onLost(this);
+        UsersController.getInstance().onLost(this);
     }
 
     public boolean isLost(){
@@ -77,7 +77,7 @@ public class User {
     }
 
     public void start(){
-        UsersController.getUsersController().refresh(self);
+        UsersController.getInstance().refresh(self);
 
         if(!negative){
             countDownTimer = CreateCountDownTimer();
@@ -103,14 +103,14 @@ public class User {
                     return;
                 }
                 --seconds;
-                UsersController.getUsersController().refresh(self);
+                UsersController.getInstance().refresh(self);
             }
 
             @Override
             public void onFinish() {
                 if(!finished){
                     finished=false;
-                    switch(UsersController.getUsersController().onTimeout(self)){
+                    switch(UsersController.getInstance().onTimeout(self)){
                         case loose: break;
                         case negativePoints:
                             seconds = 0;
@@ -128,7 +128,7 @@ public class User {
         @Override
         public void run() {
             seconds++;
-            UsersController.getUsersController().refresh(self);
+            UsersController.getInstance().refresh(self);
         }
     };
 

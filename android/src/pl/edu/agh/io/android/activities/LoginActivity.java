@@ -13,28 +13,30 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import pl.edu.agh.io.android.misc.SetText;
+import pl.edu.agh.io.android.controller.AppController;
 import pl.edu.agh.io.android.controller.SpeedGameProxy;
+import pl.edu.agh.io.android.controller.UsersController;
 import pl.edu.agh.io.android.controller.tasks.LoginTask;
+import pl.edu.agh.io.android.misc.SetText;
+import pl.edu.agh.io.android.model.User;
 
 public class LoginActivity extends AbstractActivity {
-    private View pendingView;
     private LoginActivity that;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        AppController.getInstance().setNew(true);
+
         that=this;
 
-        SpeedGameProxy.getInstance().setContext(getApplicationContext());
         setContentView(R.layout.activity_login);
 
         Button login_btn = (Button) findViewById(R.id.login__login_btn);
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pendingView = view;
                 String login = ((TextView) findViewById(R.id.login__login)).getText().toString();
                 String password = ((TextView) findViewById(R.id.login__password)).getText().toString();
                 SpeedGameProxy.getInstance().login(that,login,password);
@@ -49,6 +51,25 @@ public class LoginActivity extends AbstractActivity {
                 startActivityForResult(myIntent, 0);
             }
         });
+
+        findViewById(R.id.login__play).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppController.getInstance().setLogged(false);
+                UsersController.getInstance().
+                        addUser(new User(getStr(R.id.login__login),view.getContext()));
+                onOK();
+            }
+        });
+    }
+
+    private void onOK(){
+        if(AppController.getInstance().isAdditionalPlayer())
+            finish();
+        else{
+            Intent myIntent = new Intent(this, NewGameActivity.class);
+            startActivityForResult(myIntent, 0);
+        }
     }
 
     public void onLogin(LoginTask.LoginResult result) {
@@ -56,8 +77,9 @@ public class LoginActivity extends AbstractActivity {
 
         switch (result){
             case OK:
-                Intent myIntent = new Intent(pendingView.getContext(), NewGameActivity.class);
-                startActivityForResult(myIntent, 0);
+                UsersController.getInstance().addUser(new User(getStr(R.id.login__login),this));
+                AppController.getInstance().setLogged(true);
+                onOK();
                 break;
             case ERROR:
                 runOnUiThread(new SetText(loginInfo,R.string.login__error));

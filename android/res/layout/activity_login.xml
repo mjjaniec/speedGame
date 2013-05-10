@@ -63,7 +63,8 @@
         android:text="@string/login__new_account"/>
 
     <Space
-        android:layout_height="40dip"
+        android:layout_height="0dip"
+        android:layout_weight="1"
         android:layout_width="match_parent"
         />
 
@@ -79,7 +80,7 @@
             android:text="@string/login__no_account"/>
 
         <Button
-            android:id="@+id/offline__play"
+            android:id="@+id/login__play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"

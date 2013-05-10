@@ -11,15 +11,22 @@ package pl.edu.agh.io.android.controller;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
 import pl.edu.agh.io.android.activities.LoginActivity;
 import pl.edu.agh.io.android.activities.NewAccountActivity;
 import pl.edu.agh.io.android.activities.R;
 import pl.edu.agh.io.android.controller.tasks.LoginTask;
 import pl.edu.agh.io.android.controller.tasks.RegisterTask;
 import pl.edu.agh.io.android.controller.tasks.SendFileTask;
+import pl.edu.agh.io.android.controller.tasks.UpdateTask;
+import pl.edu.agh.io.android.misc.IProcedure;
 import pl.edu.agh.io.android.model.FileItem;
 
+import java.net.InetAddress;
+
+
 public class SpeedGameProxy {
+
 
     public enum Service{
         login,
@@ -42,10 +49,43 @@ public class SpeedGameProxy {
     private static SpeedGameProxy instance;
     private static Object lock = new Object();
     private Context context;
+    private boolean isChecked = false;
+    private boolean online = true;
+
+    public boolean isOnline(){
+        return online;
+    }
 
 
-    public boolean isOnline() {
-        return false;
+    public boolean isOnlineAsync(final IProcedure<Boolean> callback) {
+        if(isChecked){
+            return online;
+        }
+        synchronized (lock){
+            if(!isChecked){
+                online=false;
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try{
+                            InetAddress address = InetAddress.getByName(
+                                    context.getText(R.string.config__server_url).toString());
+                            if(address!=null){
+                                if(address.isReachable(500)){
+                                    online=true;
+                                }
+                            }
+                        }catch(Exception e){
+                            Log.w("SpeedGame", e.toString());
+
+                        }
+                        isChecked = true;
+                        callback.call(online);
+                    }
+                }).start();
+            }
+        }
+        return online;
     }
 
     private SpeedGameProxy() {
@@ -71,6 +111,10 @@ public class SpeedGameProxy {
 
     public void register(NewAccountActivity view, String login, String password, String email, String avatar, String ring){
         new RegisterTask(view,login,password,email ,avatar,ring).execute(getServerUrl(Service.register));
+    }
+
+    public void update(NewAccountActivity view, String login, String password, String email, String avatar, String ring){
+        new UpdateTask(view,login,password,email,avatar,ring).execute(getServerUrl(Service.register));
     }
 
     public void sendFile(NewAccountActivity view,FileItem fileItem){

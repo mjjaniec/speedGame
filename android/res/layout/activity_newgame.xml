@@ -64,7 +64,7 @@
 
     <Button
         android:id="@+id/newgame__start"
-        android:text="@string/common__start_the_game"
+        android:text="@string/newgame__next"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"/>
 

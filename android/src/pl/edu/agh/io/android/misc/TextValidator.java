@@ -14,15 +14,19 @@ public class TextValidator implements View.OnFocusChangeListener{
     private String regex;
     private String message;
     private int min, max;
+    private boolean legalEmpty;
 
-    public TextValidator(String regex, int min, int max, String message){
+    public TextValidator(String regex, int min, int max, boolean legalEmpty, String message){
         this.regex=regex;
         this.message=message;
         this.min=min;
         this.max=max;
+        this.legalEmpty=legalEmpty;
     }
 
     public boolean validate(String string){
+        if(string==null)return false;
+        if(legalEmpty && string.length()==0)return true;
         if(string.length()<min)return false;
         if(string.length()>max)return false;
         if(!string.matches(regex))return false;

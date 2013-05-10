@@ -87,7 +87,7 @@ public class UsersController {
     public int getButtonCaption() {
         if (isReady && !first)
             return R.string.game__next_player;
-        return R.string.common__start_the_game;
+        return R.string.game__start_the_game;
 
     }
 
@@ -148,6 +148,9 @@ public class UsersController {
     }
 
     public List<User> getUsers() {
+        //ugly
+        for(User user : users)
+            user.setTime(time);
         return users;
     }
 
@@ -215,6 +218,9 @@ public class UsersController {
         } else {
             User winner = findWinner();
 
+            users.add(current);
+            AppController.getInstance().setAfterGame(true);
+
             new AlertDialog.Builder(gameActivity)
                     .setTitle(
                             gameActivity.getString(R.string.game__win1) +
@@ -248,7 +254,7 @@ public class UsersController {
         return onTimeoutAction;
     }
 
-    public static UsersController getUsersController() {
+    public static UsersController getInstance() {
         if (instance != null) return instance;
         synchronized (lock) {
             if (instance == null)

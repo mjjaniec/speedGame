@@ -8,18 +8,21 @@ package pl.edu.agh.io.android.activities;
  * To change this template use File | Settings | File Templates.
  */
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
-import pl.edu.agh.io.android.controller.UsersController;
+import android.widget.*;
 import pl.edu.agh.io.android.adapters.UsersViewAdapter;
+import pl.edu.agh.io.android.controller.UsersController;
 import pl.edu.agh.io.android.model.User;
 
 public class GameActivity extends AbstractActivity {
 
+    private ImageView avatar;
+    private View next;
+    private TextView caption;
+    private ArrayAdapter<User> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,36 +30,69 @@ public class GameActivity extends AbstractActivity {
         setContentView(R.layout.activity_game);
 
 
-        UsersController controller = UsersController.getUsersController();
+        UsersController controller = UsersController.getInstance();
         TextView current_player = (TextView) findViewById(R.id.game__current);
         current_player.setText("");
 
 
         controller.configure(this);
 
-        final ArrayAdapter<User> adapter = new UsersViewAdapter(this,controller.getUsers());
+        adapter = new UsersViewAdapter(this,controller.getUsers());
         ListView queue = (ListView) findViewById(R.id.game__queue);
         queue.setAdapter(adapter);
 
-
-        final Button start = (Button) findViewById(R.id.game__next);
-        start.setText(controller.getButtonCaption());
-        start.setOnClickListener(new View.OnClickListener() {
+        queue.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-
-                UsersController controller = UsersController.getUsersController();
-                controller.rotate();
-                User current = controller.getCurrent();
-
-                TextView current_player = (TextView) findViewById(R.id.game__current);
-                current_player.setText(current.getName());
-
-                start.setText(controller.getButtonCaption());
-                start.setBackground(current.getAvatar());
-
-                adapter.notifyDataSetChanged();
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                handleClick();
             }
         });
+
+        avatar = (ImageView)findViewById(R.id.game__avatar);
+        next = findViewById(R.id.game__next);
+        caption = (TextView) findViewById(R.id.game__caption);
+
+
+        caption.setText(controller.getButtonCaption());
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handleClick();
+            }
+        });
+
+        findViewById(R.id.game__loose).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(view.getContext())
+                        .setTitle(R.string.game__really_loose)
+                        .setPositiveButton(R.string.common__yes,new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                UsersController.getInstance().getCurrent().setLost();
+                            }
+                        }).setNegativeButton(R.string.common__no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //pass
+                    }
+                }).show();
+
+            }
+        });
+    }
+
+    private void handleClick(){
+        UsersController controller = UsersController.getInstance();
+        controller.rotate();
+        User current = controller.getCurrent();
+
+        TextView current_player = (TextView) findViewById(R.id.game__current);
+        current_player.setText(current.getName());
+
+        caption.setText(controller.getButtonCaption());
+        avatar.setBackground(current.getAvatar());
+
+        adapter.notifyDataSetChanged();
     }
 }

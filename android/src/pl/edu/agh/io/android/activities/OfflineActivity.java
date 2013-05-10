@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import pl.edu.agh.io.android.controller.AppController;
 import pl.edu.agh.io.android.controller.UsersController;
 import pl.edu.agh.io.android.misc.IProcedure;
 import pl.edu.agh.io.android.misc.SetText;
@@ -36,7 +37,7 @@ public class OfflineActivity extends AbstractActivity {
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UsersController.getUsersController().addUser(
+                UsersController.getInstance().addUser(
                         new User(getStr(R.id.offline__nick),
                                 view.getContext(),
                                 ring.value,
@@ -48,8 +49,9 @@ public class OfflineActivity extends AbstractActivity {
         findViewById(R.id.offline__change_avatar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ChooseFileActivity.setCallback(new UrlSetter((TextView)findViewById(R.id.offline__avatar),avatar));
-                ChooseFileActivity.setWhat(R.string.newaccount__choose_avatar);
+                AppController.getInstance().setCallback(
+                        new UrlSetter((TextView) findViewById(R.id.offline__avatar), avatar));
+                AppController.getInstance().setWhat(R.string.newaccount__choose_avatar);
                 Intent myIntent = new Intent(view.getContext(), ChooseFileActivity.class);
                 startActivityForResult(myIntent, 0);
             }
@@ -58,8 +60,9 @@ public class OfflineActivity extends AbstractActivity {
         findViewById(R.id.offline__change_ring).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ChooseFileActivity.setCallback(new UrlSetter((TextView)findViewById(R.id.offline__ring),ring));
-                ChooseFileActivity.setWhat(R.string.newaccount__choose_ring);
+                AppController.getInstance().setCallback(
+                        new UrlSetter((TextView)findViewById(R.id.offline__ring),ring));
+                AppController.getInstance().setWhat(R.string.newaccount__choose_ring);
                 Intent myIntent = new Intent(view.getContext(), ChooseFileActivity.class);
                 startActivityForResult(myIntent, 0);
             }

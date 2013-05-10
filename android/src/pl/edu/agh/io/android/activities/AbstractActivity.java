@@ -1,7 +1,9 @@
 package pl.edu.agh.io.android.activities;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.widget.TextView;
+import pl.edu.agh.io.android.controller.SpeedGameProxy;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,5 +17,23 @@ public abstract class AbstractActivity extends Activity {
         TextView view = (TextView) findViewById(viewId);
         if(view==null)return null;
         return view.getText().toString();
+    }
+
+    protected void setStr(int viewID,String string){
+        TextView view = (TextView) findViewById(viewID);
+        if(view==null)return;
+        view.setText(string);
+    }
+
+    protected void setStr(int viewID,int stringID){
+        TextView view = (TextView) findViewById(viewID);
+        if(view==null)return;
+        view.setText(stringID);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        SpeedGameProxy.getInstance().setContext(getApplicationContext());
     }
 }

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+import pl.edu.agh.io.android.controller.AppController;
+import pl.edu.agh.io.android.controller.SpeedGameProxy;
 import pl.edu.agh.io.android.controller.UsersController;
 
 /**
@@ -25,6 +27,19 @@ public class NewGameActivity extends AbstractActivity {
                 this, android.R.layout.simple_spinner_item, UsersController.OnTimeout.values()
         ));
 
+        if(!SpeedGameProxy.getInstance().isOnline() || !AppController.getInstance().isLogged()){
+            findViewById(R.id.newgame__change_account).setVisibility(View.INVISIBLE);
+        }else {
+            findViewById(R.id.newgame__change_account).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AppController.getInstance().setNew(false);
+                    Intent intent = new Intent(view.getContext(),NewAccountActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+
 
 
         Button start = (Button) findViewById(R.id.newgame__start);
@@ -32,7 +47,7 @@ public class NewGameActivity extends AbstractActivity {
 
             @Override
             public void onClick(View view) {
-                UsersController controller = UsersController.getUsersController();
+                UsersController controller = UsersController.getInstance();
 
                 CheckBox sound = ((CheckBox)findViewById(R.id.newgame__sound));
                 controller.setSoundOn(UsersController.Sound.fromBoolean(sound.isChecked()));
@@ -56,6 +71,6 @@ public class NewGameActivity extends AbstractActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        UsersController.reset();
+        AppController.getInstance().setAdditionalPlayer(true);
     }
 }

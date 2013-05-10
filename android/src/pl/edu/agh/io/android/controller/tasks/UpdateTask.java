@@ -9,8 +9,9 @@ import pl.edu.agh.io.android.activities.NewAccountActivity;
  * Time: 1:23 PM
  * To change this template use File | Settings | File Templates.
  */
-public class RegisterTask extends UsersTaskBase {
-    public RegisterTask(NewAccountActivity view, String login, String password, String email, String avatar, String ring) {
+public class UpdateTask extends UsersTaskBase {
+    public UpdateTask(NewAccountActivity view, String login, String password, String email, String avatar, String ring) {
         super(view, login, password, email, avatar, ring);
+        map.put("update","true");
     }
 }

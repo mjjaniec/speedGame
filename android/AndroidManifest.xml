@@ -14,7 +14,10 @@
         android:theme="@style/AppBaseTheme">
 
         <activity android:name=".EmptyActivity">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
 
         <activity android:name=".LoginActivity">
@@ -28,10 +31,6 @@
         <activity android:name=".NewGameActivity">
         </activity>
         <activity android:name=".UsersActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".GameActivity">
         </activity>

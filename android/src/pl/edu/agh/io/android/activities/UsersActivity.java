@@ -3,11 +3,12 @@ package pl.edu.agh.io.android.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import pl.edu.agh.io.android.adapters.DragNDropAdapter;
+import pl.edu.agh.io.android.controller.AppController;
 import pl.edu.agh.io.android.controller.SpeedGameProxy;
 import pl.edu.agh.io.android.controller.UsersController;
-import pl.edu.agh.io.android.model.User;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,17 +20,13 @@ import pl.edu.agh.io.android.model.User;
 public class UsersActivity extends AbstractActivity {
 
     private DragNDropAdapter adapter;
-    private UsersController controller = UsersController.getUsersController();
+    private UsersController controller = UsersController.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_users);
-
-        for(int i=0; i<5; ++i)
-            controller.addUser(new User("sex "+i,this));
-
+        AppController.getInstance().setAdditionalPlayer(true);
 
         adapter = new DragNDropAdapter(this,controller.getUsers());
 
@@ -65,15 +62,20 @@ public class UsersActivity extends AbstractActivity {
         findViewById(R.id.users__add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Class<?> intent;
-                if(SpeedGameProxy.getInstance().isOnline()){
-                    intent=LoginActivity.class;
+                if(!AppController.getInstance().isAfterGame()){
+                    AppController.getInstance().setNew(false);
+                    Class<?> intent;
+                    if(SpeedGameProxy.getInstance().isOnline()){
+                        intent=LoginActivity.class;
+                    }else {
+                        intent=OfflineActivity.class;
+                    }
+                    Intent newIntent = new Intent(view.getContext(),intent);
+                    startActivity(newIntent);
                 }else {
-                    intent=OfflineActivity.class;
+                    UsersController.reset();
+                    finish();
                 }
-
-                Intent newIntent = new Intent(view.getContext(),intent);
-                startActivity(newIntent);
             }
         });
     }
@@ -81,7 +83,12 @@ public class UsersActivity extends AbstractActivity {
     @Override
     protected void onResume(){
         super.onResume();
+        if(AppController.getInstance().isAfterGame()){
+            ((Button)findViewById(R.id.users__play)).setText(R.string.users__back);
+            findViewById(R.id.users__add).setVisibility(View.INVISIBLE);
+        }
         adapter.notifyDataSetChanged();
+        AppController.getInstance().setAfterGame(false);
     }
 
 }

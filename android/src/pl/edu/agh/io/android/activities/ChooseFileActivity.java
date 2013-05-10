@@ -6,7 +6,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import pl.edu.agh.io.android.adapters.FilesViewAdapter;
-import pl.edu.agh.io.android.misc.IProcedure;
+import pl.edu.agh.io.android.controller.AppController;
 import pl.edu.agh.io.android.model.FileItem;
 
 import java.io.File;
@@ -21,17 +21,6 @@ import java.io.File;
 
 public class ChooseFileActivity extends AbstractActivity {
 
-    private static IProcedure<FileItem> callback;
-    private static int what;
-
-    public static void setWhat(int what){
-        ChooseFileActivity.what=what;
-    }
-
-    public static void setCallback(IProcedure<FileItem> callback){
-        ChooseFileActivity.callback=callback;
-    }
-
     private TextView myPath;
 
 
@@ -40,7 +29,8 @@ public class ChooseFileActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choosefile);
 
-        ((TextView)findViewById(R.id.choosefile_what)).setText(what);
+        ((TextView)findViewById(R.id.choosefile_what)).setText(
+                AppController.getInstance().getWhat());
 
         myPath = (TextView)findViewById(R.id.choosefile_path);
 
@@ -57,7 +47,7 @@ public class ChooseFileActivity extends AbstractActivity {
                     if(file.getTotalSpace()>Integer.parseInt(getString(R.string.config__max_file_size))){
                         Toast.makeText(context,context.getText(R.string.common__file_is_to_big),Toast.LENGTH_SHORT).show();
                     }else{
-                        callback.call(fileItem);
+                        AppController.getInstance().getCallback().call(fileItem);
                         finish();
                     }
                 }else{
