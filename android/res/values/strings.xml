@@ -9,6 +9,9 @@
 
     <string name="newgame__number_of_players">Number of players</string>
     <string name="newgame__time_per_player">Time per player</string>
+    <string name="newgame__sound">Sounds</string>
+    <string name="newgame__on_timeout">After timeout</string>
+    <string name="newgame__change_account">Change My Account</string>
 
     <string name="game__next_player">Next player</string>
     <string name="game__loose_game">Loose game</string>
@@ -27,8 +30,8 @@
     <string name="login__invalid_login">Invalid login. Please retype and try again. You may also create new
         account.
     </string>
-    <string name="login__invalid_password">Invalid login or password. Please retype and try again. You may also create new
-        account.
+    <string name="login__invalid_password">Invalid login or password. Please retype and try again.
+        You may also create new account.
     </string>
     <string name="login__error">An error occurred during communication with server.</string>
 
@@ -50,5 +53,16 @@
 
     <string name="choosefile__open">Open</string>
     <string name="choosefile__pick">Pick</string>
+
+    <string name="login__no_account">Don\'t want account? Just enter your nick and go!</string>
+    <string name="offline__warning">Warning! You are currently offline. Your settings would not be saved on server.
+    </string>
+    <string name="offline__nick">Nick</string>
+    <string name="offline__change">Change</string>
+    <string name="offline__play">Play</string>
+    <string name="login__play">Play</string>
+    <string name="login__login_btn">Login</string>
+    <string name="users__play">Play</string>
+
 
 </resources>

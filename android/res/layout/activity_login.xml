@@ -1,72 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
-            android:useDefaultMargins="true"
-            android:alignmentMode="alignBounds"
-            android:columnOrderPreserved="false"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:rowCount="7"
-            android:columnCount="1" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_margin="5dip"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
 
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_column="0"
-        android:layout_row="0"
         android:id="@+id/login__info"/>
 
 
-    <TextView
-        android:labelFor="@+id/login__login"
-        android:layout_row="1"
-        android:layout_column="0"
-        android:layout_width="wrap_content"
+    <LinearLayout
         android:layout_height="wrap_content"
-        android:text="@string/login__login" />
+        android:layout_width="match_parent"
+        android:orientation="vertical">
 
-    <EditText
-        android:inputType="textNoSuggestions"
-        android:layout_row="2"
-        android:layout_column="0"
-        android:id="@+id/login__login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10" />
+        <TextView
+            android:labelFor="@+id/login__login"
+            android:layout_width="@dimen/register_small"
+            android:layout_height="wrap_content"
+            android:text="@string/login__login"/>
 
-    <TextView
-        android:labelFor="@+id/login__password"
-        android:layout_row="3"
-        android:layout_column="0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/login__password" />
+        <EditText
+            android:inputType="textNoSuggestions"
+            android:id="@+id/login__login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
-    <EditText
-        android:inputType="textPassword"
-        android:layout_row="4"
-        android:layout_column="0"
-        android:id="@+id/login__password"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
         android:layout_height="wrap_content"
-        android:ems="10" />
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:labelFor="@+id/login__password"
+            android:layout_width="@dimen/register_small"
+            android:layout_height="wrap_content"
+            android:text="@string/login__password"/>
+
+        <EditText
+            android:inputType="textPassword"
+            android:id="@+id/login__password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
     <Button
-        android:layout_row="5"
-        android:layout_column="0"
         android:id="@+id/login__login_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:text="@string/login__login" />
+        android:text="@string/login__login_btn"/>
 
     <Button
         android:id="@+id/login__new"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_column="0"
-        android:layout_row="6"
         android:layout_gravity="right"
         android:text="@string/login__new_account"/>
-</GridLayout>
+
+    <Space
+        android:layout_height="40dip"
+        android:layout_width="match_parent"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:gravity="top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login__no_account"/>
+
+        <Button
+            android:id="@+id/offline__play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="@string/login__play"/>
+
+    </LinearLayout>
+
+</LinearLayout>

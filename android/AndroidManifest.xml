@@ -11,18 +11,30 @@
     <application
         android:label="@string/common__app_name"
         android:icon="@drawable/clock"
-        android:theme="@style/AppBaseTheme" >
+        android:theme="@style/AppBaseTheme">
 
-        <activity android:name=".LoginActivity"/>
-        <activity android:name=".ChooseFileActivity"/>
-        <activity android:name=".NewAccountActivity"/>
+        <activity android:name=".EmptyActivity">
+
+        </activity>
+
+        <activity android:name=".LoginActivity">
+        </activity>
+        <activity android:name=".OfflineActivity">
+        </activity>
+        <activity android:name=".NewAccountActivity">
+        </activity>
+        <activity android:name=".ChooseFileActivity">
+        </activity>
         <activity android:name=".NewGameActivity">
+        </activity>
+        <activity android:name=".UsersActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".GameActivity"/>
+        <activity android:name=".GameActivity">
+        </activity>
 
     </application>
 </manifest>

@@ -1,56 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="30dp"
-    android:useDefaultMargins="true"
-    android:alignmentMode="alignBounds"
-    android:columnOrderPreserved="false"
-    android:layout_marginLeft="50dp"
-    android:rowCount="5"
-    android:columnCount="1" >
-    
-    
-    <TextView
-        android:labelFor="@+id/newgame__players"
-        android:layout_row="0"
-        android:layout_column="0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/newgame__number_of_players" />
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <EditText
-        android:layout_row="1"
-        android:layout_column="0"
-        android:id="@+id/newgame__players"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number" />
-    
-    <TextView
-        android:labelFor="@+id/newgame__time"
-        android:layout_row="2"
-        android:layout_column="0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/newgame__time_per_player" />
 
-    <EditText
-        android:inputType="number"
-        android:layout_row="3"
-        android:layout_column="0"
-        android:id="@+id/newgame__time"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:text="@string/newgame__sound"/>
+        <CheckBox
+            android:layout_weight="1"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:id="@+id/newgame__sound"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/newgame__on_timeout"/>
+        <Spinner
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/newgame__on_timeout"/>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/newgame__time_per_player"/>
+        <EditText
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/newgame__time"/>
+    </LinearLayout>
+
+
     <Button
-        android:layout_row="4"
-        android:layout_column="0"
         android:id="@+id/newgame__start"
-        android:layout_width="wrap_content"
+        android:text="@string/common__start_the_game"
         android:layout_height="wrap_content"
+        android:layout_width="match_parent"/>
 
-        android:text="@string/common__start_the_game" />
+    <Space
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"/>
 
-</GridLayout>
+    <Button
+        android:text="@string/newgame__change_account"
+        android:id="@+id/newgame__change_account"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_width="wrap_content"/>
+
+
+</LinearLayout>

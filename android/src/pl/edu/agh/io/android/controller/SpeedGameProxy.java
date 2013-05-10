@@ -43,6 +43,11 @@ public class SpeedGameProxy {
     private static Object lock = new Object();
     private Context context;
 
+
+    public boolean isOnline() {
+        return false;
+    }
+
     private SpeedGameProxy() {
 
     }

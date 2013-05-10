@@ -1,13 +1,10 @@
 package pl.edu.agh.io.android.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.*;
 import pl.edu.agh.io.android.controller.UsersController;
-import pl.edu.agh.io.android.model.User;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,36 +15,38 @@ import pl.edu.agh.io.android.model.User;
  */
 public class NewGameActivity extends AbstractActivity {
 
-    private final int maxUsers = 200;
-    private final int minUsers = 2;
-    private Context context;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newgame);
-        context = this;
+
+        Spinner onTimeout = ((Spinner)findViewById(R.id.newgame__on_timeout));
+        onTimeout.setAdapter(new ArrayAdapter<UsersController.OnTimeout>(
+                this, android.R.layout.simple_spinner_item, UsersController.OnTimeout.values()
+        ));
+
+
 
         Button start = (Button) findViewById(R.id.newgame__start);
         start.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                String playersString =((TextView)findViewById(R.id.newgame__players)).getText().toString();
-                String timeString=((TextView)findViewById(R.id.newgame__time)).getText().toString();
-                int players = !playersString.equals("")?Integer.parseInt(playersString):2;
-                int timeLeft = !timeString.equals("")?Integer.parseInt(timeString):5;
-                if(players>maxUsers)players=maxUsers;
-                if(players<minUsers)players=minUsers;
-
                 UsersController controller = UsersController.getUsersController();
 
-                for(int i=0; i<players; ++i)
-                    controller.addUser(new User("Player "+(i+1),context));
+                CheckBox sound = ((CheckBox)findViewById(R.id.newgame__sound));
+                controller.setSoundOn(UsersController.Sound.fromBoolean(sound.isChecked()));
+
+                Spinner onTimeout = ((Spinner)findViewById(R.id.newgame__on_timeout));
+                controller.setOnTimeout(UsersController.OnTimeout.fromString(onTimeout.getSelectedItem().toString()));
+
+                String timeString=((TextView)findViewById(R.id.newgame__time)).getText().toString();
+                int timeLeft = !timeString.equals("")?Integer.parseInt(timeString):300;
+
 
                 controller.setTime(timeLeft);
 
-                Intent myIntent = new Intent(view.getContext(),GameActivity.class);
+                Intent myIntent = new Intent(view.getContext(),UsersActivity.class);
                 startActivityForResult(myIntent,0);
             }
         });
