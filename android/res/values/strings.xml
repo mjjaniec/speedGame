@@ -74,4 +74,6 @@
     <string name="common__yes">Yes</string>
     <string name="common__no">No</string>
     <string name="users__back">back</string>
+    <string name="common__preview">Preview</string>
+    <string name="newgame__default_time">300</string>
 </resources>

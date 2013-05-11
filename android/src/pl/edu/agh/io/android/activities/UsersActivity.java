@@ -1,9 +1,9 @@
 package pl.edu.agh.io.android.activities;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 import pl.edu.agh.io.android.adapters.DragNDropAdapter;
 import pl.edu.agh.io.android.controller.AppController;
@@ -34,8 +34,10 @@ public class UsersActivity extends AbstractActivity {
 
             @Override
             public void onDrop(int from,int to) {
-                controller.swap(from, to);
-                adapter.notifyDataSetChanged();
+                if(!AppController.getInstance().isAfterGame()){
+                    controller.swap(from, to);
+                    adapter.notifyDataSetChanged();
+                }
             }
 
         });;
@@ -43,8 +45,10 @@ public class UsersActivity extends AbstractActivity {
         adapter.setOnRemoveListener(new DragNDropAdapter.RemoveListener() {
             @Override
             public void onRemove(int row) {
-                controller.removeUser(row);
-                adapter.notifyDataSetChanged();
+                if(!AppController.getInstance().isAfterGame()){
+                    controller.removeUser(row);
+                    adapter.notifyDataSetChanged();
+                }
             }
         });
 
@@ -53,9 +57,19 @@ public class UsersActivity extends AbstractActivity {
         findViewById(R.id.users__play).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent myIntent = new Intent(view.getContext(), GameActivity.class);
-                startActivity(myIntent);
+                if(!AppController.getInstance().isAfterGame()){
+                    if(UsersController.getInstance().getUsers().size()<2){
+                        new AlertDialog.Builder(view.getContext()).
+                                setPositiveButton(R.string.common__ok,null).
+                                setMessage(R.id.game__more_than_one).
+                                show();
+                    }
+                    Intent myIntent = new Intent(view.getContext(), GameActivity.class);
+                    startActivity(myIntent);
+                } else {
+                    UsersController.reset();
+                    finish();
+                }
             }
         });
 
@@ -72,9 +86,6 @@ public class UsersActivity extends AbstractActivity {
                     }
                     Intent newIntent = new Intent(view.getContext(),intent);
                     startActivity(newIntent);
-                }else {
-                    UsersController.reset();
-                    finish();
                 }
             }
         });
@@ -83,12 +94,23 @@ public class UsersActivity extends AbstractActivity {
     @Override
     protected void onResume(){
         super.onResume();
+        adapter.notifyDataSetChanged();
+        /*if(AppController.getInstance().isAfterGame()){
+            AppController.getInstance().setAfterGame(false);
+            finish();
+        }*/
+        /*
         if(AppController.getInstance().isAfterGame()){
             ((Button)findViewById(R.id.users__play)).setText(R.string.users__back);
             findViewById(R.id.users__add).setVisibility(View.INVISIBLE);
-        }
-        adapter.notifyDataSetChanged();
-        AppController.getInstance().setAfterGame(false);
+        }*/
     }
+
+/*
+    @Override
+    protected void onDestroy() {
+        AppController.getInstance().setAfterGame(false);
+        super.onDestroy();
+    }*/
 
 }

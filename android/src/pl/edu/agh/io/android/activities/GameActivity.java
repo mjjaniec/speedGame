@@ -70,6 +70,7 @@ public class GameActivity extends AbstractActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 UsersController.getInstance().getCurrent().setLost();
+                                handleClick();
                             }
                         }).setNegativeButton(R.string.common__no, new DialogInterface.OnClickListener() {
                     @Override
@@ -82,6 +83,25 @@ public class GameActivity extends AbstractActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        UsersController.getInstance().pause();
+        new AlertDialog.Builder(this).setTitle(R.id.game__pause)
+                .setMessage(R.id.game__back_to_game).
+                setPositiveButton(R.string.common__yes,new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                UsersController.getInstance().unpause();
+            }
+        }).setNegativeButton(R.string.common__no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                UsersController.getInstance().endGame();
+            }
+        }).show();
+        //super.onBackPressed();
+    }
+
     private void handleClick(){
         UsersController controller = UsersController.getInstance();
         controller.rotate();
@@ -91,7 +111,7 @@ public class GameActivity extends AbstractActivity {
         current_player.setText(current.getName());
 
         caption.setText(controller.getButtonCaption());
-        avatar.setBackground(current.getAvatar());
+        avatar.setImageDrawable(current.getAvatar());
 
         adapter.notifyDataSetChanged();
     }

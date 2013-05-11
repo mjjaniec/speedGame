@@ -10,12 +10,14 @@ package pl.edu.agh.io.android.controller;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 import pl.edu.agh.io.android.activities.GameActivity;
+import pl.edu.agh.io.android.activities.NewGameActivity;
 import pl.edu.agh.io.android.activities.R;
 import pl.edu.agh.io.android.model.User;
 
@@ -31,6 +33,14 @@ public class UsersController {
         User tmp = users.get(from);
         users.set(from,users.get(to));
         users.set(to,tmp);
+    }
+
+    public void pause() {
+        current.stop();
+    }
+
+    public void unpause(){
+        current.start();
     }
 
     public static enum OnTimeout {
@@ -178,6 +188,13 @@ public class UsersController {
             play(current);
     }
 
+    public void endGame(){
+        Intent intent = new Intent(gameActivity, NewGameActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        UsersController.reset();
+        gameActivity.startActivity(intent);
+    }
+
     private void play(User current) {
         URL ringUrl = current.getRingURL();
         if (ringUrl == null) {
@@ -219,7 +236,7 @@ public class UsersController {
             User winner = findWinner();
 
             users.add(current);
-            AppController.getInstance().setAfterGame(true);
+            //AppController.getInstance().setAfterGame(true);
 
             new AlertDialog.Builder(gameActivity)
                     .setTitle(
@@ -230,7 +247,7 @@ public class UsersController {
                     .setPositiveButton(R.string.common__ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            gameActivity.finish();
+                            endGame();
                         }
                     }).show();
         }
