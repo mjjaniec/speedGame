@@ -37,6 +37,8 @@ public class GameActivity extends AbstractActivity {
 
         controller.configure(this);
 
+        findViewById(R.id.game__loose).setVisibility(View.INVISIBLE);
+
         adapter = new UsersViewAdapter(this,controller.getUsers());
         ListView queue = (ListView) findViewById(R.id.game__queue);
         queue.setAdapter(adapter);
@@ -103,6 +105,7 @@ public class GameActivity extends AbstractActivity {
     }
 
     private void handleClick(){
+        findViewById(R.id.game__loose).setVisibility(View.VISIBLE);
         UsersController controller = UsersController.getInstance();
         controller.rotate();
         User current = controller.getCurrent();

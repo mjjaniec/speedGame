@@ -84,7 +84,7 @@ public class User {
             countDownTimer.start();
         }else{
             negativePointsTimer = new Timer(true);
-            negativePointsTimer.scheduleAtFixedRate(negativeTimerTask,1000,1000);
+            negativePointsTimer.scheduleAtFixedRate(new NegativeTimerTask(),1000,1000);
         }
     }
 
@@ -116,7 +116,7 @@ public class User {
                             seconds = 0;
                             negative = true;
                             negativePointsTimer = new Timer(true);
-                            negativePointsTimer.scheduleAtFixedRate(negativeTimerTask,1000,1000);
+                            negativePointsTimer.scheduleAtFixedRate(new NegativeTimerTask(),1000,1000);
                     }
                 }
             }
@@ -124,7 +124,7 @@ public class User {
         };
     }
 
-    private TimerTask negativeTimerTask = new TimerTask() {
+    private class NegativeTimerTask extends TimerTask {
         @Override
         public void run() {
             seconds++;
