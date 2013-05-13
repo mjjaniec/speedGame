@@ -167,7 +167,7 @@
                 </div>
                 <div class="name">
                     <a href="/upload?getfile=<%out.print(avatar);%>" title="<%out.print(avatar);%>" data-gallery="gallery" download="<%out.print(avatar);%>" style="position: relative;left: 3%;"><img src="/upload?getthumb=<%out.print(avatar);%>"></a>
-                    <span style="position: relative;top: -30;left: 5%;">
+                    <span style="position: relative;top: -20;left: 5%;">
                         <button id="new_avatar">Select avatar</button>
                     </span>
                     <ul id="new_avatar_list"></ul>
@@ -221,6 +221,8 @@
 
 
         </fieldset>
+
+        <h3 class="ui-state-highlight">You need to relog to see changes</h3>
     </form>
 
 

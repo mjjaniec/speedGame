@@ -101,7 +101,7 @@ public class RegisterServlet extends HttpServlet {
 
             sessionReplacement.delete(currentlySavedUser);
             sessionReplacement.save(builder.build());
-
+            request.getSession().setAttribute("user", user);
             response.setStatus(HttpServletResponse.SC_OK);
         }
     }
