@@ -77,7 +77,7 @@ public class LoginActivity extends AbstractActivity {
 
         switch (result){
             case OK:
-                UsersController.getInstance().addUser(new User(getStr(R.id.login__login),this));
+               // UsersController.getInstance().addUser(new User(getStr(R.id.login__login),this));
                 AppController.getInstance().setLogged(true);
                 onOK();
                 break;

@@ -11,35 +11,44 @@ package pl.edu.agh.io.android.controller;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 import pl.edu.agh.io.android.activities.LoginActivity;
 import pl.edu.agh.io.android.activities.NewAccountActivity;
 import pl.edu.agh.io.android.activities.R;
-import pl.edu.agh.io.android.controller.tasks.LoginTask;
-import pl.edu.agh.io.android.controller.tasks.RegisterTask;
-import pl.edu.agh.io.android.controller.tasks.SendFileTask;
-import pl.edu.agh.io.android.controller.tasks.UpdateTask;
+import pl.edu.agh.io.android.controller.tasks.*;
 import pl.edu.agh.io.android.misc.IProcedure;
 import pl.edu.agh.io.android.model.FileItem;
+import pl.edu.agh.io.android.model.User;
 
+import java.io.InputStream;
 import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.Semaphore;
 
 
 public class SpeedGameProxy {
 
 
-    public enum Service{
+    public enum Service {
         login,
         getFile,
         sendFile,
         register;
 
-        int getPathID(){
-            switch (this){
-                case login:return R.string.config__login_path;
-                case getFile:return R.string.config__get_file_path;
-                case register:return R.string.config__register_path;
-                case sendFile:return R.string.config__send_file_path;
+        int getPathID() {
+            switch (this) {
+                case login:
+                    return R.string.config__login_path;
+                case getFile:
+                    return R.string.config__get_file_path;
+                case register:
+                    return R.string.config__register_path;
+                case sendFile:
+                    return R.string.config__send_file_path;
             }
             return 0;
         }
@@ -52,30 +61,37 @@ public class SpeedGameProxy {
     private boolean isChecked = false;
     private boolean online = true;
 
-    public boolean isOnline(){
+    public boolean isOnline() {
         return online;
     }
 
 
     public boolean isOnlineAsync(final IProcedure<Boolean> callback) {
-        if(isChecked){
+        online = false;
+        isChecked = true;
+        callback.call(false);
+
+        if(true){
+            return false;
+        }
+        if (isChecked) {
             return online;
         }
-        synchronized (lock){
-            if(!isChecked){
-                online=false;
+        synchronized (lock) {
+            if (!isChecked) {
+                online = false;
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        try{
+                        try {
                             InetAddress address = InetAddress.getByName(
                                     context.getText(R.string.config__server_url).toString());
-                            if(address!=null){
-                                if(address.isReachable(500)){
-                                    online=true;
+                            if (address != null) {
+                                if (address.isReachable(500)) {
+                                    online = true;
                                 }
                             }
-                        }catch(Exception e){
+                        } catch (Exception e) {
                             Log.w("SpeedGame", e.toString());
 
                         }
@@ -92,8 +108,36 @@ public class SpeedGameProxy {
 
     }
 
-    public void setContext(Context context){
-        this.context=context;
+    public void makeUser(final JSONObject object) {
+
+        try {
+            final Semaphore sem = new Semaphore(0);
+            final String avatar_filename = object.getString("avatar");
+            final String ring_filename = object.getString("ring");
+            final URL ring_url = new URL(getServerUrl(Service.getFile)+"?getfile="+ring_filename);
+            final String email = object.getString("email");
+            final String login = object.getString("login");
+
+            new GetFileTask(new IProcedure<InputStream>() {
+                @Override
+                public void call(InputStream arg) {
+                        Drawable avatar = Drawable.createFromStream(arg, avatar_filename);
+                        UsersController.getInstance().addUser(new User(login,context,avatar,ring_url));
+                    sem.release();
+                }
+            }, new FileItem(object.getString("avatar"), null, false)).execute(getServerUrl(Service.getFile));
+
+            sem.acquireUninterruptibly();
+
+        } catch (JSONException e) {
+            Log.e("JSON", e.toString());
+        }catch (MalformedURLException e){
+            Log.e("URL", e.toString());
+        }
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 
     public static SpeedGameProxy getInstance() {
@@ -106,24 +150,24 @@ public class SpeedGameProxy {
     }
 
     public void login(LoginActivity view, String login, String password) {
-        new LoginTask(view,login,password).execute(getServerUrl(Service.login));
+        new LoginTask(view, login, password).execute(getServerUrl(Service.login));
     }
 
-    public void register(NewAccountActivity view, String login, String password, String email, String avatar, String ring){
-        new RegisterTask(view,login,password,email ,avatar,ring).execute(getServerUrl(Service.register));
+    public void register(NewAccountActivity view, String login, String password, String email, String avatar, String ring) {
+        new RegisterTask(view, login, password, email, avatar, ring).execute(getServerUrl(Service.register));
     }
 
-    public void update(NewAccountActivity view, String login, String password, String email, String avatar, String ring){
-        new UpdateTask(view,login,password,email,avatar,ring).execute(getServerUrl(Service.register));
+    public void update(NewAccountActivity view, String login, String password, String email, String avatar, String ring) {
+        new UpdateTask(view, login, password, email, avatar, ring).execute(getServerUrl(Service.register));
     }
 
-    public void sendFile(NewAccountActivity view,FileItem fileItem){
-        new SendFileTask(view,fileItem).execute(getServerUrl(Service.sendFile));
+    public void sendFile(NewAccountActivity view, FileItem fileItem) {
+        new SendFileTask(view, fileItem).execute(getServerUrl(Service.sendFile));
     }
 
-    private String getServerUrl(Service service){
+    private String getServerUrl(Service service) {
         Resources res = context.getResources();
-        StringBuilder sb=new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         sb.append("http://");
         sb.append(res.getString(R.string.config__server_url)).append(":");
         sb.append(res.getString(R.string.config__server_port)).append("/");

@@ -44,7 +44,9 @@ public class ChooseFileActivity extends AbstractActivity {
             public void onItemClick(FileItem fileItem, boolean picked) {
                 if(picked){
                     File file = new File(fileItem.getPath());
-                    if(file.getTotalSpace()>Integer.parseInt(getString(R.string.config__max_file_size))){
+                    long maxsize = Long.parseLong(getString(R.string.config__max_file_size));
+                    long size =  file.length();
+                    if(size>maxsize){
                         Toast.makeText(context,context.getText(R.string.common__file_is_to_big),Toast.LENGTH_SHORT).show();
                     }else{
                         AppController.getInstance().getCallback().call(fileItem);

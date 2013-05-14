@@ -48,7 +48,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:editable="false"
+            android:enabled="false"
             android:inputType="textNoSuggestions"
             android:id="@+id/offline__avatar"
             android:text="@string/newaccount__default_avatar"
@@ -72,7 +72,7 @@
 
         <EditText
             android:inputType="textNoSuggestions"
-            android:editable="false"
+            android:enabled="false"
             android:layout_gravity="right"
             android:id="@+id/offline__ring"
             android:text="@string/newaccount__default_ring"

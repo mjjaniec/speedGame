@@ -224,6 +224,7 @@ public class UsersController {
     }
 
     public void onLost(User who) {
+
         if (++lostPlayers < players - 1) {
             new AlertDialog.Builder(gameActivity)
                     .setTitle(

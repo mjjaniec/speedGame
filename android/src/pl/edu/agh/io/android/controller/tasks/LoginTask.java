@@ -9,7 +9,10 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
 import pl.edu.agh.io.android.activities.LoginActivity;
+import pl.edu.agh.io.android.controller.SpeedGameProxy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,13 +60,24 @@ public class LoginTask extends AsyncTask<String,Long,Void> {
             nameValuePairs.add(new BasicNameValuePair("from_android_app","true"));
 
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+
             httpResponse=httpClient.execute(httpPost);
         } catch (Exception e) {
             Log.e("HTTP Failed", e.toString());
             return LoginResult.ERROR;
         }
+
         String status=httpResponse.getStatusLine().getReasonPhrase();
-        if(status.equals("OK"))return LoginResult.OK;
+        if(status.startsWith("OK")){
+            try{
+                JSONObject object = new JSONObject(status.substring(2));
+                SpeedGameProxy.getInstance().makeUser(object);
+            }catch (JSONException e){
+                return LoginResult.ERROR;
+            }
+            return LoginResult.OK;
+        }
         if(status.equals("INVALID_LOGIN"))return LoginResult.INVALID_LOGIN;
         if(status.equals("INVALID_PASSWORD"))return LoginResult.INVALID_PASSWORD;
         return LoginResult.ERROR;

@@ -54,7 +54,7 @@ public class DragNDropListView extends ListView {
         final int x = (int) ev.getX();
         final int y = (int) ev.getY();
 
-        if (action == MotionEvent.ACTION_DOWN && x < this.getWidth()/4) {
+        if (action == MotionEvent.ACTION_DOWN && x < 3*this.getWidth()/4) {
             mDragMode = true;
         }
 
@@ -80,6 +80,12 @@ public class DragNDropListView extends ListView {
             default:
                 mDragMode = false;
                 mEndPosition = pointToPosition(x,y);
+                if(mEndPosition == -1){
+                    if(y<this.getY())
+                        mEndPosition = 0;
+                    else
+                        mEndPosition = adapter.getCount() - 1;
+                }
                 stopDrag(mStartPosition - getFirstVisiblePosition());
                 adapter.onDrop(mStartPosition,mEndPosition);
                 break;

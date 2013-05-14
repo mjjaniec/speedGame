@@ -10,6 +10,7 @@ package pl.edu.agh.io.android.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +57,12 @@ public class FilesViewAdapter extends ArrayAdapter<FileItem> {
         this.context = context;
         this.values = values;
 
-        root="/";
+        File ext = Environment.getExternalStorageDirectory();
+        if(ext.exists()){
+            root = ext.getAbsolutePath();
+        }else{
+            root="/";
+        }
         getDir(root);
     }
 
@@ -66,10 +72,6 @@ public class FilesViewAdapter extends ArrayAdapter<FileItem> {
         values.clear();
         File f = new File(dirPath);
         File[] files = f.listFiles();
-
-        if(files==null){
-            // probably no sd card
-        }
 
         if(!dirPath.equals(root)){
             values.add(new FileItem("../",f.getParent(),true));

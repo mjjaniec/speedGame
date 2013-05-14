@@ -2,16 +2,12 @@ package pl.edu.agh.io.android.controller.tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.InputStreamEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import pl.edu.agh.io.android.activities.NewAccountActivity;
+import pl.edu.agh.io.android.misc.IProcedure;
 import pl.edu.agh.io.android.model.FileItem;
 
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,39 +19,37 @@ import java.io.FileInputStream;
 public class GetFileTask extends AsyncTask<String,Double,Void> {
 
     private FileItem fileItem;
-    private NewAccountActivity view;
+    private  IProcedure<InputStream> handler;
 
-    public GetFileTask(NewAccountActivity view, FileItem fileItem){
-        this.view = view;
+    public GetFileTask(IProcedure<InputStream> handler, FileItem fileItem){
         this.fileItem = fileItem;
+        this.handler = handler;
     }
 
-    private boolean upload(String url){
+    private InputStream download(String url){
         try{
-            HttpClient client = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost(url);
+            URLConnection ucon = new URL(url).openConnection();
+            InputStream in = ucon.getInputStream();
+            /*ByteArrayOutputStream result = new ByteArrayOutputStream();
+            byte [] buffer = new byte[1024];
 
-            InputStreamEntity reqEntity = new InputStreamEntity(
-                    new FileInputStream(new File(fileItem.getPath())),
-                    -1
-            );
-            reqEntity.setContentType("binary/octet-stream");
-            reqEntity.setChunked(true);
+            while(in.read(buffer)>0){
+                result.write(buffer);
+            }
+            return result.toByteArray();
+            */
 
-            HttpResponse response = client.execute(httpPost);
-            if(response.getStatusLine().getStatusCode()!=200)
-                return false;
+            return in;
         }catch(Exception e){
             Log.e("HTTP Failed", e.toString());
-            return false;
         }
-        return true;
+        return null;
     }
 
     @Override
     protected Void doInBackground(String... urls) {
-        String url = urls[0];
-        view.onUpload(upload(url),fileItem);
+        String url = urls[0] + "?getfile=" + fileItem.getName();
+        handler.call(download(url));
         return null;
     }
 

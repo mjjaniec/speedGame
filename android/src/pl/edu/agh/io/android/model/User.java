@@ -42,7 +42,7 @@ public class User {
         return ringURL;
     }
 
-    public User(String name, Context context,URL avatar, URL ring) {
+    public User(String name, Context context,Drawable avatar, URL ring) {
         this.name = name;
         this.self = this;
         this.ringURL = ring;
@@ -53,8 +53,7 @@ public class User {
             //use default avatar - from local resources
             this.avatar = context.getResources().getDrawable(R.drawable.default_avatar);
         }else {
-            //download remote avatar
-            throw new Error("Unimplemented");
+            this.avatar=avatar;
         }
     }
 

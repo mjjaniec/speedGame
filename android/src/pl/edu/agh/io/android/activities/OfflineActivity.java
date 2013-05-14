@@ -1,6 +1,7 @@
 package pl.edu.agh.io.android.activities;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,15 +34,20 @@ public class OfflineActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offline);
 
+
         Button play = (Button) findViewById(R.id.offline__play);
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Drawable pic = null;
+                if(avatar.value != null){
+                    pic = Drawable.createFromPath(avatar.value.getPath());
+                }
                 UsersController.getInstance().addUser(
                         new User(getStr(R.id.offline__nick),
                                 view.getContext(),
-                                ring.value,
-                                avatar.value
+                                pic,
+                                ring.value
                                 ));
                 finish();
             }
