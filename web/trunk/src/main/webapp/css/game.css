@@ -52,15 +52,12 @@ audio {
     height: 80px;
     margin-top: 0;
     font-size: 120px;
-    text-shadow: 0 1px 1px rgba(0,0,0,.4);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.35);
     background-color: transparent;
     border: 0;
     z-index: 10;
 }
 
-.carousel .item {
-    height: 500px;
-}
 
 .carousel-caption {
     background-color: transparent;
@@ -96,3 +93,7 @@ div .carousel-caption .lead, div .carousel-caption .email {
 #players { list-style-type: none; margin: 0; padding: 0; width: 20%; }
 #players li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
 #players li span { position: absolute; margin-left: -1.3em; }
+
+#player_list { width: 150px; height: 150px; padding: 0.5em; position:absolute; top:40%; display: none; left: 5%;}
+#player_list h3 { text-align: center; margin: 0;}
+.ui-resizable-helper { border: 1px dotted gray; }

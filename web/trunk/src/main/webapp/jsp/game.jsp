@@ -55,6 +55,7 @@
                         if (players[data.login] == undefined) {
                             players[data.login] = data;
                             $('#players').append("<li class='ui-state-default player'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>" + login + "</li>");
+                            $('input').val("")
                         }
                     },
                     data: {
@@ -69,7 +70,7 @@
                 return false;
             });
 
-            function change_arrow_to_next_player() {
+            function update_ui_to_next_player() {
                 var last = counter
 
                 if(counter >= 0) {
@@ -86,6 +87,14 @@
                 startRing(player.login)
 
                 $('#right-arrow').text(players_list[(counter + 1) % players_list.length].login + ">")
+
+                var jplayer_list = $('#player_list')
+
+                $('#player_list p').remove()
+
+                for(var i = 0; i < players_list.length - 1; i++) {
+                    jplayer_list.append("<p style='font-size: 21px;font-weight: 200;'>" + players_list[(i + counter + 1) % players_list.length].login + "</p>")
+                }
             }
 
             window.first = true
@@ -110,9 +119,11 @@
                     }
 
                     $('.item').last().addClass("active")
+                    $('#player_list').show()
                 }
 
-                change_arrow_to_next_player();
+                update_ui_to_next_player();
+
             })
 
 
@@ -184,13 +195,23 @@
 <div id="myCarousel" class="carousel slide" >
     <div class="carousel-inner"  id="carousel_to_display"> </div>
     <%--<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>--%>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next" id="right-arrow" style="left: auto; right: 15%;">&#62;</a>
+    <div id="player_list" class="ui-widget-content">
+        <h3 class="ui-widget-header">Players</h3>
+        <p> ala ma kota</p>
+    </div>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next" id="right-arrow" style="left: auto; right: 15%;color: rgb(12, 12, 12);">&#62;</a>
 </div>
 
 <script>
     !function ($) {
         $(function(){
             $('#myCarousel').carousel().carousel('pause')
+        })
+
+        $(function() {
+            $( "#player_list" ).resizable({
+                animate: true
+            })
         })
     }(window.jQuery)
 </script>
