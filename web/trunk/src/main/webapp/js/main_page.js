@@ -81,6 +81,22 @@ function updateTips( t ) {
     }, 500 );
 }
 
+
+function validateTime() {
+    isValid = /^[1-9][0-9]*$/.test($("#input_time").val())
+
+    if(!isValid) {
+        if($('#time_error').length) {
+            $('#time_error').remove()
+        }
+
+        $("body").prepend("<p id=\"time_error\" style=\"text-align: center; margin-left: 35%; margin-right: 35%\" class=\"ui-state-error\">" + "Wrong time format" + "</p>")
+
+    }
+
+    return isValid
+}
+
 function checkLength( o, n, min, max ) {
     if ( o.val().length > max || o.val().length < min ) {
         o.addClass( "ui-state-error" );

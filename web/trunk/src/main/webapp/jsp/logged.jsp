@@ -137,6 +137,7 @@
 </head>
 <body>
 
+
 <div id="dialog-form" title="Change Profile">
     <p class="validateTips">Change only necessary fields</p>
 
@@ -230,12 +231,12 @@
 
 <button id="change-profile" style="float: right;margin-right: 30px">Change profile</button>
 
-<form class="login_form" id="game" action="/game/" method="GET">
+<form class="login_form" id="game" action="/game/" method="GET" onsubmit="return validateTime();">
     <p class="field">
         <h2 style="text-align: center;color: #686868; font-family: ?Palatino Linotype?, ?Book Antiqua?, Palatino, serif;">New Game</h2>
     </p>
     <p class="field">
-        <input type="text" name="time" placeholder="Time of game">
+        <input type="text" id="input_time" name="time" placeholder="Time of game">
         <i class="icon-time icon-large"></i>
     </p>
     <p class="submit" style="top: 21px;">
