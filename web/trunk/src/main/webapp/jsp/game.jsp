@@ -7,6 +7,9 @@
     String avatar = user.getAvatar();
     String ring = user.getRing();
     String time = request.getParameter("time");
+    String game_mode = request.getParameter("game_mode");
+    String game_end = request.getParameter("game_end");
+    int count_end = game_end.equals("npl") ? 0 : 1;
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,22 +28,28 @@
     <script src="/js/game.js"></script>
 
     <script>
-        window.time = <%= time %>
-                window.players = {'<%= login %>' : {login: '<%= login %>', email: '<%= email %>', avatar: '<%= avatar %>', ring: '<%= ring %>'}}
+        Array.prototype.remove = function(from, to) {
+            var rest = this.slice((to || from) + 1 || this.length);
+            this.length = from < 0 ? this.length + from : from;
+            return this.push.apply(this, rest);
+        };
+
+        window.time = <%= time %>;
+        window.players = {'<%= login %>' : {login: '<%= login %>', email: '<%= email %>', avatar: '<%= avatar %>', ring: '<%= ring %>', finished: false}}
+        window.lost_players_list = []
+        window.game_mode =  '<%= game_mode %>'
+        window.count_end = <%= count_end %>
+
 
         $(function () {
 
 
-            $("#dialog").dialog({
-                autoOpen: false,
-                resizable: false,
-                height: 320,
-                modal: true,
-                buttons: {
-                    "Ok": function() {
-                        $(this).dialog( "close" );
-                    }
-                }
+            $("#dialog").modal({
+                show: false
+            })
+
+            $("#summary").modal({
+                show: false
             })
 
             $("#add_player_form").submit(function(event) {
@@ -53,6 +62,7 @@
                     success: function(data, textStatus, jqXHR) {
                         $("#errors").html("");
                         if (players[data.login] == undefined) {
+                            data.finished = false;
                             players[data.login] = data;
                             $('#players').append("<li class='ui-state-default player'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>" + login + "</li>");
                             $('input').val("")
@@ -71,29 +81,74 @@
             });
 
             function update_ui_to_next_player() {
-                var last = counter
 
                 if(counter >= 0) {
-                    // first run
-                    stopClock(players_list[last].login)
-                    stopRing(players_list[last].login)
+
+                    stopClock(players_list[counter].login)
+                    stopRing(players_list[counter].login)
                 }
 
-                counter = (counter + 1) % players_list.length;
+                var stillInGame = players_list.filter(function (obj) {
+                    return !obj.finished;
+                });
 
-                player = players_list[counter % players_list.length]
+                if(stillInGame.length <= window.count_end) {
+                    var text = ""
+                    switch(window.count_end)
+                    {
+                        case 0:
+                            text = ""
+                            break;
+                        case 1:
+                            var winner = players_list.filter(function (obj) {
+                                return !obj.finished;
+                            })[0]
+                            text = "The winner is: <i>" + winner.login + "</i> with: " + getLeftTime(winner.login) + " seconds left<br>"
+                            break;
+                        default:
+                            text = "Unexpected ending"
+                    }
 
-                startClock(player.login)
-                startRing(player.login)
+                    var jres = $("#results")
+                    jres.empty()
 
-                $('#right-arrow').text(players_list[(counter + 1) % players_list.length].login + ">")
+                    jres.append("<h5>" + text + "</h5>")
 
-                var jplayer_list = $('#player_list')
+                    var lost_player_summary = ""
 
-                $('#player_list p').remove()
+                    if(game_mode == "eot") {
 
-                for(var i = 0; i < players_list.length - 1; i++) {
-                    jplayer_list.append("<p style='font-size: 21px;font-weight: 200;'>" + players_list[(i + counter + 1) % players_list.length].login + "</p>")
+                        for(var i = 0; i < window.lost_players_list.length; i++) {
+                            lost_player_summary += "<p><i>" + lost_players_list[i].login + "</i> was defeated </p>"
+                        }
+
+                    } else {
+                        for(var i = 0; i < window.lost_players_list.length; i++) {
+                            var player = lost_players_list[i]
+                            lost_player_summary += "<p><i>" + player.login + "</i> exceeded time by " + (player.time / 1000) + " seconds</p>"
+                        }
+                    }
+
+                    jres.append(lost_player_summary)
+                    $("#summary").modal("show")
+
+                } else {
+                    counter = (counter + 1) % players_list.length;
+
+                    player = players_list[counter % players_list.length]
+
+                    startClock(player.login)
+                    startRing(player.login)
+
+                    $('#right-arrow').text(players_list[(counter + 1) % players_list.length].login + ">")
+
+                    var jplayer_list = $('#player_list')
+
+                    $('#player_list p').remove()
+
+                    for(var i = 0; i < players_list.length; i++) {
+                        jplayer_list.append("<p style='font-size: 21px;font-weight: 200;'>" + players_list[(i + counter + 1) % players_list.length].login + "</p>")
+                    }
                 }
             }
 
@@ -184,10 +239,28 @@
     <li class="ui-state-default player"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><%out.print(login);%></li>
 </ul>
 
-<div id="dialog" title="Player lost">
-    <p id="over">
-        Time is over for player
-    </p>
+<div id="dialog" title="Player lost" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Time is over</h3>
+    </div>
+    <div class="modal-body" id="over">
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+    </div>
+</div>
+
+<div id="summary" title="Summary" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Summary</h3>
+    </div>
+    <div class="modal-body" id="results">
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+    </div>
 </div>
 
 <!-- Carousel
@@ -195,9 +268,8 @@
 <div id="myCarousel" class="carousel slide" >
     <div class="carousel-inner"  id="carousel_to_display"> </div>
     <%--<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>--%>
-    <div id="player_list" class="ui-widget-content">
-        <h3 class="ui-widget-header">Players</h3>
-        <p> ala ma kota</p>
+    <div id="player_list" class="ui-widget-content" style="width: 200px;">
+        <h3 class="ui-widget-header">Next Players</h3>
     </div>
     <a class="right carousel-control" href="#myCarousel" data-slide="next" id="right-arrow" style="left: auto; right: 15%;color: rgb(12, 12, 12);">&#62;</a>
 </div>

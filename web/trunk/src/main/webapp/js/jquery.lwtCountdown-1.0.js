@@ -56,6 +56,14 @@
 		this.doCountDown($(this).attr('id'),$.data(this[0], 'diffSecs'), 500);
 	};
 
+
+// added
+    $.fn.leftTime = function() {
+        return $.data(this[0], 'diffSecs')
+    }
+//end of added content
+
+
 	$.fn.setCountDown = function (options) {
 		var targetTime = new Date();
 
