@@ -6,13 +6,19 @@
     <string name="common__cant_read_file">can not be read.</string>
     <string name="common__file_is_to_big">File is to big</string>
     <string name="common__ok">OK</string>
+    <string name="common__yes">Yes</string>
+    <string name="common__no">No</string>
+    <string name="common__preview">Preview</string>
+
 
     <string name="newgame__number_of_players">Number of players</string>
     <string name="newgame__time_per_player">Time per player</string>
     <string name="newgame__sound">Sounds</string>
     <string name="newgame__on_timeout">After timeout</string>
-    <string name="newgame__change_account">Change My Account</string>
+    <string name="newgame__change_account">Change profile</string>
     <string name="newgame__next">Next</string>
+    <string name="newgame__default_time">5</string>
+    <string name="newgame__proper_time">Incorrect time</string>
 
     <string name="game__loose_game">Loose game</string>
     <string name="game__game_name">Name of the Game</string>
@@ -25,13 +31,14 @@
     <string name="game__lost">lost!</string>
     <string name="game__start_the_game">Click anywhere to start the Game!</string>
     <string name="game__next_player">Click anywhere to end move.</string>
+    <string name="game__really_loose">Do you really loose?</string>
 
 
     <string name="login__play">Play</string>
     <string name="login__login_btn">Login</string>
     <string name="login__login">Login/Nick</string>
     <string name="login__password">Password</string>
-    <string name="login__new_account">Register</string>
+    <string name="login__new_account">Create new user</string>
     <string name="login__no_account">Don\'t want account? Just enter your nick and go!</string>
     <string name="login__invalid_login">Invalid login. Please retype and try again. You may also create new
         account.
@@ -41,22 +48,23 @@
     </string>
     <string name="login__error">An error occurred during communication with server.</string>
 
-    <string name="newaccount__login">Login</string>
-    <string name="newaccount__password">Password</string>
-    <string name="newaccount__email">Email</string>
-    <string name="newaccount__retype">Retype</string>
-    <string name="newaccount__register">Register</string>
-    <string name="newaccount__change">Change</string>
-    <string name="newaccount__default_avatar">avatar.jpg</string>
-    <string name="newaccount__default_ring">ring.mp3</string>
-    <string name="newaccount__choose_avatar">Please select an avatar</string>
-    <string name="newaccount__choose_ring">Please select a ring</string>
-    <string name="newaccount__error">An error occurred during connection to server</string>
-    <string name="newaccount__user_exists">This login is already used by someone else. Please choose different one.
-    </string>
-    <string name="newaccount__validate">Please fill and validate all the fields before registration.</string>
-    <string name="newaccount__sending_file">Sending files, please wait...</string>
-    <string name="newaccount__update">Update</string>
+    <string name="register__avatar">Avatar</string>
+    <string name="register__ring">Ring</string>
+    <string name="register__login">Login</string>
+    <string name="register__password">Password</string>
+    <string name="register__email">Email</string>
+    <string name="register__retype">Retype</string>
+    <string name="register__register">Create an account</string>
+    <string name="register__change">Change</string>
+    <string name="register__default_avatar">avatar.jpg</string>
+    <string name="register__default_ring">ring.mp3</string>
+    <string name="register__choose_avatar">Please select an avatar</string>
+    <string name="register__choose_ring">Please select a ring</string>
+    <string name="register__error">An error occurred during connection to server</string>
+    <string name="register__user_exists">User with the same login already exists.</string>
+    <string name="register__validate">Please fill and validate all the fields before registration.</string>
+    <string name="register__sending_file">Sending files, please wait...</string>
+    <string name="register__update">Update</string>
 
     <string name="choosefile__open">Open</string>
     <string name="choosefile__pick">Pick</string>
@@ -69,11 +77,7 @@
     <string name="offline__play">Add</string>
 
     <string name="users__play">Play</string>
-    <string name="game__really_loose">Do you really loose?</string>
-
-    <string name="common__yes">Yes</string>
-    <string name="common__no">No</string>
     <string name="users__back">back</string>
-    <string name="common__preview">Preview</string>
-    <string name="newgame__default_time">300</string>
+
+
 </resources>

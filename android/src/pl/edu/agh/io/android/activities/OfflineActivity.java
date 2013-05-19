@@ -40,9 +40,11 @@ public class OfflineActivity extends AbstractActivity {
             @Override
             public void onClick(View view) {
                 Drawable pic = null;
+
                 if(avatar.value != null){
                     pic = Drawable.createFromPath(avatar.value.getPath());
                 }
+
                 UsersController.getInstance().addUser(
                         new User(getStr(R.id.offline__nick),
                                 view.getContext(),
@@ -57,7 +59,7 @@ public class OfflineActivity extends AbstractActivity {
             public void onClick(View view) {
                 AppController.getInstance().setCallback(
                         new UrlSetter((TextView) findViewById(R.id.offline__avatar), avatar));
-                AppController.getInstance().setWhat(R.string.newaccount__choose_avatar);
+                AppController.getInstance().setWhat(R.string.register__choose_avatar);
                 Intent myIntent = new Intent(view.getContext(), ChooseFileActivity.class);
                 startActivityForResult(myIntent, 0);
             }
@@ -68,7 +70,7 @@ public class OfflineActivity extends AbstractActivity {
             public void onClick(View view) {
                 AppController.getInstance().setCallback(
                         new UrlSetter((TextView)findViewById(R.id.offline__ring),ring));
-                AppController.getInstance().setWhat(R.string.newaccount__choose_ring);
+                AppController.getInstance().setWhat(R.string.register__choose_ring);
                 Intent myIntent = new Intent(view.getContext(), ChooseFileActivity.class);
                 startActivityForResult(myIntent, 0);
             }

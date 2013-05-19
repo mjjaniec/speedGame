@@ -16,6 +16,8 @@ import android.media.MediaPlayer;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.net.Uri;
+
 import pl.edu.agh.io.android.activities.GameActivity;
 import pl.edu.agh.io.android.activities.NewGameActivity;
 import pl.edu.agh.io.android.activities.R;
@@ -31,15 +33,15 @@ public class UsersController {
 
     public void swap(int from, int to) {
         User tmp = users.get(from);
-        users.set(from,users.get(to));
-        users.set(to,tmp);
+        users.set(from, users.get(to));
+        users.set(to, tmp);
     }
 
     public void pause() {
         current.stop();
     }
 
-    public void unpause(){
+    public void unpause() {
         current.start();
     }
 
@@ -51,17 +53,20 @@ public class UsersController {
 
         @Override
         public String toString() {
-            switch (this){
-                case loose:return looseStr;
-                case negativePoints: return negativeStr;
-                default: throw new Error("Unimplemented on timeout");
+            switch (this) {
+                case loose:
+                    return looseStr;
+                case negativePoints:
+                    return negativeStr;
+                default:
+                    throw new Error("Unimplemented on timeout");
             }
         }
 
-        public static OnTimeout fromString(String str){
-            if(str==looseStr)
+        public static OnTimeout fromString(String str) {
+            if (str == looseStr)
                 return loose;
-            if(str==negativeStr)
+            if (str == negativeStr)
                 return negativePoints;
 
             throw new Error("Unimplemented on timeout");
@@ -159,7 +164,7 @@ public class UsersController {
 
     public List<User> getUsers() {
         //ugly
-        for(User user : users)
+        for (User user : users)
             user.setTime(time);
         return users;
     }
@@ -188,7 +193,7 @@ public class UsersController {
             play(current);
     }
 
-    public void endGame(){
+    public void endGame() {
         Intent intent = new Intent(gameActivity, NewGameActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         UsersController.reset();
@@ -197,22 +202,22 @@ public class UsersController {
 
     private void play(User current) {
         URL ringUrl = current.getRingURL();
-        if (ringUrl == null) {
-            try {
-                mediaPlayer.reset();
+        try {
+            mediaPlayer.reset();
+            if (ringUrl == null) {
                 AssetFileDescriptor descriptor = gameActivity.getAssets().openFd("default_ring.mp3");
                 mediaPlayer.setDataSource(descriptor.getFileDescriptor());
                 descriptor.close();
-                mediaPlayer.prepare();
-                mediaPlayer.start();
-            } catch (IOException e) {
-                //pass it quite silently, it's not critical problem.
-                Log.e("mediaPlayer", "error while opening default_ring.mp3 file");
-            } catch (Exception e) {
-                Log.e("mediaPlayer", e.toString());
+            } else {
+                mediaPlayer.setDataSource(gameActivity, Uri.parse(ringUrl.toString()));
             }
-        } else {
-            throw new Error("unimplemented");
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+        } catch (IOException e) {
+            //pass it quite silently, it's not critical problem.
+            Log.e("mediaPlayer", "error while opening default_ring.mp3 file");
+        } catch (Exception e) {
+            Log.e("mediaPlayer", e.toString());
         }
     }
 

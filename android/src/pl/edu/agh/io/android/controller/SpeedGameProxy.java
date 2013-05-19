@@ -16,7 +16,7 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 import pl.edu.agh.io.android.activities.LoginActivity;
-import pl.edu.agh.io.android.activities.NewAccountActivity;
+import pl.edu.agh.io.android.activities.RegisterActivity;
 import pl.edu.agh.io.android.activities.R;
 import pl.edu.agh.io.android.controller.tasks.*;
 import pl.edu.agh.io.android.misc.IProcedure;
@@ -59,7 +59,7 @@ public class SpeedGameProxy {
     private static Object lock = new Object();
     private Context context;
     private boolean isChecked = false;
-    private boolean online = true;
+    private boolean online = false;
 
     public boolean isOnline() {
         return online;
@@ -67,13 +67,6 @@ public class SpeedGameProxy {
 
 
     public boolean isOnlineAsync(final IProcedure<Boolean> callback) {
-        online = false;
-        isChecked = true;
-        callback.call(false);
-
-        if(true){
-            return false;
-        }
         if (isChecked) {
             return online;
         }
@@ -153,15 +146,15 @@ public class SpeedGameProxy {
         new LoginTask(view, login, password).execute(getServerUrl(Service.login));
     }
 
-    public void register(NewAccountActivity view, String login, String password, String email, String avatar, String ring) {
+    public void register(RegisterActivity view, String login, String password, String email, String avatar, String ring) {
         new RegisterTask(view, login, password, email, avatar, ring).execute(getServerUrl(Service.register));
     }
 
-    public void update(NewAccountActivity view, String login, String password, String email, String avatar, String ring) {
+    public void update(RegisterActivity view, String login, String password, String email, String avatar, String ring) {
         new UpdateTask(view, login, password, email, avatar, ring).execute(getServerUrl(Service.register));
     }
 
-    public void sendFile(NewAccountActivity view, FileItem fileItem) {
+    public void sendFile(RegisterActivity view, FileItem fileItem) {
         new SendFileTask(view, fileItem).execute(getServerUrl(Service.sendFile));
     }
 

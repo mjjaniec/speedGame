@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_margin="@dimen/margin"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/register__info"
+        android:labelFor="@+id/register__register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- login -->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:paddingRight="@dimen/margin"
+                android:text="@string/register__login"
+                android:labelFor="@+id/register__login"
+                android:layout_gravity="center|right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+
+            <EditText
+                android:inputType="textNoSuggestions"
+                android:id="@+id/register__login"
+                android:layout_weight="1"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                />
+
+        </TableRow>
+
+        <!-- password -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:paddingRight="@dimen/margin"
+                android:labelFor="@+id/register__password"
+                android:text="@string/register__password"
+                android:layout_gravity="center|right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <EditText
+                android:inputType="textPassword|textNoSuggestions"
+                android:id="@+id/register__password"
+                android:layout_weight="1"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"/>
+
+        </TableRow>
+
+
+        <!-- Retype -->
+        <TableRow>
+
+            <TextView
+                android:paddingRight="@dimen/margin"
+                android:text="@string/register__retype"
+                android:labelFor="@+id/register__retype"
+                android:layout_gravity="center|right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <EditText
+                android:inputType="textPassword|textNoSuggestions"
+                android:id="@+id/register__retype"
+                android:layout_weight="1"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"/>
+        </TableRow>
+
+
+        <!-- e-mail -->
+        <TableRow>
+
+            <TextView
+                android:paddingRight="@dimen/margin"
+                android:text="@string/register__email"
+                android:labelFor="@+id/register__email"
+                android:layout_gravity="center|right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+
+            <EditText
+                android:id="@+id/register__email"
+                android:inputType="textNoSuggestions"
+                android:layout_weight="1"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                />
+
+
+        </TableRow>
+
+
+        <!-- avatar -->
+        <TableRow>
+
+            <TextView
+                android:paddingRight="@dimen/margin"
+                android:text="@string/register__avatar"
+                android:layout_gravity="center|right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <EditText
+                android:enabled="false"
+                android:id="@+id/register__avatar"
+                android:text="@string/register__default_avatar"
+                android:layout_weight="1"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:layout_gravity="center"
+                android:id="@+id/register__change_avatar"
+                android:text="@string/register__change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </TableRow>
+
+        <!-- ring -->
+        <TableRow>
+
+            <TextView
+                android:paddingRight="@dimen/margin"
+                android:text="@string/register__ring"
+                android:layout_gravity="center|right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+
+            <EditText
+                android:enabled="false"
+                android:id="@+id/register__ring"
+                android:text="@string/register__default_ring"
+                android:layout_weight="1"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/register__change_ring"
+                android:text="@string/register__change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </TableRow>
+
+
+    </TableLayout>
+
+
+    <Button
+        android:id="@+id/register__register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/register__register"/>
+
+</LinearLayout>

@@ -24,6 +24,7 @@ public class TextValidator implements View.OnFocusChangeListener{
         this.legalEmpty=legalEmpty;
     }
 
+
     public boolean validate(String string){
         if(string==null)return false;
         if(legalEmpty && string.length()==0)return true;

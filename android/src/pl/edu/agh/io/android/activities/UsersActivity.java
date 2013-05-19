@@ -63,9 +63,10 @@ public class UsersActivity extends AbstractActivity {
                                 setPositiveButton(R.string.common__ok,null).
                                 setMessage(R.id.game__more_than_one).
                                 show();
+                    } else {
+                        Intent myIntent = new Intent(view.getContext(), GameActivity.class);
+                        startActivity(myIntent);
                     }
-                    Intent myIntent = new Intent(view.getContext(), GameActivity.class);
-                    startActivity(myIntent);
                 } else {
                     UsersController.reset();
                     finish();

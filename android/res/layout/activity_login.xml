@@ -1,52 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:layout_margin="5dip"
+              android:layout_margin="@dimen/margin"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+
 
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:id="@+id/login__info"/>
 
-
-    <LinearLayout
-        android:layout_height="wrap_content"
+    <TableLayout
         android:layout_width="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:labelFor="@+id/login__login"
-            android:layout_width="@dimen/register_small"
-            android:layout_height="wrap_content"
-            android:text="@string/login__login"/>
-
-        <EditText
-            android:inputType="textNoSuggestions"
-            android:id="@+id/login__login"
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+            android:layout_height="wrap_content">
 
+            <TextView
+                android:paddingRight="10dp"
+                android:labelFor="@+id/login__login"
+                android:layout_width="wrap_content"
+                android:layout_gravity="right|center"
+                android:layout_height="wrap_content"
+                android:text="@string/login__login"/>
 
-    <LinearLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:orientation="vertical">
+            <EditText
+                android:inputType="textNoSuggestions"
+                android:id="@+id/login__login"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+        </TableRow>
 
-        <TextView
-            android:labelFor="@+id/login__password"
-            android:layout_width="@dimen/register_small"
-            android:layout_height="wrap_content"
-            android:text="@string/login__password"/>
-
-        <EditText
-            android:inputType="textPassword"
-            android:id="@+id/login__password"
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:paddingRight="10dp"
+                android:layout_gravity="right|center"
+                android:labelFor="@+id/login__password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login__password"/>
+
+            <EditText
+                android:inputType="textPassword"
+                android:id="@+id/login__password"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+        </TableRow>
+
+
+    </TableLayout>
 
 
     <Button
@@ -71,11 +81,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <TextView
             android:gravity="top"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="@string/login__no_account"/>
 
@@ -83,7 +94,6 @@
             android:id="@+id/login__play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
             android:text="@string/login__play"/>
 
     </LinearLayout>

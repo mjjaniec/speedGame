@@ -1,104 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:useDefaultMargins="true"
-              android:layout_marginLeft="10dp"
-              android:alignmentMode="alignBounds"
+              android:layout_margin="@dimen/margin"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/offline__info"
         android:text="@string/offline__warning"
-        android:layout_gravity="center_horizontal"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"/>
-
-    <Space
-        android:layout_height="40dip"
-        android:layout_width="match_parent"
-        />
+        android:labelFor="@+id/offline__offline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <!-- login -->
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:labelFor="@+id/offline__nick"
-            android:layout_width="@dimen/register_small"
-            android:layout_height="wrap_content"
-            android:text="@string/offline__nick"/>
-
-        <EditText
-            android:inputType="textNoSuggestions"
-            android:id="@+id/offline__nick"
-            android:layout_width="@dimen/register_big"
-            android:layout_height="wrap_content"
-            android:ems="10"/>
-    </LinearLayout>
-
-
-    <!--avatar -->
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:enabled="false"
-            android:inputType="textNoSuggestions"
-            android:id="@+id/offline__avatar"
-            android:text="@string/newaccount__default_avatar"
-            android:layout_height="wrap_content"
-            android:layout_width="@dimen/register_big"/>
-
-        <Button
-            android:layout_gravity="center"
-            android:id="@+id/offline__change_avatar"
-            android:text="@string/offline__change"
-            android:layout_width="@dimen/register_small"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-
-
-    <!-- ring -->
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:inputType="textNoSuggestions"
-            android:enabled="false"
-            android:layout_gravity="right"
-            android:id="@+id/offline__ring"
-            android:text="@string/newaccount__default_ring"
-            android:layout_height="wrap_content"
-            android:layout_width="@dimen/register_big"/>
-
-        <Button
-            android:id="@+id/offline__change_ring"
-            android:text="@string/offline__change"
-            android:layout_width="@dimen/register_small"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
-
-    <Space
-        android:layout_height="40dip"
+    <TableLayout
         android:layout_width="match_parent"
-        />
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:paddingRight="10dp"
+                android:text="@string/offline__nick"
+                android:labelFor="@+id/offline__nick"
+                android:layout_gravity="center|right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+
+            <EditText
+                android:inputType="textNoSuggestions"
+                android:id="@+id/offline__nick"
+                android:layout_weight="1"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                />
+
+        </TableRow>
+
+
+        <!-- avatar -->
+        <TableRow>
+
+            <TextView
+                android:paddingRight="10dp"
+                android:text="@string/register__avatar"
+                android:layout_gravity="center|right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <EditText
+                android:text="@string/register__default_avatar"
+                android:enabled="false"
+                android:id="@+id/offline__avatar"
+                android:layout_weight="1"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:layout_gravity="center"
+                android:id="@+id/offline__change_avatar"
+                android:text="@string/offline__change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </TableRow>
+
+        <!-- ring -->
+        <TableRow>
+
+            <TextView
+                android:paddingRight="10dp"
+                android:text="@string/register__ring"
+                android:layout_gravity="center|right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+
+            <EditText
+                android:enabled="false"
+                android:text="@string/register__default_ring"
+                android:id="@+id/offline__ring"
+                android:layout_weight="1"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/offline__change_ring"
+                android:text="@string/offline__change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </TableRow>
+
+
+    </TableLayout>
+
 
     <Button
         android:id="@+id/offline__play"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:text="@string/offline__play"/>
 
 </LinearLayout>
-

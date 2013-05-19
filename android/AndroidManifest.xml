@@ -11,7 +11,7 @@
     <application
         android:label="@string/common__app_name"
         android:icon="@drawable/clock"
-        android:theme="@style/AppBaseTheme">
+        android:theme="@android:style/Theme.Holo">
 
         <activity android:name=".EmptyActivity">
             <intent-filter>
@@ -24,7 +24,7 @@
         </activity>
         <activity android:name=".OfflineActivity">
         </activity>
-        <activity android:name=".NewAccountActivity">
+        <activity android:name=".RegisterActivity">
         </activity>
         <activity android:name=".ChooseFileActivity">
         </activity>

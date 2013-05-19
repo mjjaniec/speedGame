@@ -9,7 +9,7 @@ import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.DefaultHttpClient;
-import pl.edu.agh.io.android.activities.NewAccountActivity;
+import pl.edu.agh.io.android.activities.RegisterActivity;
 import pl.edu.agh.io.android.model.FileItem;
 
 import java.io.File;
@@ -24,9 +24,9 @@ import java.io.File;
 public class SendFileTask extends AsyncTask<String,Double,Void> {
 
     private FileItem fileItem;
-    private NewAccountActivity view;
+    private RegisterActivity view;
 
-    public SendFileTask(NewAccountActivity view, FileItem fileItem){
+    public SendFileTask(RegisterActivity view, FileItem fileItem){
         this.view = view;
         this.fileItem = fileItem;
     }

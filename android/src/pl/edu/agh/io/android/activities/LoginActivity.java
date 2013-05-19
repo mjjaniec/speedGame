@@ -47,7 +47,7 @@ public class LoginActivity extends AbstractActivity {
         new_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), NewAccountActivity.class);
+                Intent myIntent = new Intent(view.getContext(), RegisterActivity.class);
                 startActivityForResult(myIntent, 0);
             }
         });

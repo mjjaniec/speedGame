@@ -5,8 +5,10 @@
       <profile>
         <option name="device" value="2.7in QVGA" />
         <option name="deviceConfiguration" value="Portrait" />
+        <option name="dockMode" value="" />
+        <option name="nightMode" value="notnight" />
         <option name="targetHashString" value="android-17" />
-        <option name="theme" value="AppBaseTheme" />
+        <option name="theme" value="AppTheme" />
       </profile>
     </option>
     <option name="selection" value="[Full]" />
@@ -22,47 +24,63 @@
         <option name="visible" value="false" />
       </GlobalState>
     </option>
+    <device-configurations>
+      <entry key="file://$PROJECT_DIR$/res/layout-land/activity_register.xml" value="Portrait" />
+    </device-configurations>
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="19464e4d-ef4e-43fe-9524-97cd3d88d313" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/apache_mime4j.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/httpmime_4_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/ChooseFileActivity.java" afterPath="$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/ChooseFileActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pl/edu/agh/io/android/adapters/DragNDropListView.java" afterPath="$PROJECT_DIR$/src/pl/edu/agh/io/android/adapters/DragNDropListView.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sd.img" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pl/edu/agh/io/android/misc/TimeParser.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout-land/activity_register.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/res/layout/row_editableusersview.xml" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/res/layout/activity_newaccount.xml" afterPath="$PROJECT_DIR$/res/layout/activity_register.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/NewAccountActivity.java" afterPath="$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/RegisterActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pl/edu/agh/io/android/adapters/FilesViewAdapter.java" afterPath="$PROJECT_DIR$/src/pl/edu/agh/io/android/adapters/FilesViewAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/GetFileTask.java" afterPath="$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/GetFileTask.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/LoginActivity.java" afterPath="$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/LoginActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/LoginTask.java" afterPath="$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/LoginTask.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/NewGameActivity.java" afterPath="$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/NewGameActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/OfflineActivity.java" afterPath="$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/OfflineActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/RegisterTask.java" afterPath="$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/RegisterTask.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/SendFileTask.java" afterPath="$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/SendFileTask.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/SpeedGameProxy.java" afterPath="$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/SpeedGameProxy.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pl/edu/agh/io/android/model/User.java" afterPath="$PROJECT_DIR$/src/pl/edu/agh/io/android/model/User.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pl/edu/agh/io/android/misc/TextValidator.java" afterPath="$PROJECT_DIR$/src/pl/edu/agh/io/android/misc/TextValidator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/UpdateTask.java" afterPath="$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/UpdateTask.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/UsersActivity.java" afterPath="$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/UsersActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/UsersController.java" afterPath="$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/UsersController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/UsersTaskBase.java" afterPath="$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/UsersTaskBase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_choosefile.xml" afterPath="$PROJECT_DIR$/res/layout/activity_choosefile.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_game.xml" afterPath="$PROJECT_DIR$/res/layout/activity_game.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_login.xml" afterPath="$PROJECT_DIR$/res/layout/activity_login.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_newgame.xml" afterPath="$PROJECT_DIR$/res/layout/activity_newgame.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_offline.xml" afterPath="$PROJECT_DIR$/res/layout/activity_offline.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/config.xml" afterPath="$PROJECT_DIR$/res/values/config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_users.xml" afterPath="$PROJECT_DIR$/res/layout/activity_users.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android.iml" afterPath="$PROJECT_DIR$/android.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/dimens.xml" afterPath="$PROJECT_DIR$/res/values/dimens.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="android.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/AndroidManifest.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368175453578" ignored="false" />
-    <file path="/Dummy.txt" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368268338856" ignored="false" />
+    <file path="/AndroidManifest.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368995774783" ignored="false" />
+    <file path="/Dummy.txt" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368553140032" ignored="false" />
     <file path="/TextValidator.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368193799496" ignored="false" />
-    <file path="/NewAccountActivity.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368195762728" ignored="false" />
-    <file path="/strings.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368268267837" ignored="false" />
-    <file path="/activity_login.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368189504930" ignored="false" />
+    <file path="/NewAccountActivity.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368553747469" ignored="false" />
+    <file path="/strings.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368996234760" ignored="false" />
+    <file path="/activity_login.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368891676193" ignored="false" />
     <file path="/activity_newaccount.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1366624115801" ignored="false" />
-    <file path="/fragment.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368514762509" ignored="false" />
+    <file path="/fragment.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368997463234" ignored="false" />
     <file path="/RegisterTask.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368185262784" ignored="false" />
     <file path="/LoginTask.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368480510795" ignored="false" />
     <file path="/LoginActivity.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368191647665" ignored="false" />
-    <file path="/SpeedGameProxy.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368520181684" ignored="false" />
+    <file path="/SpeedGameProxy.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368558586204" ignored="false" />
     <file path="/GameActivity.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368266519807" ignored="false" />
-    <file path="/UsersController.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368472133812" ignored="false" />
-    <file path="/NewGameActivity.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368195421119" ignored="false" />
+    <file path="/UsersController.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368546238337" ignored="false" />
+    <file path="/NewGameActivity.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368996509642" ignored="false" />
     <file path="/Playground.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1367136235184" ignored="false" />
     <file path="/activity_playground.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1367136047956" ignored="false" />
     <file path="/IFolderItemListener.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1367136669506" ignored="false" />
@@ -70,34 +88,34 @@
     <file path="/FolderLayout.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1367137478702" ignored="false" />
     <file path="/custom_folderview.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1367136626799" ignored="false" />
     <file path="/ChooseFileActivity.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368520524708" ignored="false" />
-    <file path="/activity_choosefile.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368118637121" ignored="false" />
+    <file path="/activity_choosefile.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368891016182" ignored="false" />
     <file path="/custom_folderview_row.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1367268544272" ignored="false" />
     <file path="/CustomArrayAdapter.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1367179964200" ignored="false" />
     <file path="/File.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1367179937248" ignored="false" />
     <file path="/FilesviewArrayAdapter.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1367254591699" ignored="false" />
     <file path="/FileItem.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1367254141221" ignored="false" />
-    <file path="/dimens.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1367356402245" ignored="false" />
+    <file path="/dimens.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368568244949" ignored="false" />
     <file path="/AbstractActivity.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368193350932" ignored="false" />
-    <file path="/config.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368471481149" ignored="false" />
+    <file path="/config.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368987382912" ignored="false" />
     <file path="/SendFileTask.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1367307162361" ignored="false" />
     <file path="/GetFileTask.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368481945853" ignored="false" />
     <file path="/User.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368481833001" ignored="false" />
-    <file path="/FilesViewAdapter.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368514899151" ignored="false" />
+    <file path="/FilesViewAdapter.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368528799105" ignored="false" />
     <file path="/UserViewAdapter.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1367350628899" ignored="false" />
     <file path="/UsersViewAdapter.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1367402963837" ignored="false" />
     <file path="/custom_usersview_row.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1367357017813" ignored="false" />
     <file path="/custom_filesview_row.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1367356768730" ignored="false" />
     <file path="/row_usersview.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1367404192026" ignored="false" />
-    <file path="/activity_game.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368256481351" ignored="false" />
+    <file path="/activity_game.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368891025524" ignored="false" />
     <file path="/UsersViewAdapterEx.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1367403277880" ignored="false" />
     <file path="/row_usersview_ex.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1367404566540" ignored="false" />
-    <file path="/activity_newgame.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368256708134" ignored="false" />
+    <file path="/activity_newgame.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368891046013" ignored="false" />
     <file path="/activity_offlineadd.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368122924037" ignored="false" />
     <file path="/EmptyActivity.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368189718445" ignored="false" />
-    <file path="/UsersActivity.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368261626753" ignored="false" />
-    <file path="/OfflineActivity.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368514565822" ignored="false" />
-    <file path="/activity_offline.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368520785123" ignored="false" />
-    <file path="/activity_users.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368179665689" ignored="false" />
+    <file path="/UsersActivity.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368540591689" ignored="false" />
+    <file path="/OfflineActivity.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368556507068" ignored="false" />
+    <file path="/activity_offline.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368894287401" ignored="false" />
+    <file path="/activity_users.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368891344757" ignored="false" />
     <file path="/EditableUsersViewAdapter.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368167347527" ignored="false" />
     <file path="/row_editableusersview.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368172719856" ignored="false" />
     <file path="/FieldSetter.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368170094071" ignored="false" />
@@ -115,6 +133,10 @@
     <file path="/UpdateTask.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368185332931" ignored="false" />
     <file path="/UsersTaskBase.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368185172031" ignored="false" />
     <file path="/LoginServlet.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368479905458" ignored="false" />
+    <file path="/RegisterActivity.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368556394602" ignored="false" />
+    <file path="/TimeParser.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368557715695" ignored="false" />
+    <file path="/activity_register.xml" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368891466730" ignored="false" />
+    <file path="/TimeParserTest.java" changelist="19464e4d-ef4e-43fe-9524-97cd3d88d313" time="1368997389206" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,6 +152,64 @@
   </component>
   <component name="DebuggerManager">
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint url="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/LoginTask.java" line="84" class="pl.edu.agh.io.android.controller.tasks.LoginTask" package="pl.edu.agh.io.android.controller.tasks">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/UsersTaskBase.java" line="74" class="pl.edu.agh.io.android.controller.tasks.UsersTaskBase" package="pl.edu.agh.io.android.controller.tasks">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/NewGameActivity.java" line="87" class="pl.edu.agh.io.android.activities.NewGameActivity$3" package="pl.edu.agh.io.android.activities">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/LoginTask.java" line="61" class="pl.edu.agh.io.android.controller.tasks.LoginTask" package="pl.edu.agh.io.android.controller.tasks">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -164,120 +244,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/model/User.java" line="114" class="pl.edu.agh.io.android.model.User$1" package="pl.edu.agh.io.android.model">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/NewAccountActivity.java" line="216" class="pl.edu.agh.io.android.activities.NewAccountActivity" package="pl.edu.agh.io.android.activities">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/UsersController.java" line="236" class="pl.edu.agh.io.android.controller.UsersController" package="pl.edu.agh.io.android.controller">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/UsersController.java" line="243" class="pl.edu.agh.io.android.controller.UsersController" package="pl.edu.agh.io.android.controller">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/SpeedGameProxy.java" line="123" class="pl.edu.agh.io.android.controller.SpeedGameProxy$2" package="pl.edu.agh.io.android.controller">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/GetFileTask.java" line="30" class="pl.edu.agh.io.android.controller.tasks.GetFileTask" package="pl.edu.agh.io.android.controller.tasks">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/GetFileTask.java" line="50" class="pl.edu.agh.io.android.controller.tasks.GetFileTask" package="pl.edu.agh.io.android.controller.tasks">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/ChooseFileActivity.java" line="48" class="pl.edu.agh.io.android.activities.ChooseFileActivity$1" package="pl.edu.agh.io.android.activities">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -287,28 +253,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="LoginTask.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/LoginTask.java">
+      <file leaf-file-name="misc.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="0" selection-start="2296" selection-end="2296" vertical-scroll-proportion="0.0">
+            <state line="3" column="32" selection-start="133" selection-end="133" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GetFileTask.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/GetFileTask.java">
+      <file leaf-file-name="LoginActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="0" selection-start="1436" selection-end="1436" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="URL.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/adt-bundle-linux-x86_64-20130219/sdk/platforms/android-17/android.jar!/java/net/URL.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="34" selection-start="1923" selection-end="1923" vertical-scroll-proportion="0.0">
+            <state line="35" column="37" selection-start="1015" selection-end="1016" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -317,73 +274,73 @@
       <file leaf-file-name="SpeedGameProxy.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/SpeedGameProxy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="24" selection-start="1937" selection-end="1937" vertical-scroll-proportion="0.0">
+            <state line="79" column="0" selection-start="2111" selection-end="2111" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginTask.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/LoginTask.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="71" column="0" selection-start="2242" selection-end="2242" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RegisterActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/RegisterActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="140" column="0" selection-start="5436" selection-end="5436" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UsersTaskBase.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/UsersTaskBase.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="74" column="0" selection-start="2538" selection-end="2538" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TimeParser.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/misc/TimeParser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="48" selection-start="480" selection-end="480" vertical-scroll-proportion="0.70153844">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NewGameActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/NewGameActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="60" column="78" selection-start="2267" selection-end="2267" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2130#2909#0" expanded="true" />
-                <element signature="e#2890#2891#0" expanded="true" />
-                <element signature="e#3518#3889#0" expanded="true" />
-                <element signature="e#3874#3875#0" expanded="true" />
+                <element signature="e#3119#3538#0" expanded="true" />
+                <element signature="e#3527#3528#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FilesViewAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/adapters/FilesViewAdapter.java">
+      <file leaf-file-name="User.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/model/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="148" column="0" selection-start="4342" selection-end="4342" vertical-scroll-proportion="0.0">
+            <state line="114" column="0" selection-start="2964" selection-end="2964" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChooseFileActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/ChooseFileActivity.java">
+      <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="0" selection-start="1557" selection-end="1557" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_offline.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/res/layout/activity_offline.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="34" selection-start="2432" selection-end="2432" vertical-scroll-proportion="0.42704627">
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_login.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/activity_login.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="48" selection-start="662" selection-end="662" vertical-scroll-proportion="-2.4">
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmptyActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/EmptyActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="0" selection-start="791" selection-end="791" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/values/config.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="44" selection-start="433" selection-end="433" vertical-scroll-proportion="0.0">
+            <state line="20" column="54" selection-start="963" selection-end="963" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -399,22 +356,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/res/values/dimens.xml" />
-        <option value="$PROJECT_DIR$/src/pl/edu/agh/io/android/adapters/DragNDropListView.java" />
-        <option value="$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/UsersController.java" />
-        <option value="$USER_HOME$/playground/io/c2/web/trunk/src/main/java/pl/edu/agh/speedgame/LoginServlet.java" />
-        <option value="$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/LoginActivity.java" />
-        <option value="$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/LoginTask.java" />
-        <option value="$PROJECT_DIR$/src/pl/edu/agh/io/android/model/User.java" />
-        <option value="$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/OfflineActivity.java" />
-        <option value="$PROJECT_DIR$/src/pl/edu/agh/io/android/adapters/FilesViewAdapter.java" />
-        <option value="$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/GetFileTask.java" />
-        <option value="$PROJECT_DIR$/res/values/config.xml" />
-        <option value="$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/SpeedGameProxy.java" />
-        <option value="$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/ChooseFileActivity.java" />
+        <option value="$PROJECT_DIR$/res/layout/activity_choosefile.xml" />
+        <option value="$PROJECT_DIR$/res/layout/activity_game.xml" />
+        <option value="$PROJECT_DIR$/res/layout/activity_newgame.xml" />
+        <option value="$PROJECT_DIR$/res/layout/activity_users.xml" />
+        <option value="$PROJECT_DIR$/res/layout/activity_register.xml" />
+        <option value="$PROJECT_DIR$/res/layout-land/activity_register.xml" />
         <option value="$PROJECT_DIR$/res/layout/activity_login.xml" />
         <option value="$PROJECT_DIR$/res/layout/activity_offline.xml" />
+        <option value="$PROJECT_DIR$/res/values/config.xml" />
+        <option value="$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/EmptyActivity.java" />
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/NewGameActivity.java" />
+        <option value="$PROJECT_DIR$/src/pl/edu/agh/io/android/misc/test/TimeParserTest.java" />
+        <option value="$PROJECT_DIR$/src/pl/edu/agh/io/android/misc/TimeParser.java" />
       </list>
     </option>
   </component>
@@ -435,12 +392,55 @@
           <State>
             <id>Android</id>
           </State>
-        </expanded-state>
-        <selected-state>
           <State>
-            <id>AndroidDomInspection</id>
+            <id>Android Lint</id>
           </State>
-        </selected-state>
+          <State>
+            <id>Assignment issuesGroovy</id>
+          </State>
+          <State>
+            <id>Assignment issuesJavaScript</id>
+          </State>
+          <State>
+            <id>CSS</id>
+          </State>
+          <State>
+            <id>Control flow issuesJavaScript</id>
+          </State>
+          <State>
+            <id>DOM issuesJavaScript</id>
+          </State>
+          <State>
+            <id>General</id>
+          </State>
+          <State>
+            <id>GeneralJavaScript</id>
+          </State>
+          <State>
+            <id>Groovy</id>
+          </State>
+          <State>
+            <id>IDEA Platform Inspections</id>
+          </State>
+          <State>
+            <id>Java language level migration aids</id>
+          </State>
+          <State>
+            <id>JavaScript</id>
+          </State>
+          <State>
+            <id>SASS/SCSS</id>
+          </State>
+          <State>
+            <id>Spring Model</id>
+          </State>
+          <State>
+            <id>Threading issuesGroovy</id>
+          </State>
+          <State>
+            <id>WSDL issues</id>
+          </State>
+        </expanded-state>
       </profile-state>
     </entry>
   </component>
@@ -471,7 +471,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -487,6 +486,156 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="misc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tasks" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="activities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -519,6 +668,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -574,25 +737,28 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_directory_selection" value="$PROJECT_DIR$/src/pl/edu/agh/io/android/activities" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/pl/edu/agh/io/android/misc/test" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit3" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="OverrideImplement.combined" value="false" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="reference.idesettings.debugger.dataviews" />
-    <property name="last_opened_file_path" value="$USER_HOME$/playground/io/c2/web/trunk/src/main/java/pl/edu/agh/speedgame/LoginServlet.java" />
-    <property name="AndroidLayoutSelectedEditor" value="text-editor" />
+    <property name="options.lastSelected" value="Errors" />
+    <property name="last_opened_file_path" value="$USER_HOME$/playground/io/c2/web/trunk/src/main/java/pl/edu/agh/speedgame/RegisterServlet.java" />
+    <property name="AndroidLayoutSelectedEditor" value="android-designer" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="BX9038TM3M" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="findjar.last.used.dir" value="$PROJECT_DIR$/libs" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="test" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="MemberChooser.showClasses" value="true" />
@@ -601,7 +767,15 @@
     <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="pl.edu.agh.io.android.misc.test" />
+      <recent name="pl.edu.agh.io.android.misc" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/res/layout-land" />
       <recent name="$PROJECT_DIR$/src/pl/edu/agh/io/android/activities" />
       <recent name="$PROJECT_DIR$/src/pl/edu/agh/io/android/model" />
     </key>
@@ -714,11 +888,11 @@
       <option name="ACTIVITY_CLASS" value="" />
       <option name="MODE" value="default_activity" />
       <option name="DEPLOY" value="true" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="PREFERRED_AVD" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="PREFERRED_AVD" value="jj" />
       <option name="COMMAND_LINE" value="" />
       <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="true" />
       <option name="NETWORK_SPEED" value="full" />
       <option name="NETWORK_LATENCY" value="none" />
       <option name="CLEAR_LOGCAT" value="true" />
@@ -836,7 +1010,11 @@
       <created>1368268410101</created>
       <updated>1368268410101</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Funkcjonalność #277&#10;&#10;Pobieranie z serwera avatarów - android">
+      <created>1368520949158</created>
+      <updated>1368520949158</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -863,25 +1041,25 @@
     <frame x="0" y="0" width="1366" height="744" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3242424" sideWeight="0.5953565" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3242424" sideWeight="0.5953565" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3272727" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3239757" sideWeight="0.6549414" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3239757" sideWeight="0.6549414" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32888147" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852563" sideWeight="0.67540985" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35227272" sideWeight="0.5936982" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4840871" sideWeight="0.49573106" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37688443" sideWeight="0.49573106" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40298507" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24848485" sideWeight="0.20066334" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24848485" sideWeight="0.20066334" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32663316" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29815745" sideWeight="0.49469697" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32328308" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34505862" sideWeight="0.49469697" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32824427" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24866596" sideWeight="0.23825137" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24772727" sideWeight="0.6181818" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24886191" sideWeight="0.59128976" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4087102" sideWeight="0.48636365" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24734446" sideWeight="0.6231156" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4036851" sideWeight="0.48636365" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -929,7 +1107,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="#310&#10;&#10;Android - wznawiania ujemnego czasu." />
+    <option name="LAST_COMMIT_MESSAGE" value="Funkcjonalność #277&#10;&#10;Pobieranie z serwera avatarów - android" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -952,6 +1130,7 @@
     <MESSAGE value="Funkcjonalność #306&#10;&#10;Przełączanie użytkownika, klikając &quot;gdziekolwiek&quot; - android" />
     <MESSAGE value="Male poprawki" />
     <MESSAGE value="#310&#10;&#10;Android - wznawiania ujemnego czasu." />
+    <MESSAGE value="Funkcjonalność #277&#10;&#10;Pobieranie z serwera avatarów - android" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -967,126 +1146,122 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/UsersController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="257" column="34" selection-start="7195" selection-end="7195" vertical-scroll-proportion="0.0">
+        <state line="197" column="54" selection-start="4830" selection-end="4853" vertical-scroll-proportion="0.16442451">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/adt-bundle-linux-x86_64-20130219/sdk/platforms/android-17/android.jar!/android/os/AsyncTask.class">
+    <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/OfflineActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/adt-bundle-linux-x86_64-20130219/sdk/platforms/android-17/android.jar!/java/lang/ClassLoader.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="30" selection-start="2418" selection-end="2418" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/adt-bundle-linux-x86_64-20130219/sdk/platforms/android-17/android.jar!/java/lang/Double.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="35" selection-start="2449" selection-end="2449" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/adt-bundle-linux-x86_64-20130219/sdk/platforms/android-17/android.jar!/java/lang/String.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="143" column="35" selection-start="5466" selection-end="5466" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/adt-bundle-linux-x86_64-20130219/sdk/platforms/android-17/android.jar!/org/json/JSONObject.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="11" selection-start="451" selection-end="451" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/LoginTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="0" selection-start="2296" selection-end="2296" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/adt-bundle-linux-x86_64-20130219/sdk/platforms/android-17/android.jar!/java/net/URL.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="34" selection-start="1923" selection-end="1923" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/GetFileTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="0" selection-start="1436" selection-end="1436" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/SpeedGameProxy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="24" selection-start="1937" selection-end="1937" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2130#2909#0" expanded="true" />
-            <element signature="e#2890#2891#0" expanded="true" />
-            <element signature="e#3518#3889#0" expanded="true" />
-            <element signature="e#3874#3875#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/adapters/FilesViewAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="148" column="0" selection-start="4342" selection-end="4342" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/EmptyActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="791" selection-end="791" vertical-scroll-proportion="0.0">
+        <state line="81" column="0" selection-start="2997" selection-end="2997" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/values/config.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="44" selection-start="433" selection-end="433" vertical-scroll-proportion="0.0">
+        <state line="3" column="41" selection-start="152" selection-end="152" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/ChooseFileActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/EmptyActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="0" selection-start="1557" selection-end="1557" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="12" column="16" selection-start="343" selection-end="343" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_login.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="48" selection-start="662" selection-end="662" vertical-scroll-proportion="-2.4">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/activity_offline.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="34" selection-start="2432" selection-end="2432" vertical-scroll-proportion="0.42704627">
+      <provider editor-type-id="text-editor">
+        <state line="26" column="43" selection-start="866" selection-end="866" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="android-designer">
+      <provider selected="true" editor-type-id="android-designer">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="50" selection-start="499" selection-end="499" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="54" selection-start="963" selection-end="963" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/NewGameActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="78" selection-start="2267" selection-end="2267" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#3119#3538#0" expanded="true" />
+            <element signature="e#3527#3528#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="114" column="0" selection-start="2964" selection-end="2964" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="32" selection-start="133" selection-end="133" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="37" selection-start="1015" selection-end="1016" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/SpeedGameProxy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="79" column="0" selection-start="2111" selection-end="2111" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/LoginTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="71" column="0" selection-start="2242" selection-end="2242" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/activities/RegisterActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="140" column="0" selection-start="5436" selection-end="5436" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/controller/tasks/UsersTaskBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="0" selection-start="2538" selection-end="2538" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pl/edu/agh/io/android/misc/TimeParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="48" selection-start="480" selection-end="480" vertical-scroll-proportion="0.70153844">
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>
@@ -1129,7 +1304,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.7</last-edited>
+          <last-edited>New Android SDK</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1141,7 +1316,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>Android|android</last-edited>
+          <last-edited>android</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1170,6 +1345,17 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20000002" />
               </list>
             </option>
           </splitter-proportions>

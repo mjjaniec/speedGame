@@ -9,7 +9,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import pl.edu.agh.io.android.activities.NewAccountActivity;
+import pl.edu.agh.io.android.activities.RegisterActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,11 +36,11 @@ public abstract class UsersTaskBase extends AsyncTask<String,Long,Void> {
     private final String email;
     private final String avatar;
     private final String ring;
-    private NewAccountActivity view;
+    private RegisterActivity view;
     private HttpClient httpClient;
     private HttpPost httpPost;
 
-    public UsersTaskBase(NewAccountActivity view, String login, String password, String email, String avatar, String ring){
+    public UsersTaskBase(RegisterActivity view, String login, String password, String email, String avatar, String ring){
         this.view=view;
         this.login=login;
         this.password=password;

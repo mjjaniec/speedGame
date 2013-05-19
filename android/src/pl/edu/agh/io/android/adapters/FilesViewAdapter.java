@@ -58,7 +58,7 @@ public class FilesViewAdapter extends ArrayAdapter<FileItem> {
         this.values = values;
 
         File ext = Environment.getExternalStorageDirectory();
-        if(ext.exists()){
+        if(ext.listFiles()!=null){
             root = ext.getAbsolutePath();
         }else{
             root="/";
