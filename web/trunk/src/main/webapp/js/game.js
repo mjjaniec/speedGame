@@ -66,6 +66,7 @@ function insert_new_player(player, time) {
     var ring = $("<audio controls height=\"100\" width=\"100\"></audio>")
     var source = $("<source type=\"audio/mpeg\">")
     var embed = $("<embed height=\"50\" width=\"100\">")
+
     ring.append(source).append(embed)
     item.append(container)
     container.append(caption)
@@ -115,7 +116,6 @@ function getLeftTime(login) {
 
 function startRing(login) {
     console.log("playing " + login)
-    window.players_list
     $('#ring_' + login)[0].load();
     $('#ring_' + login)[0].play();
 }

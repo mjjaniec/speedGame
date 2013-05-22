@@ -21,11 +21,8 @@
     <%--<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/start/jquery-ui.css" id="theme">--%>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 
-    <link rel="stylesheet" href="/css/login.css"/>
+    <link rel="stylesheet" href="/css/logged.css"/>
     <link rel="stylesheet" href="/css/common.css"/>
-
-    <script id="template-upload" type="text/x-tmpl" src="/js/template-upload.js"></script>
-    <script id="template-download" type="text/x-tmpl" src="/js/template-download.js"></script>
 
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>

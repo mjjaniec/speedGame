@@ -157,12 +157,12 @@
             $('#right-arrow').click(function() {
                 if(window.first) {
                     window.first = false
+                    $('#right-arrow').text(">")
                     $("#errors").html("");
                     $('#intro').text("Game")
                     $('#players').fadeOut(200)
                     $('#add_player_form').fadeOut(200)
                     $('#carousel_to_display').fadeIn()
-                    $('#right-arrow').css("font-size", "50px")
                     window.players_list = []
                     window.counter = -1
 
@@ -173,6 +173,10 @@
                         insert_new_player(player, time);
                     }
 
+                    if(players.length == 1) {
+                        $('#right-arrow').css("font-size", "100px")
+                    }
+
                     $('.item').last().addClass("active")
                     $('#player_list').show()
                 }
@@ -181,12 +185,19 @@
 
             })
 
-
-
         });
 
+        $(function(){
+            $('#myCarousel').carousel().carousel('pause')
+        });
 
-    </script>
+        $(function() {
+            $( "#player_list" ).resizable({
+                animate: true
+            })
+        });
+
+</script>
 </head>
 
 <body>
@@ -263,29 +274,15 @@
     </div>
 </div>
 
-<!-- Carousel
-================================================== -->
 <div id="myCarousel" class="carousel slide" >
-    <div class="carousel-inner"  id="carousel_to_display"> </div>
-    <%--<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>--%>
+    <div class="carousel-inner" id="carousel_to_display"></div>
     <div id="player_list" class="ui-widget-content" style="width: 200px;">
         <h3 class="ui-widget-header">Next Players</h3>
     </div>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next" id="right-arrow" style="left: auto; right: 15%;color: rgb(12, 12, 12);">&#62;</a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next" id="right-arrow" style="left: auto; right: 20%;color: rgb(12, 12, 12); font-size: 50px;">Start&#62;</a>
 </div>
 
 <script>
-    !function ($) {
-        $(function(){
-            $('#myCarousel').carousel().carousel('pause')
-        })
-
-        $(function() {
-            $( "#player_list" ).resizable({
-                animate: true
-            })
-        })
-    }(window.jQuery)
 </script>
 </body>
 </html>

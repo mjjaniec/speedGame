@@ -12,7 +12,7 @@
         <td>{% if (!o.options.autoUpload) { %}
             <button class="btn btn-primary start">
                 <i class="icon-upload icon-white"></i>
-                <span>Start</span>
+                <span>Upload</span>
             </button>
                         {% } %}</td>
                     {% } else { %}
