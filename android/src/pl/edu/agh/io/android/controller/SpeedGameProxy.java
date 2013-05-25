@@ -119,8 +119,13 @@ public class SpeedGameProxy {
             new GetFileTask(new IProcedure<InputStream>() {
                 @Override
                 public void call(InputStream arg) {
-                        Drawable avatar = Drawable.createFromStream(arg, avatar_filename);
-                        UsersController.getInstance().addUser(new User(login,context,avatar,ring_url));
+                    Drawable avatar = null;
+                    try{
+                        avatar = Drawable.createFromStream(arg, avatar_filename);
+                    }catch(Exception e){
+                        Log.w("login","downloading error");
+                    }
+                    UsersController.getInstance().addUser(new User(login,context,avatar,ring_url));
                     sem.release();
                 }
             }, new FileItem(object.getString("avatar"), null, false)).execute(getServerUrl(Service.getFile));

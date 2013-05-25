@@ -17,8 +17,10 @@ public class EmptyActivity extends AbstractActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(AppController.getInstance().isFirstTime()){
-            AppController.getInstance().setAdditionalPlayer(false);
+        AppController app = AppController.getInstance();
+        if(app.isFirstTime()){
+            app.setContext(this);
+            app.setAdditionalPlayer(false);
             SpeedGameProxy.getInstance().isOnlineAsync(new IProcedure<Boolean>() {
                 @Override
                 public void call(Boolean arg) {

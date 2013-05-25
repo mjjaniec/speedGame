@@ -13,11 +13,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.net.Uri;
-
 import pl.edu.agh.io.android.activities.GameActivity;
 import pl.edu.agh.io.android.activities.NewGameActivity;
 import pl.edu.agh.io.android.activities.R;
@@ -53,8 +52,8 @@ public class UsersController {
     public static enum OnTimeout {
         loose, negativePoints;
 
-        private static final String looseStr = "Loose game";
-        private static final String negativeStr = "Negative time";
+        private static final String looseStr = "Lose game";
+        private static final String negativeStr =  "Negative Points";
 
         @Override
         public String toString() {
@@ -69,9 +68,9 @@ public class UsersController {
         }
 
         public static OnTimeout fromString(String str) {
-            if (str == looseStr)
+            if (str.equals(looseStr))
                 return loose;
-            if (str == negativeStr)
+            if (str.equals(negativeStr))
                 return negativePoints;
 
             throw new Error("Unimplemented on timeout");
@@ -233,34 +232,46 @@ public class UsersController {
         return null;
     }
 
-    public void onLost(User who) {
+    private boolean isGameEnd(){
+        return lostPlayers == players -1;
+    }
 
-        if (++lostPlayers < players - 1) {
-            new AlertDialog.Builder(gameActivity)
-                    .setTitle(
-                            gameActivity.getString(R.string.game__timeout_loose1) +
-                                    " " + who.getName() + " " +
-                                    gameActivity.getString(R.string.game__timeout_loose2)
-                    )
-                    .setPositiveButton(R.string.common__ok, null).show();
+    private void userLostAlert(User who){
+        new AlertDialog.Builder(gameActivity)
+                .setTitle(
+                        gameActivity.getString(R.string.game__timeout_loose1) +
+                                " " + who.getName() + " " +
+                                gameActivity.getString(R.string.game__timeout_loose2)
+                )
+                .setPositiveButton(R.string.common__ok, null).show();
+    }
+
+    private void userWinAlert(User winner){
+        new AlertDialog.Builder(gameActivity)
+                .setTitle(
+                        gameActivity.getString(R.string.game__win1) +
+                                " " + winner.getName() + " " +
+                                gameActivity.getString(R.string.game__win2)
+                )
+                .setPositiveButton(R.string.common__ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        endGame();
+                    }
+                }).show();
+    }
+
+    public void onLost(User who) {
+        ++lostPlayers;
+        if (!isGameEnd()) {
+            userLostAlert(who);
         } else {
             User winner = findWinner();
 
             users.add(current);
             //AppController.getInstance().setAfterGame(true);
 
-            new AlertDialog.Builder(gameActivity)
-                    .setTitle(
-                            gameActivity.getString(R.string.game__win1) +
-                                    " " + winner.getName() + " " +
-                                    gameActivity.getString(R.string.game__win2)
-                    )
-                    .setPositiveButton(R.string.common__ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            endGame();
-                        }
-                    }).show();
+            userWinAlert(winner);
         }
     }
 

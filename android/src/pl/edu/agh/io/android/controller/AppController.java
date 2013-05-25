@@ -1,5 +1,6 @@
 package pl.edu.agh.io.android.controller;
 
+import android.content.Context;
 import pl.edu.agh.io.android.misc.IProcedure;
 import pl.edu.agh.io.android.model.FileItem;
 
@@ -21,6 +22,7 @@ public class AppController {
 
     }
 
+    private Context context;
     private boolean additionalPlayer;
     private boolean isNew;
     private IProcedure<FileItem> callback;
@@ -37,6 +39,14 @@ public class AppController {
         _isFirstTime = true;
     }
 
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
 
     public boolean isFirstTime(){
         boolean ret = _isFirstTime;

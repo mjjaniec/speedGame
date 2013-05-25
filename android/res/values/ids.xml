@@ -3,4 +3,6 @@
     <item name="game__more_than_one" type="id">You need at least tow players to start the game.</item>
     <item name="game__pause" type="id">Paused</item>
     <item name="game__back_to_game" type="id">Back to game?</item>
+    <item name="newgame__loose_game" type="id">Loose game</item>
+    <item name="newgame__negative_time" type="id">Negative time</item>
 </resources>

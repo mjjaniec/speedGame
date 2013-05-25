@@ -66,7 +66,6 @@ public abstract class UsersTaskBase extends AsyncTask<String,Long,Void> {
             nameValuePairs.add(new BasicNameValuePair("email",email));
             nameValuePairs.add(new BasicNameValuePair("avatar",avatar));
             nameValuePairs.add(new BasicNameValuePair("ring",ring));
-            nameValuePairs.add(new BasicNameValuePair("from_android_app","true"));
             for(Map.Entry<String,String> entry: map.entrySet()){
                 nameValuePairs.add(new BasicNameValuePair(entry.getKey(),entry.getValue()));
             }
@@ -80,7 +79,7 @@ public abstract class UsersTaskBase extends AsyncTask<String,Long,Void> {
         }
         String status=httpResponse.getStatusLine().getReasonPhrase();
         if(status.equals("OK"))return RegisterResult.OK;
-        if(status.equals("USER_EXISTS"))return RegisterResult.USER_EXISTS;
+        if(status.equals("User with the same login already exists"))return RegisterResult.USER_EXISTS;
         return RegisterResult.ERROR;
     }
 }
