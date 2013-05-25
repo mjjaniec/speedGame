@@ -32,6 +32,11 @@ public class UsersController {
 
 
     public void swap(int from, int to) {
+        if (current == users.get(from)) {
+            current = users.get(to);
+        } else if (current == users.get(to)) {
+            current = users.get(from);
+        }
         User tmp = users.get(from);
         users.set(from, users.get(to));
         users.set(to, tmp);
@@ -132,6 +137,9 @@ public class UsersController {
 
     public void setTime(int time) {
         this.time = time;
+        for (User user : users) {
+            user.setTime(time);
+        }
     }
 
 
@@ -163,9 +171,6 @@ public class UsersController {
     }
 
     public List<User> getUsers() {
-        //ugly
-        for (User user : users)
-            user.setTime(time);
         return users;
     }
 

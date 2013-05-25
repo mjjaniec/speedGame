@@ -36,7 +36,6 @@ public class EmptyActivity extends AbstractActivity {
             SpeedGameProxy.getInstance().reset();
             UsersController.reset();
             finish();
-          //  android.os.Process.killProcess(android.os.Process.myPid());
         }
     }
 
