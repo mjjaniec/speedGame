@@ -65,6 +65,11 @@ public class SpeedGameProxy {
         return online;
     }
 
+    public void reset(){
+        isChecked = false;
+        online = false;
+    }
+
 
     public boolean isOnlineAsync(final IProcedure<Boolean> callback) {
         if (isChecked) {
@@ -108,7 +113,7 @@ public class SpeedGameProxy {
             final String avatar_filename = object.getString("avatar");
             final String ring_filename = object.getString("ring");
             final URL ring_url = new URL(getServerUrl(Service.getFile)+"?getfile="+ring_filename);
-            final String email = object.getString("email");
+           // final String email = object.getString("email");
             final String login = object.getString("login");
 
             new GetFileTask(new IProcedure<InputStream>() {

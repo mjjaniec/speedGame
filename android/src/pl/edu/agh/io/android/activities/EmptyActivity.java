@@ -1,9 +1,9 @@
 package pl.edu.agh.io.android.activities;
 
 import android.content.Intent;
-import android.os.Bundle;
 import pl.edu.agh.io.android.controller.AppController;
 import pl.edu.agh.io.android.controller.SpeedGameProxy;
+import pl.edu.agh.io.android.controller.UsersController;
 import pl.edu.agh.io.android.misc.IProcedure;
 
 /**
@@ -15,21 +15,29 @@ import pl.edu.agh.io.android.misc.IProcedure;
  */
 public class EmptyActivity extends AbstractActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        AppController.getInstance().setAdditionalPlayer(false);
-        SpeedGameProxy.getInstance().isOnlineAsync(new IProcedure<Boolean>() {
-            @Override
-            public void call(Boolean arg) {
-                if (arg) {
-                    Intent myIntent = new Intent(getBaseContext(), LoginActivity.class);
-                    startActivity(myIntent);
-                } else {
-                    Intent myIntent = new Intent(getBaseContext(), NewGameActivity.class);
-                    startActivity(myIntent);
+    protected void onResume() {
+        super.onResume();
+        if(AppController.getInstance().isFirstTime()){
+            AppController.getInstance().setAdditionalPlayer(false);
+            SpeedGameProxy.getInstance().isOnlineAsync(new IProcedure<Boolean>() {
+                @Override
+                public void call(Boolean arg) {
+                    if (arg) {
+                        Intent myIntent = new Intent(getBaseContext(), LoginActivity.class);
+                        startActivity(myIntent);
+                    } else {
+                        Intent myIntent = new Intent(getBaseContext(), NewGameActivity.class);
+                        startActivity(myIntent);
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            AppController.getInstance().reset();
+            SpeedGameProxy.getInstance().reset();
+            UsersController.reset();
+            finish();
+          //  android.os.Process.killProcess(android.os.Process.myPid());
+        }
     }
 
 }

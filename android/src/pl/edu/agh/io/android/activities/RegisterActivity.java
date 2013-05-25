@@ -223,8 +223,8 @@ public class RegisterActivity extends AbstractActivity {
                 try{
                     UsersController.getInstance().addUser(new User(
                             getStr(R.id.register__login), this,
-                            Drawable.createFromPath(avatar.fileItem.getPath()),
-                            new URL("file://"+ring.fileItem.getPath())
+                            avatar.fileItem!=null?Drawable.createFromPath(avatar.fileItem.getPath()):null,
+                            ring.fileItem!=null?new URL("file://"+ring.fileItem.getPath()):null
                     ));
                 }catch(MalformedURLException e){
                     Log.e("URL", e.toString());

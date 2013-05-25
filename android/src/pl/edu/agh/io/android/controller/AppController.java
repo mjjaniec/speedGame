@@ -26,12 +26,23 @@ public class AppController {
     private IProcedure<FileItem> callback;
     private int what;
     private boolean logged = false;
+    private boolean _isFirstTime = true;
 
     public boolean isLogged() {
         return logged;
     }
 
+    public void reset(){
+        logged = false;
+        _isFirstTime = true;
+    }
 
+
+    public boolean isFirstTime(){
+        boolean ret = _isFirstTime;
+        _isFirstTime = false;
+        return ret;
+    }
 
     public void setLogged(boolean logged) {
         this.logged = logged;

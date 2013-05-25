@@ -14,6 +14,9 @@ import org.json.JSONObject;
 import pl.edu.agh.io.android.activities.LoginActivity;
 import pl.edu.agh.io.android.controller.SpeedGameProxy;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +64,6 @@ public class LoginTask extends AsyncTask<String,Long,Void> {
 
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
-
             httpResponse=httpClient.execute(httpPost);
         } catch (Exception e) {
             Log.e("HTTP Failed", e.toString());
@@ -69,12 +71,26 @@ public class LoginTask extends AsyncTask<String,Long,Void> {
         }
 
         String status=httpResponse.getStatusLine().getReasonPhrase();
+
         if(status.startsWith("OK")){
             try{
+                BufferedReader br = new BufferedReader( new InputStreamReader(
+                        httpResponse.getEntity().getContent()));
+            /*    while(true){
+                    String strx = br.readLine();
+                    strx = strx + strx;
+                    if(false){
+                        break;
+                    }
+                }
+
+                JSONObject o = new JSONObject("");*/
                 JSONObject object = new JSONObject(status.substring(2));
                 SpeedGameProxy.getInstance().makeUser(object);
             }catch (JSONException e){
                 return LoginResult.ERROR;
+            } catch (IOException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
             return LoginResult.OK;
         }
