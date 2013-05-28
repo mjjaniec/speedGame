@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-        //!!!added
+
         String android = request.getParameter("from_android_app");
         boolean isAndroid = android != null && android.equals("true");
 
@@ -42,7 +42,6 @@ public class LoginServlet extends HttpServlet {
                     return;
                 }
 
-                //!!!changed
                 if(isAndroid)response.sendError(HttpServletResponse.SC_OK,"INVALID_LOGIN");
                 else response.sendRedirect(response.encodeRedirectURL("/main_page.jsp?error=" + "User doesn't exists"));
                         return;
@@ -78,7 +77,6 @@ public class LoginServlet extends HttpServlet {
                     return;
                 }
 
-    		    //!!!changed
         		if(isAndroid)response.sendError(HttpServletResponse.SC_OK,"INVALID_PASSWORD");
                 else response.sendRedirect(response.encodeRedirectURL("/main_page.jsp?error=" + "Wrong login or password"));
             }

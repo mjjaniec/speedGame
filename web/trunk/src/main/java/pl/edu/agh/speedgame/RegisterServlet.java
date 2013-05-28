@@ -42,7 +42,7 @@ public class RegisterServlet extends HttpServlet {
         String avatar = request.getParameter("avatar");
         String ring = request.getParameter("ring");
 
-        //!!!added
+
         String android = request.getParameter("from_android_app");
         boolean isAndroid = android != null && android.equals("true");
 

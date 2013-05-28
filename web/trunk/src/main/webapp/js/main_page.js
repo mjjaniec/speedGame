@@ -5,14 +5,12 @@ $(function () {
     $('#fileupload').fileupload({
         url: '/upload',
         maxFileSize: 10000000,
-        //acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
         acceptFileTypes: /(\w*)$/i,
         process: [
             {
                 action: 'load',
-                //fileTypes: /^image\/(gif|jpeg|png)$/,
                 fileTypes: /(\w*)$/,
-                maxFileSize: 20000000 // 20MB
+                maxFileSize: 20000000
             },
             {
                 action: 'resize',
@@ -90,7 +88,14 @@ function validateTime() {
             $('#time_error').remove()
         }
 
-        $("body").prepend("<p id=\"time_error\" style=\"text-align: center; margin-left: 35%; margin-right: 35%\" class=\"ui-state-error\">" + "Wrong time format" + "</p>")
+        textOfError = ""
+        if($("#input_time").val() == "") {
+            textOfError = "Time cannot be empty"
+        } else {
+            textOfError = "Wrong time format"
+        }
+
+        $("body").prepend("<p id=\"time_error\" style=\"text-align: center; margin-left: 35%; margin-right: 35%\" class=\"ui-state-error\">" + textOfError + "</p>")
 
     }
 

@@ -23,7 +23,6 @@ import java.util.List;
 
 public class UploadServlet extends HttpServlet {
 
-//    private static final long serialVersionUID = 1L;
     private File fileUploadPath;
     private MimeUtil2 mimeUtil;
 
@@ -33,11 +32,7 @@ public class UploadServlet extends HttpServlet {
         mimeUtil = new MimeUtil2();
         mimeUtil.registerMimeDetector("eu.medsea.mimeutil.detector.MagicMimeMimeDetector");
     }
-        
-    /**
-        * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response)
-        * 
-        */
+
     @SuppressWarnings("unchecked")
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -105,11 +100,6 @@ public class UploadServlet extends HttpServlet {
         }
     }
     
-    /**
-        * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response)
-        * 
-        */
-
     @SuppressWarnings("unchecked")
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -156,10 +146,6 @@ public class UploadServlet extends HttpServlet {
     private String getMimeType(File file) {
         String mimetype = "";
         if (file.exists()) {
-//            URLConnection uc = new URL("file://" + file.getAbsolutePath()).openConnection();
-//            String mimetype = uc.getContentType();
-//            MimetypesFIleTypeMap gives PNG as application/octet-stream, but it seems so does URLConnection
-//            have to make dirty workaround
             if (getSuffix(file.getName()).equalsIgnoreCase("png")) {
                 mimetype = "image/png";
             } else {

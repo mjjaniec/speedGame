@@ -5,37 +5,26 @@
 <hibernate-configuration>
     <session-factory>
 
-        <!-- Wykorzystywany sterownik do bazy danych -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 
-        <!-- URL do bazy danych -->
         <property name="connection.url">jdbc:mysql://localhost:3306/io</property>
 
-        <!-- Nazwa użytkownika -->
         <property name="connection.username">io</property>
 
-        <!-- Hasło użytkownika -->
         <property name="connection.password">io</property>
 
-        <!-- Ilość połączeń -->
         <property name="connection.pool_size">1</property>
 
-        <!-- Wykorzystywany dialekt SQl’a -->
         <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
 
-        <!-- Disable the second-level cache -->
         <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
 
-        <!-- Wypisywanie wykonywanych zapytań na stdout -->
         <property name="show_sql">true</property>
 
-        <!-- Aktualizowanie schematu -->
         <property name="hbm2ddl.auto">update</property>
 
-        <!-- Register user - fix -->
         <property name="hibernate.connection.isolation">8</property>
 
-        <!-- Klasa zawierająca mapowanie -->
         <mapping class="pl.edu.agh.speedgame.dto.User"/>
 
     </session-factory>
