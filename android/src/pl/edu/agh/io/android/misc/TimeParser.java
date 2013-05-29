@@ -9,14 +9,14 @@ package pl.edu.agh.io.android.misc;
  */
 public class TimeParser {
 
-    public static int Parse(String string)throws Exception{
+    public static int Parse(String string) throws Exception {
         String[] split = string.split(":");
-        if(split.length>2)
+        if (split.length > 2)
             throw new Exception("Parse exception");
 
-        if(split.length==1)
-            return Integer.parseInt(split[0])*60;
+        if (split.length == 1)
+            return Integer.parseInt(split[0]) * 60;
         else
-            return Integer.parseInt(split[0])*60+Integer.parseInt(split[1]);
+            return Integer.parseInt(split[0]) * 60 + Integer.parseInt(split[1]);
     }
 }

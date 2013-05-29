@@ -32,7 +32,7 @@ public class DragNDropListView extends ListView {
 
     int mStartPosition;
     int mEndPosition;
-    int mDragPointOffset;		//Used to adjust drag view location
+    int mDragPointOffset;        //Used to adjust drag view location
 
     ImageView mDragView;
     DragListener mDragListener;
@@ -45,7 +45,7 @@ public class DragNDropListView extends ListView {
     @Override
     public void setAdapter(ListAdapter adapter) {
         super.setAdapter(adapter);
-        this.adapter=(DragNDropAdapter)adapter;
+        this.adapter = (DragNDropAdapter) adapter;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class DragNDropListView extends ListView {
         final int x = (int) ev.getX();
         final int y = (int) ev.getY();
 
-        if (action == MotionEvent.ACTION_DOWN && x < 3*this.getWidth()/4) {
+        if (action == MotionEvent.ACTION_DOWN && x < 3 * this.getWidth() / 4) {
             mDragMode = true;
         }
 
@@ -63,31 +63,31 @@ public class DragNDropListView extends ListView {
 
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                mStartPosition = pointToPosition(x,y);
+                mStartPosition = pointToPosition(x, y);
                 if (mStartPosition != INVALID_POSITION) {
                     int mItemPosition = mStartPosition - getFirstVisiblePosition();
                     mDragPointOffset = y - getChildAt(mItemPosition).getTop();
-                    mDragPointOffset -= ((int)ev.getRawY()) - y;
-                    startDrag(mItemPosition,y);
-                    drag(0,y);// replace 0 with x if desired
+                    mDragPointOffset -= ((int) ev.getRawY()) - y;
+                    startDrag(mItemPosition, y);
+                    drag(0, y);// replace 0 with x if desired
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
-                drag(0,y);// replace 0 with x if desired
+                drag(0, y);// replace 0 with x if desired
                 break;
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
             default:
                 mDragMode = false;
-                mEndPosition = pointToPosition(x,y);
-                if(mEndPosition == -1){
-                    if(y<this.getY())
+                mEndPosition = pointToPosition(x, y);
+                if (mEndPosition == -1) {
+                    if (y < this.getY())
                         mEndPosition = 0;
                     else
                         mEndPosition = adapter.getCount() - 1;
                 }
                 stopDrag(mStartPosition - getFirstVisiblePosition());
-                adapter.onDrop(mStartPosition,mEndPosition);
+                adapter.onDrop(mStartPosition, mEndPosition);
                 break;
         }
         return true;
@@ -141,7 +141,7 @@ public class DragNDropListView extends ListView {
         ImageView v = new ImageView(context);
         v.setImageBitmap(bitmap);
 
-        WindowManager mWindowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+        WindowManager mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         mWindowManager.addView(v, mWindowParams);
         mDragView = v;
     }
@@ -152,7 +152,7 @@ public class DragNDropListView extends ListView {
             if (mDragListener != null)
                 mDragListener.onStopDrag(getChildAt(itemIndex));
             mDragView.setVisibility(GONE);
-            WindowManager wm = (WindowManager)getContext().getSystemService(Context.WINDOW_SERVICE);
+            WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
             wm.removeView(mDragView);
             mDragView.setImageDrawable(null);
             mDragView = null;
@@ -168,14 +168,16 @@ public class DragNDropListView extends ListView {
     public static interface DragListener {
         /**
          * Called when a drag starts.
+         *
          * @param itemView - the view of the item to be dragged i.e. the drag view
          */
         void onStartDrag(View itemView);
 
         /**
          * Called when a drag is to be performed.
-         * @param x - horizontal coordinate of MotionEvent.
-         * @param y - verital coordinate of MotionEvent.
+         *
+         * @param x        - horizontal coordinate of MotionEvent.
+         * @param y        - verital coordinate of MotionEvent.
          * @param listView - the listView
          */
         void onDrag(int x, int y, ListView listView);
@@ -184,6 +186,7 @@ public class DragNDropListView extends ListView {
          * Called when a drag stops.
          * Any changes in onStartDrag need to be undone here
          * so that the view can be used in the list again.
+         *
          * @param itemView - the view of the item to be dragged i.e. the drag view
          */
         void onStopDrag(View itemView);

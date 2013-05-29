@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:padding="10dp" >
+              android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/filesview__image"
+        android:layout_gravity="center_vertical"
         android:layout_width="@dimen/icon_size"
         android:layout_height="@dimen/icon_size"
-        android:layout_marginRight="3dp" />
+        android:layout_marginRight="@dimen/margin"/>
 
     <TextView
         android:id="@+id/filesview__name"
@@ -19,7 +19,7 @@
     <Button
         android:id="@+id/filesview__button"
         android:layout_height="@dimen/x1_5icon_size"
-        android:layout_width="@dimen/x2icon_size"
+        android:layout_width="@dimen/x2_5icon_size"
         />
 
 </LinearLayout>

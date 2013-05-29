@@ -3,12 +3,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
               android:layout_width="fill_parent"
-              android:layout_height="wrap_content">
+              android:layout_height="wrap_content"
+              android:layout_margin="@dimen/margin">
 
     <ImageView
         android:id="@+id/dnd_usersview__avatar"
         android:layout_height="@dimen/avatar_small"
         android:layout_width="@dimen/avatar_small"/>
+
+    <Space
+        android:layout_height="wrap_content"
+        android:layout_width="@dimen/margin"/>
 
     <LinearLayout
         android:orientation="vertical"
@@ -27,7 +32,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
-
 
 
     <ImageButton

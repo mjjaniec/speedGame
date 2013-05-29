@@ -2,6 +2,8 @@ package pl.edu.agh.io.android.controller.tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import pl.edu.agh.io.android.activities.R;
+import pl.edu.agh.io.android.controller.AppState;
 import pl.edu.agh.io.android.misc.IProcedure;
 import pl.edu.agh.io.android.model.FileItem;
 
@@ -16,31 +18,23 @@ import java.net.URLConnection;
  * Time: 8:58 PM
  * To change this template use File | Settings | File Templates.
  */
-public class GetFileTask extends AsyncTask<String,Double,Void> {
+public class GetFileTask extends AsyncTask<String, Double, Void> {
 
     private FileItem fileItem;
-    private  IProcedure<InputStream> handler;
+    private IProcedure<InputStream> handler;
 
-    public GetFileTask(IProcedure<InputStream> handler, FileItem fileItem){
+    public GetFileTask(IProcedure<InputStream> handler, FileItem fileItem) {
         this.fileItem = fileItem;
         this.handler = handler;
     }
 
-    private InputStream download(String url){
-        try{
+    private InputStream download(String url) {
+        try {
             URLConnection ucon = new URL(url).openConnection();
             InputStream in = ucon.getInputStream();
-            /*ByteArrayOutputStream result = new ByteArrayOutputStream();
-            byte [] buffer = new byte[1024];
-
-            while(in.read(buffer)>0){
-                result.write(buffer);
-            }
-            return result.toByteArray();
-            */
 
             return in;
-        }catch(Exception e){
+        } catch (Exception e) {
             Log.e("HTTP Failed", e.toString());
         }
         return null;
@@ -48,8 +42,10 @@ public class GetFileTask extends AsyncTask<String,Double,Void> {
 
     @Override
     protected Void doInBackground(String... urls) {
-        String url = urls[0] + "?getfile=" + fileItem.getName();
-        handler.call(download(url));
+        StringBuilder sb = new StringBuilder(urls[0]);
+        sb.append(AppState.getInstance().getContext().getString(R.string.config__download_parameter));
+        sb.append(fileItem.getName());
+        handler.call(download(sb.toString()));
         return null;
     }
 

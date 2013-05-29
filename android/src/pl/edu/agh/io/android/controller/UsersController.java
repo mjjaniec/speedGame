@@ -10,50 +10,34 @@ package pl.edu.agh.io.android.controller;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 import pl.edu.agh.io.android.activities.GameActivity;
-import pl.edu.agh.io.android.activities.NewGameActivity;
 import pl.edu.agh.io.android.activities.R;
 import pl.edu.agh.io.android.model.User;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
 public class UsersController {
 
-
-    public void swap(int from, int to) {
-        if (current == users.get(from)) {
-            current = users.get(to);
-        } else if (current == users.get(to)) {
-            current = users.get(from);
-        }
-        User tmp = users.get(from);
-        users.set(from, users.get(to));
-        users.set(to, tmp);
-    }
-
-    public void pause() {
-        current.stop();
-    }
-
-    public void unpause() {
-        current.start();
+    public void setGameActivity(GameActivity gameActivity) {
+        this.gameActivity = gameActivity;
     }
 
     public static enum OnTimeout {
         loose, negativePoints;
 
-        private static final String looseStr = "Lose game";
-        private static final String negativeStr =  "Negative Points";
+        private static final String looseStr =
+                AppState.getInstance().getContext().getResources()
+                        .getString(R.string.newgame__loose_game);
+        private static final String negativeStr =
+                AppState.getInstance().getContext().getResources()
+                        .getString(R.string.newgame__negative_time);
 
         @Override
         public String toString() {
@@ -75,8 +59,38 @@ public class UsersController {
 
             throw new Error("Unimplemented on timeout");
         }
+    }
 
+    public static enum GameEnds {
+        one, none;
 
+        private static final String oneStr =
+                AppState.getInstance().getContext().getResources()
+                        .getString(R.string.newgame__one);
+        private static final String noneStr =
+                AppState.getInstance().getContext().getResources()
+                        .getString(R.string.newgame__none);
+
+        @Override
+        public String toString() {
+            switch (this) {
+                case one:
+                    return oneStr;
+                case none:
+                    return noneStr;
+                default:
+                    throw new Error("Unimplemented on timeout");
+            }
+        }
+
+        public static GameEnds fromString(String str) {
+            if (str.equals(oneStr))
+                return one;
+            if (str.equals(noneStr))
+                return none;
+
+            throw new Error("Unimplemented on timeout");
+        }
     }
 
     public static enum Sound {
@@ -86,6 +100,7 @@ public class UsersController {
             return checked ? on : off;
         }
     }
+
 
     private static UsersController instance;
     private static Object lock = new Object();
@@ -102,8 +117,38 @@ public class UsersController {
     private int lostPlayers;
     private MediaPlayer mediaPlayer;
     private int time;
+    private GameEnds gameEnds;
 
-    public int getButtonCaption() {
+    public void setGameEnds(GameEnds gameEnds) {
+        this.gameEnds = gameEnds;
+    }
+
+    public GameEnds getGameEnds() {
+        return gameEnds;
+    }
+
+    private boolean isValidIndex(int index){
+        return 0 <= index && index < users.size();
+    }
+
+    public void swapPlayers(int from, int to) {
+        if(!isValidIndex(from) || !isValidIndex(to))
+            return;
+
+        User tmp = users.get(from);
+        users.set(from, users.get(to));
+        users.set(to, tmp);
+    }
+
+    public void pauseGame() {
+        current.stop();
+    }
+
+    public void resumeGame() {
+        current.start();
+    }
+
+    public int getInfoStringId() {
         if (isReady && !first)
             return R.string.game__next_player;
         return R.string.game__start_the_game;
@@ -148,6 +193,7 @@ public class UsersController {
             this.lostPlayers = 0;
             players = users.size();
             isReady = true;
+            current = users.getLast();
 
             if (soundOn == Sound.on) {
                 if (mediaPlayer == null) {
@@ -161,7 +207,6 @@ public class UsersController {
 
     public void addUser(User user) {
         user.setTime(time);
-        current = user;
         users.add(user);
     }
 
@@ -177,11 +222,23 @@ public class UsersController {
         return current;
     }
 
-    public void rotate() {
+    public void rotateUsers() {
+        if (isGameEnd())
+            return;
+
         if (first) {
             first = false;
             users.remove(players - 1);
+
+            if(users.isEmpty()) { //none left mode, only one player in the game -> only start after first click
+                current.start();
+                if (soundOn == Sound.on)
+                    playRing(current);
+            }
         }
+
+        if(users.isEmpty()) //none left mode, only one player in the game -> no rotation needed;
+            return;
 
         current.stop();
 
@@ -194,17 +251,10 @@ public class UsersController {
         current.start();
 
         if (soundOn == Sound.on)
-            play(current);
+            playRing(current);
     }
 
-    public void endGame() {
-        Intent intent = new Intent(gameActivity, NewGameActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        UsersController.reset();
-        gameActivity.startActivity(intent);
-    }
-
-    private void play(User current) {
+    private void playRing(User current) {
         URL ringUrl = current.getRingURL();
         try {
             mediaPlayer.reset();
@@ -216,12 +266,10 @@ public class UsersController {
                 mediaPlayer.setDataSource(gameActivity, Uri.parse(ringUrl.toString()));
             }
             mediaPlayer.prepare();
+            mediaPlayer.setLooping(true);
             mediaPlayer.start();
-        } catch (IOException e) {
-            //pass it quite silently, it's not critical problem.
-            Log.e("mediaPlayer", "error while opening default_ring.mp3 file");
         } catch (Exception e) {
-            Log.e("mediaPlayer", e.toString());
+            Log.w("mediaPlayer", e.toString());
         }
     }
 
@@ -232,21 +280,31 @@ public class UsersController {
         return null;
     }
 
-    private boolean isGameEnd(){
-        return lostPlayers == players -1;
+    private boolean isGameEnd() {
+        switch (gameEnds){
+            case one: return lostPlayers == players - 1;
+            case none: return lostPlayers == players;
+            default: assert false;
+        }
+        return false;
     }
 
-    private void userLostAlert(User who){
+    private void showUserLostAlert(User who) {
         new AlertDialog.Builder(gameActivity)
                 .setTitle(
                         gameActivity.getString(R.string.game__timeout_loose1) +
                                 " " + who.getName() + " " +
                                 gameActivity.getString(R.string.game__timeout_loose2)
                 )
-                .setPositiveButton(R.string.common__ok, null).show();
+                .setPositiveButton(R.string.common__ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        gameActivity.handleClick();
+                    }
+                }).show();
     }
 
-    private void userWinAlert(User winner){
+    private void showUserWinAlert(User winner) {
         new AlertDialog.Builder(gameActivity)
                 .setTitle(
                         gameActivity.getString(R.string.game__win1) +
@@ -256,7 +314,7 @@ public class UsersController {
                 .setPositiveButton(R.string.common__ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        endGame();
+                        gameActivity.endGame();
                     }
                 }).show();
     }
@@ -264,15 +322,23 @@ public class UsersController {
     public void onLost(User who) {
         ++lostPlayers;
         if (!isGameEnd()) {
-            userLostAlert(who);
+            showUserLostAlert(who);
         } else {
-            User winner = findWinner();
-
-            users.add(current);
-            //AppController.getInstance().setAfterGame(true);
-
-            userWinAlert(winner);
+            restoreUsersList();
+            if(gameEnds==GameEnds.one){
+                User winner = findWinner();
+                winner.setWinner(true);
+                showUserWinAlert(winner);
+            } else {
+                showUserLostAlert(who);
+                gameActivity.endGame();
+            }
         }
+    }
+
+    public void restoreUsersList(){
+        if(users.size()<players)
+            users.add(current);
     }
 
     public OnTimeout onTimeout(User who) {
@@ -304,13 +370,7 @@ public class UsersController {
     }
 
     public void refresh(final User user) {
-        final TextView textView = (TextView) gameActivity.findViewById(R.id.game__clock);
-        gameActivity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                textView.setText(user.timeString());
-            }
-        });
+        gameActivity.refreshTime(user.timeString());
     }
 
 }

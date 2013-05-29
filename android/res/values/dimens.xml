@@ -1,11 +1,10 @@
 <resources>
 
-    <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="margin">10dp</dimen>
     <dimen name="main_timer">32dp</dimen>
     <dimen name="icon_size">32px</dimen>
     <dimen name="x1_5icon_size">48px</dimen>
-    <dimen name="x2icon_size">64px</dimen>
+    <dimen name="x2_5icon_size">80px</dimen>
     <dimen name="avatar_small">50dp</dimen>
 
 </resources>

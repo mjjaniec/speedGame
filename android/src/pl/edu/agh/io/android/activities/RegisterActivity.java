@@ -14,15 +14,14 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import pl.edu.agh.io.android.controller.AppController;
+import pl.edu.agh.io.android.controller.AppState;
 import pl.edu.agh.io.android.controller.SpeedGameProxy;
 import pl.edu.agh.io.android.controller.UsersController;
-import pl.edu.agh.io.android.controller.tasks.UsersTaskBase;
+import pl.edu.agh.io.android.controller.tasks.UpdateAndRegisterBase;
 import pl.edu.agh.io.android.misc.IProcedure;
-import pl.edu.agh.io.android.misc.SetText;
+import pl.edu.agh.io.android.misc.ViewTextSetter;
 import pl.edu.agh.io.android.misc.TextValidator;
 import pl.edu.agh.io.android.model.FileItem;
 import pl.edu.agh.io.android.model.User;
@@ -40,6 +39,7 @@ public class RegisterActivity extends AbstractActivity {
         public AtomicBoolean uploaded = new AtomicBoolean(false);
     }
 
+    private AppState state = AppState.getInstance();
     private FileItemHolder avatar = new FileItemHolder();
     private FileItemHolder ring = new FileItemHolder();
     private EditText login;
@@ -48,13 +48,14 @@ public class RegisterActivity extends AbstractActivity {
     private EditText email;
     private TextView info;
     private boolean update;
+    private User oldUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        update = !AppController.getInstance().isNew();
+        update = !AppState.getInstance().isCreatingNewAccount();
 
         info = (TextView) findViewById(R.id.register__info);
         login = (EditText) findViewById(R.id.register__login);
@@ -67,70 +68,81 @@ public class RegisterActivity extends AbstractActivity {
 
         if (update) {
             login.setEnabled(false);
-            login.setText(UsersController.getInstance().getCurrent().getName());
+            oldUser = UsersController.getInstance().getUsers().get(0);
+            //updated user is always first user
+            login.setText(oldUser.getName());
             setStr(R.id.register__avatar, "");
             setStr(R.id.register__ring, "");
             setStr(R.id.register__register, R.string.register__update);
-
-            UsersController.reset();
         }
 
 
-        Button register = (Button) findViewById(R.id.register__register);
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                register();
-            }
-        });
-
-        findViewById(R.id.register__change_avatar).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AppController.getInstance().setCallback(
-                        new FieldSetter((TextView) findViewById(R.id.register__avatar), avatar));
-                AppController.getInstance().setWhat(R.string.register__choose_avatar);
-                Intent myIntent = new Intent(view.getContext(), ChooseFileActivity.class);
-                startActivityForResult(myIntent, 0);
-            }
-        });
-
-
-        findViewById(R.id.register__change_ring).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AppController.getInstance().setCallback(
-                        new FieldSetter((TextView) findViewById(R.id.register__ring), ring));
-                AppController.getInstance().setWhat(R.string.register__choose_ring);
-                Intent myIntent = new Intent(view.getContext(), ChooseFileActivity.class);
-                startActivityForResult(myIntent, 0);
-            }
-        });
+        findViewById(R.id.register__register).setOnClickListener(onRegister);
+        findViewById(R.id.register__change_avatar).setOnClickListener(onChangeAvatar);
+        findViewById(R.id.register__change_ring).setOnClickListener(onChangeRing);
     }
+
+    private View.OnClickListener onRegister = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (state.isBusy())
+                return;
+
+            state.setBusy(true);
+            register();
+        }
+    };
+
+    private View.OnClickListener onChangeAvatar = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            AppState.getInstance().setFilesViewCallback(
+                    new FieldSetter((TextView) findViewById(R.id.register__avatar), avatar));
+            AppState.getInstance().setFilesViewTitleId(R.string.register__choose_avatar);
+            startActivity(new Intent(view.getContext(), ChooseFileActivity.class));
+        }
+    };
+
+    private View.OnClickListener onChangeRing = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            AppState.getInstance().setFilesViewCallback(
+                    new FieldSetter((TextView) findViewById(R.id.register__ring), ring));
+            AppState.getInstance().setFilesViewTitleId(R.string.register__choose_ring);
+            startActivity(new Intent(view.getContext(), ChooseFileActivity.class));
+        }
+    };
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        update = !AppController.getInstance().isNew();
+        state.setBusy(false);
+        update = !AppState.getInstance().isCreatingNewAccount();
 
-        String basicRegex = "[a-z][0-9a-z_]+";
-        String emailRegex = "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})";
+        String basicRegex = getString(R.string.config__basic_regex);
+        String emailRegex = getString(R.string.config__email_regex);
 
 
-        login.setOnFocusChangeListener(new TextValidator(basicRegex, 5, 16, update, "Username may consist of a-z, 0-9, underscores, begin with a letter."));
-        password.setOnFocusChangeListener(new TextValidator(basicRegex, 5, 16, update, "Password may consist of a-z, 0-9, underscores, begin with a letter."));
-        email.setOnFocusChangeListener(new TextValidator(emailRegex, 6, 80, update, "Please enter valid email. eg. abc@example.com"));
+        login.setOnFocusChangeListener(
+                new TextValidator(basicRegex, 5, 16, update, getString(R.string.register__login_valid_error)));
+        password.setOnFocusChangeListener(
+                new TextValidator(basicRegex, 5, 16, update, getString(R.string.register__password_valid_error)));
+        email.setOnFocusChangeListener(
+                new TextValidator(emailRegex, 6, 80, update, getString(R.string.register__email_valid_error)));
 
-        retype.setOnFocusChangeListener(new TextValidator(basicRegex, 5, 16, update, "not used") {
+        retype.setOnFocusChangeListener(new TextValidator(basicRegex, 5, 16, update, null) {
+
+            @Override
+            public boolean validate(String string) {
+                return getStr(R.id.register__password).equals(getStr(R.id.register__retype));
+            }
+
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if (!hasFocus) {
-                    EditText retype = (EditText) view;
-                    EditText pass = (EditText) findViewById(R.id.register__password);
-
-                    if (!pass.getText().toString().equals(retype.getText().toString())) {
-                        retype.setError("Retyped password should match password");
+                    if (!validate(null)) {
+                        retype.setError(getString(R.string.register__retype_valid_error));
                     }
                 }
             }
@@ -140,34 +152,36 @@ public class RegisterActivity extends AbstractActivity {
     public void register() {
         if (!checkAll()) {
             info.setText(R.string.register__validate);
-        } else if (!ring.uploaded.get()) {
+            state.setBusy(false);
+            return;
+        }
+        if (!ring.uploaded.get()) {
             handleFile(ring, R.string.register__default_ring);
-        } else if (!avatar.uploaded.get()) {
+            return;
+        }
+        if (!avatar.uploaded.get()) {
             handleFile(avatar, R.string.register__default_avatar);
-        } else {
-            if (!checkAll()) {
-                info.setText(R.string.register__validate);
-            } else {
-                if(update)
-                    SpeedGameProxy.getInstance().update(
-                            this,
-                            login.getText().toString(),
-                            password.getText().toString(),
-                            email.getText().toString(),
-                            avatar.name,
-                            ring.name
-                    );
-                else{
-                    SpeedGameProxy.getInstance().register(
-                            this,
-                            login.getText().toString(),
-                            password.getText().toString(),
-                            email.getText().toString(),
-                            avatar.name,
-                            ring.name
-                    );
-                }
-            }
+            return;
+        }
+
+        if (update)
+            SpeedGameProxy.getInstance().update(
+                    this,
+                    login.getText().toString(),
+                    password.getText().toString(),
+                    email.getText().toString(),
+                    avatar.name,
+                    ring.name
+            );
+        else {
+            SpeedGameProxy.getInstance().register(
+                    this,
+                    login.getText().toString(),
+                    password.getText().toString(),
+                    email.getText().toString(),
+                    avatar.name,
+                    ring.name
+            );
         }
     }
 
@@ -180,7 +194,7 @@ public class RegisterActivity extends AbstractActivity {
 
     private void handleFile(FileItemHolder fileItemHolder, int defaultString) {
         if (fileItemHolder.fileItem == null) {
-            if(update == false){
+            if (update == false) {
                 fileItemHolder.name = getString(defaultString);
             }
             fileItemHolder.uploaded.set(true);
@@ -189,7 +203,7 @@ public class RegisterActivity extends AbstractActivity {
             if (!fileItemHolder.touched.get()) {
                 fileItemHolder.touched.set(true);
                 fileItemHolder.name = fileItemHolder.fileItem.getName();
-                runOnUiThread(new SetText(info,R.string.register__sending_file));
+                runOnUiThread(new ViewTextSetter(info, R.string.register__sending_file));
                 SpeedGameProxy.getInstance().sendFile(this, fileItemHolder.fileItem);
             }
         }
@@ -212,36 +226,66 @@ public class RegisterActivity extends AbstractActivity {
         @Override
         public void call(FileItem arg) {
             fileItemHolder.fileItem = arg;
-            runOnUiThread(new SetText(view, arg.getName()));
+            runOnUiThread(new ViewTextSetter(view, arg.getName()));
         }
     }
 
-    public void onRegister(UsersTaskBase.RegisterResult result) {
+    private URL formFileURL(FileItem item) {
+        try {
+            return new URL("file:// " + item.getPath());
+        } catch (MalformedURLException e) {
+            Log.e("URL", e.toString());
+            return null;
+        }
+    }
 
+    private void updateUser() {
+        UsersController controller = UsersController.getInstance();
+        //updated user is always first user
+        controller.removeUser(0);
+
+        controller.addUser(new User(
+                oldUser.getName(),
+                avatar.fileItem != null ? Drawable.createFromPath(avatar.fileItem.getPath()) : oldUser.getAvatar(),
+                ring.fileItem != null ? formFileURL(ring.fileItem) : oldUser.getRingURL()
+        ));
+
+        finish();
+    }
+
+    private void addUser() {
+
+        UsersController.getInstance().addUser(new User(
+                getStr(R.id.register__login),
+                avatar.fileItem != null ? Drawable.createFromPath(avatar.fileItem.getPath()) : null,
+                ring.fileItem != null ? formFileURL(ring.fileItem) : null
+        ));
+
+        Intent intent = new Intent(this, UsersActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    private void onSuccessfulRegistration() {
+
+        if (update) {
+            updateUser();
+        } else {
+            addUser();
+        }
+    }
+
+    public void onRegister(UpdateAndRegisterBase.RegisterResult result) {
+        state.setBusy(false);
         switch (result) {
             case OK:
-                try{
-                    UsersController.getInstance().addUser(new User(
-                            getStr(R.id.register__login), this,
-                            avatar.fileItem!=null?Drawable.createFromPath(avatar.fileItem.getPath()):null,
-                            ring.fileItem!=null?new URL("file://"+ring.fileItem.getPath()):null
-                    ));
-                }catch(MalformedURLException e){
-                    Log.e("URL", e.toString());
-                }
-                if(AppController.getInstance().isAdditionalPlayer()){
-                    Intent myIntent = new Intent(this, UsersActivity.class);
-                    startActivityForResult(myIntent, 0);
-                }else {
-                    Intent myIntent = new Intent(this, NewGameActivity.class);
-                    startActivityForResult(myIntent, 0);
-                }
+                onSuccessfulRegistration();
                 break;
             case ERROR:
-                runOnUiThread(new SetText(info, R.string.register__error));
+                runOnUiThread(new ViewTextSetter(info, R.string.register__error));
                 break;
             case USER_EXISTS:
-                runOnUiThread(new SetText(info, R.string.register__user_exists));
+                runOnUiThread(new ViewTextSetter(info, R.string.register__user_exists));
                 break;
             default:
                 assert (false);
@@ -261,7 +305,7 @@ public class RegisterActivity extends AbstractActivity {
                 assert false : "bad file name?";
             }
         } else {
-            runOnUiThread(new SetText(info, R.string.register__error));
+            runOnUiThread(new ViewTextSetter(info, R.string.register__error));
         }
     }
 }

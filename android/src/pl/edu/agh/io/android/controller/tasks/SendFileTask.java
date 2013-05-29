@@ -21,31 +21,31 @@ import java.io.File;
  * Time: 8:58 PM
  * To change this template use File | Settings | File Templates.
  */
-public class SendFileTask extends AsyncTask<String,Double,Void> {
+public class SendFileTask extends AsyncTask<String, Double, Void> {
 
     private FileItem fileItem;
     private RegisterActivity view;
 
-    public SendFileTask(RegisterActivity view, FileItem fileItem){
+    public SendFileTask(RegisterActivity view, FileItem fileItem) {
         this.view = view;
         this.fileItem = fileItem;
     }
 
-    private boolean upload(String url){
-        try{
+    private boolean upload(String url) {
+        try {
             HttpClient client = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
             MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
 
-            multipartEntity.addPart(fileItem.getName(),new FileBody(new File(fileItem.getPath())));
+            multipartEntity.addPart(fileItem.getName(), new FileBody(new File(fileItem.getPath())));
 
             httpPost.setEntity(multipartEntity);
 
             HttpResponse response = client.execute(httpPost);
 
-            if(response.getStatusLine().getStatusCode()!=200)
+            if (response.getStatusLine().getStatusCode() != 200)
                 return false;
-        }catch(Exception e){
+        } catch (Exception e) {
             Log.e("HTTP Failed", e.toString());
             return false;
         }
@@ -55,7 +55,7 @@ public class SendFileTask extends AsyncTask<String,Double,Void> {
     @Override
     protected Void doInBackground(String... urls) {
         String url = urls[0];
-        view.onUpload(upload(url),fileItem);
+        view.onUpload(upload(url), fileItem);
         return null;
     }
 

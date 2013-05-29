@@ -10,18 +10,21 @@ package pl.edu.agh.io.android.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 import pl.edu.agh.io.android.adapters.UsersViewAdapter;
+import pl.edu.agh.io.android.controller.AppState;
 import pl.edu.agh.io.android.controller.UsersController;
+import pl.edu.agh.io.android.misc.ViewTextSetter;
 import pl.edu.agh.io.android.model.User;
 
 public class GameActivity extends AbstractActivity {
 
     private ImageView avatar;
-    private View next;
-    private TextView caption;
+    private TextView clock;
+    private TextView info;
     private ArrayAdapter<User> adapter;
 
     @Override
@@ -29,17 +32,12 @@ public class GameActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-
         UsersController controller = UsersController.getInstance();
-        TextView current_player = (TextView) findViewById(R.id.game__current);
-        current_player.setText("");
-
-
         controller.configure(this);
 
         findViewById(R.id.game__loose).setVisibility(View.INVISIBLE);
 
-        adapter = new UsersViewAdapter(this,controller.getUsers());
+        adapter = new UsersViewAdapter(this, controller.getUsers());
         ListView queue = (ListView) findViewById(R.id.game__queue);
         queue.setAdapter(adapter);
 
@@ -49,73 +47,96 @@ public class GameActivity extends AbstractActivity {
                 handleClick();
             }
         });
+        findViewById(R.id.game__next).setOnClickListener(callHandleClick);
+        findViewById(R.id.game__next2).setOnClickListener(callHandleClick);
 
-        avatar = (ImageView)findViewById(R.id.game__avatar);
-        next = findViewById(R.id.game__next);
-        caption = (TextView) findViewById(R.id.game__caption);
+        avatar = (ImageView) findViewById(R.id.game__avatar);
+        clock = (TextView) findViewById(R.id.game__clock);
+        info = (TextView) findViewById(R.id.game__info);
 
+        info.setText(controller.getInfoStringId());
 
-        caption.setText(controller.getButtonCaption());
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                handleClick();
-            }
-        });
-
-        findViewById(R.id.game__loose).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new AlertDialog.Builder(view.getContext())
-                        .setTitle(R.string.game__really_loose)
-                        .setPositiveButton(R.string.common__yes,new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                UsersController.getInstance().getCurrent().setLost();
-                                handleClick();
-                            }
-                        }).setNegativeButton(R.string.common__no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //pass
-                    }
-                }).show();
-
-            }
-        });
+        findViewById(R.id.game__loose).setOnClickListener(onLoosePressed);
     }
+
+    private View.OnClickListener callHandleClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            handleClick();
+        }
+    };
 
     @Override
-    public void onBackPressed() {
-        UsersController.getInstance().pause();
-        new AlertDialog.Builder(this).setTitle(R.id.game__pause)
-                .setMessage(R.id.game__back_to_game).
-                setPositiveButton(R.string.common__yes,new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                UsersController.getInstance().unpause();
-            }
-        }).setNegativeButton(R.string.common__no, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                UsersController.getInstance().endGame();
-            }
-        }).show();
-        //super.onBackPressed();
+    protected void onResume() {
+        super.onResume();
+        UsersController.getInstance().setGameActivity(this);
+        if (AppState.getInstance().isGameStarted()) {
+            refreshScene();
+        }
     }
 
-    private void handleClick(){
+    private void refreshScene() {
         findViewById(R.id.game__loose).setVisibility(View.VISIBLE);
         UsersController controller = UsersController.getInstance();
-        controller.rotate();
         User current = controller.getCurrent();
 
-        TextView current_player = (TextView) findViewById(R.id.game__current);
-        current_player.setText(current.getName());
+        setStr(R.id.game__current, current.getName());
 
-        caption.setText(controller.getButtonCaption());
+        info.setText(controller.getInfoStringId());
         avatar.setImageDrawable(current.getAvatar());
 
         adapter.notifyDataSetChanged();
+        clock.setText(current.timeString());
+
+    }
+
+    private View.OnClickListener onLoosePressed = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            new AlertDialog.Builder(view.getContext())
+                    .setTitle(R.string.game__really_loose)
+                    .setPositiveButton(R.string.common__yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            UsersController.getInstance().getCurrent().setLost();
+                        }
+                    }).setNegativeButton(R.string.common__no, null).show();
+        }
+    };
+
+    @Override
+    public void onBackPressed() {
+        UsersController.getInstance().pauseGame();
+        new AlertDialog.Builder(this).setTitle(R.string.game__pause)
+                .setMessage(R.string.game__back_to_game).
+                setPositiveButton(R.string.common__yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        UsersController.getInstance().resumeGame();
+                    }
+                }).setNegativeButton(R.string.common__no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                UsersController.getInstance().restoreUsersList();
+                endGame();
+            }
+        }
+        ).show();
+    }
+
+    public void endGame() {
+        startActivity(new Intent(this, RanksActivity.class));
+    }
+
+    public void handleClick() {
+        AppState.getInstance().setGameStarted(true);
+        UsersController controller = UsersController.getInstance();
+        controller.rotateUsers();
+
+        refreshScene();
+    }
+
+    public void refreshTime(String s) {
+        runOnUiThread(new ViewTextSetter(clock, s));
     }
 }

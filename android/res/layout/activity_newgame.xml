@@ -11,10 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
 
-        <TableRow
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
-
+        <!-- sounds -->
+        <TableRow>
             <TextView
                 android:gravity="center_vertical|right"
                 android:layout_width="wrap_content"
@@ -25,15 +23,12 @@
                 android:layout_weight="1"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
                 android:id="@+id/newgame__sound"/>
-
         </TableRow>
 
-        <TableRow
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
 
+        <!-- timeout -->
+        <TableRow>
             <TextView
                 android:gravity="center_vertical|right"
                 android:layout_width="wrap_content"
@@ -47,10 +42,24 @@
                 android:id="@+id/newgame__on_timeout"/>
         </TableRow>
 
-        <TableRow
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+        <!-- ends when -->
+        <TableRow>
+            <TextView
+                android:gravity="center_vertical|right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/newgame__game_ends"/>
 
+            <Spinner
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/newgame__game_ends"/>
+
+        </TableRow>
+
+        <!-- time -->
+        <TableRow>
             <TextView
                 android:gravity="center_vertical|right"
                 android:layout_width="wrap_content"
@@ -62,16 +71,15 @@
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/newgame__default_time"
+                android:text="@string/config__default_time"
                 android:id="@+id/newgame__time"/>
-
         </TableRow>
 
     </TableLayout>
 
 
     <Button
-        android:id="@+id/newgame__start"
+        android:id="@+id/newgame__next"
         android:text="@string/newgame__next"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"/>

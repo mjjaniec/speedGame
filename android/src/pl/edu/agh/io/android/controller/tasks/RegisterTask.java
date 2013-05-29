@@ -9,7 +9,7 @@ import pl.edu.agh.io.android.activities.RegisterActivity;
  * Time: 1:23 PM
  * To change this template use File | Settings | File Templates.
  */
-public class RegisterTask extends UsersTaskBase {
+public class RegisterTask extends UpdateAndRegisterBase {
     public RegisterTask(RegisterActivity view, String login, String password, String email, String avatar, String ring) {
         super(view, login, password, email, avatar, ring);
     }

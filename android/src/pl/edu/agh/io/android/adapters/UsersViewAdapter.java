@@ -47,13 +47,18 @@ public class UsersViewAdapter extends ArrayAdapter<User> {
         avatar.setImageDrawable(user.getAvatar());
         name.setText(user.getName());
 
-        if(user.isLost()){
+        if(user.isWinner()){
+            //there is no way to take color from skin? I could not find.
+            name.setTextColor(Color.parseColor("#2aa6ff"));
+        }
+
+        if (user.isLost()) {
             time.setText(R.string.game__lost);
-            time.setTextColor(Color.RED);
-        }else{
+            time.setTextColor(Color.parseColor("#ff5555"));
+        } else {
             time.setText(user.timeString());
-            if(user.isNegative()){
-                time.setTextColor(Color.RED);
+            if (user.isNegative()) {
+                time.setTextColor(Color.parseColor("#ff5555"));
             }
         }
 

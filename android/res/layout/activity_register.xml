@@ -12,11 +12,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <!-- login -->
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- login -->
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

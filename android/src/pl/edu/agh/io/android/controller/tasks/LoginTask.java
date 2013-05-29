@@ -27,10 +27,10 @@ import java.util.List;
  * Time: 2:26 PM
  * To change this template use File | Settings | File Templates.
  */
-public class LoginTask extends AsyncTask<String,Long,Void> {
+public class LoginTask extends AsyncTask<String, Long, Void> {
 
-    public enum LoginResult{
-        OK,INVALID_LOGIN,INVALID_PASSWORD,ERROR
+    public enum LoginResult {
+        OK, INVALID_LOGIN, INVALID_PASSWORD, ERROR
     }
 
     private final String login;
@@ -39,46 +39,50 @@ public class LoginTask extends AsyncTask<String,Long,Void> {
     private HttpClient httpClient;
     private HttpPost httpPost;
 
-    public LoginTask(LoginActivity view, String login, String password){
-        this.view=view;
-        this.login=login;
-        this.password=password;
+    public LoginTask(LoginActivity view, String login, String password) {
+        this.view = view;
+        this.login = login;
+        this.password = password;
     }
+
     @Override
     protected Void doInBackground(String... urls) {
         view.onLogin(doLogin(urls[0]));
         return null;
     }
 
-    private LoginResult handleResopnse(HttpResponse httpResponse){
-        String status=httpResponse.getStatusLine().getReasonPhrase();
+    private JSONObject getUserFromResponse(HttpResponse httpResponse) throws IOException, JSONException {
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
+            return new JSONObject(br.readLine());
+        } finally {
+            if (br != null)
+                br.close();
+        }
+    }
 
-        if(status.startsWith("OK")){
-            try{
-                BufferedReader br = null;
-                JSONObject object;
-                try{
-                    br = new BufferedReader( new InputStreamReader(httpResponse.getEntity().getContent()));
-                    object = new JSONObject(br.readLine());
-                }finally{
-                    if(br!=null)
-                        br.close();
-                }
-                SpeedGameProxy.getInstance().makeUser(object);
-            }catch (JSONException e){
-                return LoginResult.ERROR;
-            } catch (IOException e) {
+
+    private LoginResult handleResopnse(HttpResponse httpResponse) {
+        String status = httpResponse.getStatusLine().getReasonPhrase();
+
+        if (status.startsWith("OK")) {
+            try {
+                SpeedGameProxy.getInstance().
+                        makeUserFromJSON(getUserFromResponse(httpResponse));
+            } catch (Exception e) {
+                Log.w("Login", e.toString());
                 return LoginResult.ERROR;
             }
             return LoginResult.OK;
         }
-        if(status.equals("Bad request")){
+        if (status.equals("Bad Request")) {
             return LoginResult.INVALID_LOGIN;
         }
         return LoginResult.ERROR;
     }
 
-    private LoginResult doLogin(String url){
+    private LoginResult doLogin(String url) {
 
         httpClient = new DefaultHttpClient();
         httpPost = new HttpPost(url);
@@ -87,12 +91,12 @@ public class LoginTask extends AsyncTask<String,Long,Void> {
         try {
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
             nameValuePairs.add(new BasicNameValuePair("login", login));
-            nameValuePairs.add(new BasicNameValuePair("password",password));
-            nameValuePairs.add(new BasicNameValuePair("exists","true"));
+            nameValuePairs.add(new BasicNameValuePair("password", password));
+            nameValuePairs.add(new BasicNameValuePair("exists", "true"));
 
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
-            httpResponse=httpClient.execute(httpPost);
+            httpResponse = httpClient.execute(httpPost);
         } catch (Exception e) {
             Log.e("HTTP Failed", e.toString());
             return LoginResult.ERROR;

@@ -9,6 +9,10 @@
     <string name="common__yes">Yes</string>
     <string name="common__no">No</string>
     <string name="common__preview">Preview</string>
+    <string name="common__field_to_short1">Field is to short, you should provide at least</string>
+    <string name="common__field_to_short2">characters.</string>
+    <string name="common__field_to_long1">Field is to long, you should provide at most</string>
+    <string name="common__field_to_long2">characters.</string>
 
 
     <string name="newgame__number_of_players">Number of players</string>
@@ -17,21 +21,28 @@
     <string name="newgame__on_timeout">After timeout</string>
     <string name="newgame__change_account">Change profile</string>
     <string name="newgame__next">Next</string>
-    <string name="newgame__default_time">5</string>
     <string name="newgame__proper_time">Incorrect time</string>
+    <string name="newgame__loose_game">Loose game</string>
+    <string name="newgame__negative_time">Negative time</string>
+    <string name="newgame__game_ends">Game ends when</string>
+    <string name="newgame__one">one player left</string>
+    <string name="newgame__none">none player left</string>
+
 
     <string name="game__loose_game">Loose game</string>
     <string name="game__game_name">Name of the Game</string>
     <string name="game__timeout_loose1">Player</string>
-    <string name="game__timeout_loose2">looses the game.</string>
+    <string name="game__timeout_loose2">loose the game.</string>
     <string name="game__timeout_negative1">Player</string>
-    <string name="game__timeout_negative2" >has reached timeout, from now negative time would be counted.</string>
+    <string name="game__timeout_negative2">has reached timeout, from now negative time will be counted.</string>
     <string name="game__win1">Player</string>
-    <string name="game__win2">Has won the game. Congratulations!</string>
+    <string name="game__win2">has won the game. Congratulations!</string>
     <string name="game__lost">lost!</string>
-    <string name="game__start_the_game">Click anywhere to start the Game!</string>
-    <string name="game__next_player">Click anywhere to end move.</string>
-    <string name="game__really_loose">Do you really loose?</string>
+    <string name="game__start_the_game">Click anywhere to start the game!</string>
+    <string name="game__next_player">Click anywhere to end your move.</string>
+    <string name="game__really_loose">Did you loose?</string>
+    <string name="game__pause">Paused</string>
+    <string name="game__back_to_game">Back to game?</string>
 
 
     <string name="login__play">Play</string>
@@ -39,14 +50,12 @@
     <string name="login__login">Login/Nick</string>
     <string name="login__password">Password</string>
     <string name="login__new_account">Create new user</string>
-    <string name="login__no_account">Don\'t want account? Just enter your nick and go!</string>
-    <string name="login__invalid_login">Invalid login. Please retype and try again. You may also create new
-        account.
-    </string>
-    <string name="login__invalid_password">Invalid login or password. Please retype and try again.
+    <string name="login__error">An error occurred during communication with server.</string>
+    <string name="login__no_account">You can play without an account - enter your nick and go!</string>
+    <string name="login__invalid_login_or_password">Invalid login or password. Please retype and try again.
         You may also create new account.
     </string>
-    <string name="login__error">An error occurred during communication with server.</string>
+
 
     <string name="register__avatar">Avatar</string>
     <string name="register__ring">Ring</string>
@@ -58,26 +67,36 @@
     <string name="register__change">Change</string>
     <string name="register__default_avatar">avatar.jpg</string>
     <string name="register__default_ring">ring.mp3</string>
-    <string name="register__choose_avatar">Please select an avatar</string>
-    <string name="register__choose_ring">Please select a ring</string>
-    <string name="register__error">An error occurred during connection to server</string>
+    <string name="register__choose_avatar">Please select an avatar.</string>
+    <string name="register__choose_ring">Please select a ring.</string>
+    <string name="register__error">An error occurred during connection to server.</string>
     <string name="register__user_exists">User with the same login already exists.</string>
     <string name="register__validate">Please fill and validate all the fields before registration.</string>
     <string name="register__sending_file">Sending files, please wait...</string>
     <string name="register__update">Update</string>
+    <string name="register__email_valid_error">Please enter valid email. ex. abc@example.com</string>
+    <string name="register__retype_valid_error">Retyped password should match original password</string>
+    <string name="register__login_valid_error">Username may consist of a-z, 0-9, underscores, begin with a letter.
+    </string>
+    <string name="register__password_valid_error">Password may consist of a-z, 0-9, underscores, begin with a letter.
+    </string>
+
+
 
     <string name="choosefile__open">Open</string>
     <string name="choosefile__pick">Pick</string>
 
 
-    <string name="offline__warning">Warning! You are currently offline. Your settings would not be saved on server.
-    </string>
     <string name="offline__nick">Nick</string>
     <string name="offline__change">Change</string>
     <string name="offline__play">Add</string>
+    <string name="offline__warning">Warning! You are currently offline. Your settings will not be saved on server.
+    </string>
+
 
     <string name="users__play">Play</string>
-    <string name="users__back">back</string>
-
+    <string name="users__back">Back</string>
+    <string name="users__at_least_two">You need at least two players to start the game.</string>
+    <string name="users__at_least_one">You need at least one player to start the game.</string>
 
 </resources>

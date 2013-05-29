@@ -1,9 +1,7 @@
 package pl.edu.agh.io.android.activities;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.widget.TextView;
-import pl.edu.agh.io.android.controller.SpeedGameProxy;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,27 +11,41 @@ import pl.edu.agh.io.android.controller.SpeedGameProxy;
  * To change this template use File | Settings | File Templates.
  */
 public abstract class AbstractActivity extends Activity {
-    protected String getStr(int viewId){
+    /**
+     * get string directly from child view
+     *
+     * @param viewId child view id
+     * @return string from child view
+     */
+    protected String getStr(int viewId) {
         TextView view = (TextView) findViewById(viewId);
-        if(view==null)return null;
+        if (view == null) return null;
         return view.getText().toString();
     }
 
-    protected void setStr(int viewID,String string){
+    /**
+     * set string directly to child view
+     *
+     * @param viewID child view id
+     * @param string string to be set
+     */
+    protected void setStr(int viewID, String string) {
         TextView view = (TextView) findViewById(viewID);
-        if(view==null)return;
+        if (view == null) return;
         view.setText(string);
     }
 
-    protected void setStr(int viewID,int stringID){
+
+    /**
+     * set string directly to child view
+     *
+     * @param viewID   child view id
+     * @param stringID id of string to be set
+     */
+    protected void setStr(int viewID, int stringID) {
         TextView view = (TextView) findViewById(viewID);
-        if(view==null)return;
+        if (view == null) return;
         view.setText(stringID);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        SpeedGameProxy.getInstance().setContext(getApplicationContext());
-    }
 }

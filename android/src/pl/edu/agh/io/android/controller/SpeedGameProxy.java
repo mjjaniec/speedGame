@@ -55,77 +55,90 @@ public class SpeedGameProxy {
     }
 
 
-    private static SpeedGameProxy instance;
-    private static Object lock = new Object();
-    private Context context;
+    private SpeedGameProxy() {
+    }
+
+    private static SpeedGameProxy instance = new SpeedGameProxy();
+
+    public static SpeedGameProxy getInstance() {
+        return instance;
+    }
+
+
     private boolean isChecked = false;
     private boolean online = false;
+    private Context _context;
+
+    private Context getContext() {
+        //not an initialization -> synchronization not needed
+        if (_context == null)
+            _context = AppState.getInstance().getContext();
+        return _context;
+    }
 
     public boolean isOnline() {
         return online;
     }
 
-    public void reset(){
+    public void reset() {
         isChecked = false;
         online = false;
     }
 
 
-    public boolean isOnlineAsync(final IProcedure<Boolean> callback) {
-        if (isChecked) {
-            return online;
-        }
-        synchronized (lock) {
-            if (!isChecked) {
-                online = false;
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            InetAddress address = InetAddress.getByName(
-                                    context.getText(R.string.config__server_url).toString());
-                            if (address != null) {
-                                if (address.isReachable(500)) {
-                                    online = true;
-                                }
-                            }
-                        } catch (Exception e) {
-                            Log.w("SpeedGame", e.toString());
-
+    public void isOnlineAsync(final IProcedure<Boolean> callback) {
+        if (!isChecked) {
+            online = false;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        InetAddress address = InetAddress.getByName(
+                                getContext().getText(R.string.config__server_url).toString());
+                        if (address != null && address.isReachable(500)) {
+                            online = true;
                         }
-                        isChecked = true;
-                        callback.call(online);
+                    } catch (Exception e) {
+                        Log.w("SpeedGame", e.toString());
                     }
-                }).start();
-            }
+                    isChecked = true;
+                    callback.call(online);
+                }
+            }).start();
         }
-        return online;
     }
 
-    private SpeedGameProxy() {
-
+    private URL formDownloadUrl(String filename) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getServerUrl(Service.getFile));
+        sb.append(getContext().getString(R.string.config__download_parameter));
+        sb.append(filename);
+        try {
+            return new URL(sb.toString());
+        } catch (MalformedURLException e) {
+            Log.e("URL", e.toString());
+            return null;
+        }
     }
 
-    public void makeUser(final JSONObject object) {
+    public void makeUserFromJSON(final JSONObject object) {
 
         try {
             final Semaphore sem = new Semaphore(0);
             final String avatar_filename = object.getString("avatar");
-            final String ring_filename = object.getString("ring");
-            final URL ring_url = new URL(getServerUrl(Service.getFile)+"?getfile="+ring_filename);
-           // final String email = object.getString("email");
+            final URL ring_url = formDownloadUrl(object.getString("ring"));
             final String login = object.getString("login");
 
             new GetFileTask(new IProcedure<InputStream>() {
                 @Override
                 public void call(InputStream arg) {
                     Drawable avatar = null;
-                    try{
+                    try {
                         avatar = Drawable.createFromStream(arg, avatar_filename);
-                    }catch(Exception e){
-                        Log.w("login","downloading error");
+                    } catch (Exception e) {
+                        Log.w("login", "downloading error");
                     }
-                    UsersController.getInstance().addUser(new User(login,context,avatar,ring_url));
+                    UsersController.getInstance().addUser(new User(login, avatar, ring_url));
                     sem.release();
                 }
             }, new FileItem(object.getString("avatar"), null, false)).execute(getServerUrl(Service.getFile));
@@ -134,22 +147,7 @@ public class SpeedGameProxy {
 
         } catch (JSONException e) {
             Log.e("JSON", e.toString());
-        }catch (MalformedURLException e){
-            Log.e("URL", e.toString());
         }
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
-    }
-
-    public static SpeedGameProxy getInstance() {
-        if (instance != null) return instance;
-        synchronized (lock) {
-            if (instance == null)
-                instance = new SpeedGameProxy();
-        }
-        return instance;
     }
 
     public void login(LoginActivity view, String login, String password) {
@@ -169,7 +167,7 @@ public class SpeedGameProxy {
     }
 
     private String getServerUrl(Service service) {
-        Resources res = context.getResources();
+        Resources res = getContext().getResources();
         StringBuilder sb = new StringBuilder();
         sb.append("http://");
         sb.append(res.getString(R.string.config__server_url)).append(":");

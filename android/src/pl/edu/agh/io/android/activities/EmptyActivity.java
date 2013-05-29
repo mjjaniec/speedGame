@@ -1,7 +1,7 @@
 package pl.edu.agh.io.android.activities;
 
 import android.content.Intent;
-import pl.edu.agh.io.android.controller.AppController;
+import pl.edu.agh.io.android.controller.AppState;
 import pl.edu.agh.io.android.controller.SpeedGameProxy;
 import pl.edu.agh.io.android.controller.UsersController;
 import pl.edu.agh.io.android.misc.IProcedure;
@@ -17,8 +17,8 @@ public class EmptyActivity extends AbstractActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        AppController app = AppController.getInstance();
-        if(app.isFirstTime()){
+        AppState app = AppState.getInstance();
+        if (app.isFirstTime()) {
             app.setContext(this);
             app.setAdditionalPlayer(false);
             SpeedGameProxy.getInstance().isOnlineAsync(new IProcedure<Boolean>() {
@@ -34,7 +34,7 @@ public class EmptyActivity extends AbstractActivity {
                 }
             });
         } else {
-            AppController.getInstance().reset();
+            AppState.getInstance().reset();
             SpeedGameProxy.getInstance().reset();
             UsersController.reset();
             finish();

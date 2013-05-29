@@ -8,17 +8,17 @@ package pl.edu.agh.io.android.model;
  * To change this template use File | Settings | File Templates.
  */
 public class FileItem {
-    private final String[] soundExtensions = { "mp3", "vaw", "ogg", "flac", "wma" };
-    private final String[] imageExtensions = { "jpg", "png", "gif", "jpeg", "tif", "tiff" };
+    private final String[] soundExtensions = {"mp3", "vaw", "ogg", "flac", "wma"};
+    private final String[] imageExtensions = {"jpg", "png", "gif", "jpeg", "tif", "tiff"};
 
     private String name;
     private String path;
     private boolean dir;
 
-    public FileItem(String name, String path, boolean isDirectory){
-        this.name=name;
-        this.path=path;
-        this.dir=isDirectory;
+    public FileItem(String name, String path, boolean isDirectory) {
+        this.name = name;
+        this.path = path;
+        this.dir = isDirectory;
     }
 
     public String getName() {
@@ -30,25 +30,25 @@ public class FileItem {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return name;
     }
 
-    public boolean isDirectory(){
+    public boolean isDirectory() {
         return dir;
     }
 
-    public boolean isSound(){
+    public boolean isSound() {
         return isA(soundExtensions);
     }
 
-    public boolean isImage(){
+    public boolean isImage() {
         return isA(imageExtensions);
     }
 
-    private boolean isA(String[] what){
-        for(String extension: what)
-            if(name.endsWith(extension))
+    private boolean isA(String[] what) {
+        for (String extension : what)
+            if (name.endsWith(extension))
                 return true;
         return false;
     }

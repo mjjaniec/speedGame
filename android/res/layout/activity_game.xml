@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/game__next"
-    android:layout_margin="@dimen/margin">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:id="@+id/game__next"
+              android:layout_margin="@dimen/margin">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +28,6 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/common__preview"
                 />
 
             <TextView
@@ -57,24 +56,33 @@
             >
 
             <ListView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/game__queue"
+                />
+
+            <Space
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:id="@+id/game__queue"
-            />
+                android:id="@+id/game__next2"/>
+
         </LinearLayout>
 
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
+
         <TextView
-                android:id="@+id/game__caption"
-                android:layout_width="0dip"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="@string/common__preview"/>
+            android:id="@+id/game__info"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/common__preview"/>
+
         <Button
             android:id="@+id/game__loose"
             android:layout_height="wrap_content"

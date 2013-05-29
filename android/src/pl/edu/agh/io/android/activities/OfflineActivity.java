@@ -7,10 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import pl.edu.agh.io.android.controller.AppController;
+import pl.edu.agh.io.android.controller.AppState;
 import pl.edu.agh.io.android.controller.UsersController;
 import pl.edu.agh.io.android.misc.IProcedure;
-import pl.edu.agh.io.android.misc.SetText;
+import pl.edu.agh.io.android.misc.ViewTextSetter;
 import pl.edu.agh.io.android.model.FileItem;
 import pl.edu.agh.io.android.model.User;
 
@@ -41,25 +41,21 @@ public class OfflineActivity extends AbstractActivity {
             public void onClick(View view) {
                 Drawable pic = null;
 
-                if(avatar.value != null){
+                if (avatar.value != null) {
                     pic = Drawable.createFromPath(avatar.value.getPath());
                 }
 
                 UsersController.getInstance().addUser(
-                        new User(getStr(R.id.offline__nick),
-                                view.getContext(),
-                                pic,
-                                ring.value
-                                ));
+                        new User(getStr(R.id.offline__nick), pic, ring.value));
                 finish();
             }
         });
         findViewById(R.id.offline__change_avatar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppController.getInstance().setCallback(
+                AppState.getInstance().setFilesViewCallback(
                         new UrlSetter((TextView) findViewById(R.id.offline__avatar), avatar));
-                AppController.getInstance().setWhat(R.string.register__choose_avatar);
+                AppState.getInstance().setFilesViewTitleId(R.string.register__choose_avatar);
                 Intent myIntent = new Intent(view.getContext(), ChooseFileActivity.class);
                 startActivityForResult(myIntent, 0);
             }
@@ -68,20 +64,20 @@ public class OfflineActivity extends AbstractActivity {
         findViewById(R.id.offline__change_ring).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppController.getInstance().setCallback(
-                        new UrlSetter((TextView)findViewById(R.id.offline__ring),ring));
-                AppController.getInstance().setWhat(R.string.register__choose_ring);
+                AppState.getInstance().setFilesViewCallback(
+                        new UrlSetter((TextView) findViewById(R.id.offline__ring), ring));
+                AppState.getInstance().setFilesViewTitleId(R.string.register__choose_ring);
                 Intent myIntent = new Intent(view.getContext(), ChooseFileActivity.class);
                 startActivityForResult(myIntent, 0);
             }
         });
     }
 
-    private static class URLHolder{
+    private static class URLHolder {
         public URL value = null;
     }
 
-    private class UrlSetter implements IProcedure<FileItem>{
+    private class UrlSetter implements IProcedure<FileItem> {
 
         private TextView view;
         private URLHolder holder;
@@ -94,11 +90,11 @@ public class OfflineActivity extends AbstractActivity {
 
         @Override
         public void call(FileItem arg) {
-            runOnUiThread(new SetText(view,arg.getName()));
-            try{
-                holder.value=new URL("file://"+arg.getPath());
-            }catch (MalformedURLException e){
-                Log.d("offline",e.getMessage());
+            runOnUiThread(new ViewTextSetter(view, arg.getName()));
+            try {
+                holder.value = new URL("file://" + arg.getPath());
+            } catch (MalformedURLException e) {
+                Log.d("offline", e.getMessage());
             }
         }
     }

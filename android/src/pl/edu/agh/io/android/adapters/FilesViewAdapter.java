@@ -8,7 +8,6 @@ package pl.edu.agh.io.android.adapters;
  * To change this template use File | Settings | File Templates.
  */
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -34,20 +33,20 @@ public class FilesViewAdapter extends ArrayAdapter<FileItem> {
 
     private String root;
 
-    public static interface OnItemClick{
+    public static interface OnItemClick {
         void onItemClick(FileItem fileItem, boolean picked);
     }
 
     private OnItemClick onItemClick;
 
-    public void setOnItemClick(OnItemClick onItemClick){
-        this.onItemClick=onItemClick;
+    public void setOnItemClick(OnItemClick onItemClick) {
+        this.onItemClick = onItemClick;
     }
 
 
-    public static FilesViewAdapter createInstanced(Context context){
+    public static FilesViewAdapter createInstanced(Context context) {
         List<FileItem> list = new ArrayList<FileItem>();
-        return new FilesViewAdapter(context,list);
+        return new FilesViewAdapter(context, list);
 
     }
 
@@ -58,35 +57,32 @@ public class FilesViewAdapter extends ArrayAdapter<FileItem> {
         this.values = values;
 
         File ext = Environment.getExternalStorageDirectory();
-        if(ext.listFiles()!=null){
+        if (ext.listFiles() != null) {
             root = ext.getAbsolutePath();
-        }else{
-            root="/";
+        } else {
+            root = Environment.getDataDirectory().getAbsolutePath();
         }
         getDir(root);
     }
 
 
-    private void getDir(String dirPath)
-    {
+    private void getDir(String dirPath) {
         values.clear();
         File f = new File(dirPath);
         File[] files = f.listFiles();
 
-        if(!dirPath.equals(root)){
-            values.add(new FileItem("../",f.getParent(),true));
+        if (!dirPath.equals(root)) {
+            values.add(new FileItem("../", f.getParent(), true));
         }
 
         Arrays.sort(files, filecomparator);
 
-        for(int i=0; i < files.length; i++) {
-            File file = files[i];
-
-            if(!file.isHidden() && file.canRead()){
-                if(file.isDirectory()){
-                    values.add(new FileItem(file.getName() + "/",file.getPath(),true));
-                }else{
-                    values.add(new FileItem(file.getName(),file.getPath(), false));
+        for (File file : files) {
+            if (!file.isHidden() && file.canRead()) {
+                if (file.isDirectory()) {
+                    values.add(new FileItem(file.getName() + "/", file.getPath(), true));
+                } else {
+                    values.add(new FileItem(file.getName(), file.getPath(), false));
                 }
             }
         }
@@ -94,20 +90,23 @@ public class FilesViewAdapter extends ArrayAdapter<FileItem> {
         notifyDataSetChanged();
     }
 
-    private Comparator<? super File> filecomparator = new Comparator<File>(){
+    /**
+     * Directories first in alphabetical order then files in the same order.
+     */
+    private Comparator<? super File> filecomparator = new Comparator<File>() {
 
         public int compare(File file1, File file2) {
 
-            if(file1.isDirectory()){
-                if (file2.isDirectory()){
+            if (file1.isDirectory()) {
+                if (file2.isDirectory()) {
                     return String.valueOf(file1.getName().toLowerCase()).compareTo(file2.getName().toLowerCase());
-                }else{
+                } else {
                     return -1;
                 }
-            }else {
-                if (file2.isDirectory()){
+            } else {
+                if (file2.isDirectory()) {
                     return 1;
-                }else{
+                } else {
                     return String.valueOf(file1.getName().toLowerCase()).compareTo(file2.getName().toLowerCase());
                 }
             }
@@ -115,30 +114,46 @@ public class FilesViewAdapter extends ArrayAdapter<FileItem> {
         }
     };
 
-    class  FilesViewOnClickListener implements View.OnClickListener{
+    class FilesViewOnClickListener implements View.OnClickListener {
 
         private int position;
-        public FilesViewOnClickListener(int position){
-            this.position=position;
+
+        public FilesViewOnClickListener(int position) {
+            this.position = position;
         }
+
         @Override
         public void onClick(View v) {
             FileItem fileItem = values.get(position);
             File file = new File(fileItem.getPath());
 
-            if (file.isDirectory())
-            {
-                if(file.canRead()){
-                    getDir(fileItem.getPath());
-                }else{
-                    new AlertDialog.Builder(context)
-                            .setTitle("[" + file.getName() + "] " + context.getText(R.string.common__cant_read_file))
-                            .setPositiveButton(R.string.common__ok, null).show();
-                }
-            }else {
-                if(onItemClick!=null)
-                    onItemClick.onItemClick(fileItem,!fileItem.isDirectory());
+            if (file.isDirectory()) {
+                getDir(fileItem.getPath());
+            } else {
+                if (onItemClick != null)
+                    onItemClick.onItemClick(fileItem, !fileItem.isDirectory());
             }
+        }
+    }
+
+    private int getIconId(FileItem fileItem) {
+        if (fileItem.isDirectory())
+            return R.drawable.folder;
+
+        if (fileItem.isImage())
+            return R.drawable.picture;
+
+        if (fileItem.isSound())
+            return R.drawable.note;
+
+        return R.drawable.file;
+    }
+
+    private int getButtonCaptionId(FileItem fileItem) {
+        if (fileItem.isDirectory()) {
+            return R.string.choosefile__open;
+        } else {
+            return R.string.choosefile__pick;
         }
     }
 
@@ -155,23 +170,8 @@ public class FilesViewAdapter extends ArrayAdapter<FileItem> {
         FileItem fileItem = values.get(position);
 
         textView.setText(fileItem.toString());
-
-        if(fileItem.isDirectory()){
-            imageView.setImageResource(R.drawable.folder);
-        }else if(fileItem.isImage()){
-            imageView.setImageResource(R.drawable.picture);
-        }else if(fileItem.isSound()){
-            imageView.setImageResource(R.drawable.note);
-        }else{
-            imageView.setImageResource(R.drawable.file);
-        }
-
-        if(fileItem.isDirectory()){
-            button.setText(R.string.choosefile__open);
-        }else {
-            button.setText(R.string.choosefile__pick);
-        }
-
+        button.setText(getButtonCaptionId(fileItem));
+        imageView.setImageResource(getIconId(fileItem));
         button.setOnClickListener(new FilesViewOnClickListener(position));
 
         return rowView;

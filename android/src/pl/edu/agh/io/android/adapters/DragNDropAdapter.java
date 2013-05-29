@@ -17,7 +17,6 @@ package pl.edu.agh.io.android.adapters;
 
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,8 +48,8 @@ public final class DragNDropAdapter extends BaseAdapter {
 
     public DragNDropAdapter(Context context, List<User> users) {
         super();
-        this.users=users;
-        this.context=context;
+        this.users = users;
+        this.context = context;
 
     }
 
@@ -62,15 +61,15 @@ public final class DragNDropAdapter extends BaseAdapter {
         this.onRemoveListener = onRemoveListener;
     }
 
-    /*internal*/ void onDrop(int form, int to){
-        if(onDropListener!=null)
-            onDropListener.onDrop(form,to);
+    /*internal*/ void onDrop(int form, int to) {
+        if (onDropListener != null)
+            onDropListener.onDrop(form, to);
     }
-
 
 
     /**
      * The number of items in the list
+     *
      * @see android.widget.ListAdapter#getCount()
      */
     public int getCount() {
@@ -91,6 +90,7 @@ public final class DragNDropAdapter extends BaseAdapter {
 
     /**
      * Use the array index as a unique id.
+     *
      * @see android.widget.ListAdapter#getItemId(int)
      */
     public long getItemId(int position) {
@@ -105,6 +105,7 @@ public final class DragNDropAdapter extends BaseAdapter {
         View rowView = inflater.inflate(R.layout.row_dnd_usersview, parent, false);
 
         User user = users.get(position);
+
         TextView name = (TextView) rowView.findViewById(R.id.dnd_usersview__name);
         TextView time = (TextView) rowView.findViewById(R.id.dnd_usersview__time);
         ImageButton remove = (ImageButton) rowView.findViewById(R.id.dnd_usersview__remove);
@@ -113,27 +114,17 @@ public final class DragNDropAdapter extends BaseAdapter {
 
         avatar.setImageDrawable(user.getAvatar());
         name.setText(user.getName());
-
-        if (user.isLost()) {
-            time.setText(R.string.game__lost);
-            time.setTextColor(Color.RED);
-        } else {
-            time.setText(user.timeString());
-            if (user.isNegative()) {
-                time.setTextColor(Color.RED);
-            }
-        }
-
-        remove.setOnClickListener(new Handler(position));
+        time.setText(user.timeString());
+        remove.setOnClickListener(new RemoveHandler(position));
 
         return rowView;
     }
 
-    private class Handler implements View.OnClickListener {
+    private class RemoveHandler implements View.OnClickListener {
 
         private int row;
 
-        public Handler(int row) {
+        public RemoveHandler(int row) {
             this.row = row;
         }
 
@@ -143,7 +134,6 @@ public final class DragNDropAdapter extends BaseAdapter {
                 onRemoveListener.onRemove(row);
         }
     }
-
 
 
 }

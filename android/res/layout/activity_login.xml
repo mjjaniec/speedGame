@@ -28,7 +28,7 @@
                 android:text="@string/login__login"/>
 
             <EditText
-                android:inputType="textNoSuggestions"
+                android:inputType="textPersonName"
                 android:id="@+id/login__login"
                 android:layout_width="0dp"
                 android:layout_weight="1"
