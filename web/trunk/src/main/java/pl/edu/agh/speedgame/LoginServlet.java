@@ -26,9 +26,6 @@ public class LoginServlet extends HttpServlet {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
-        String android = request.getParameter("from_android_app");
-        boolean isAndroid = android != null && android.equals("true");
-
         try(OurSessionReplacement sessionReplacement = SessionFactorySingleton.getInstance().createSessionReplacement()){
             User user = (User) sessionReplacement.get(User.class, login);
 
@@ -42,8 +39,7 @@ public class LoginServlet extends HttpServlet {
                     return;
                 }
 
-                if(isAndroid)response.sendError(HttpServletResponse.SC_OK,"INVALID_LOGIN");
-                else response.sendRedirect(response.encodeRedirectURL("/main_page.jsp?error=" + "User doesn't exists"));
+               response.sendRedirect(response.encodeRedirectURL("/main_page.jsp?error=" + "User doesn't exists"));
                         return;
             }
 
@@ -65,24 +61,16 @@ public class LoginServlet extends HttpServlet {
                     return;
                 }
 
-		        if(isAndroid)response.sendError(HttpServletResponse.SC_OK,"OK");
-		        else{
-                    	request.getSession().setAttribute("user", user);
-                    	response.sendRedirect("/jsp/logged.jsp");
-        		}
+               	request.getSession().setAttribute("user", user);
+               	response.sendRedirect("/jsp/logged.jsp");
             } else {
 
                 if(isExists) {
                     response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                     return;
                 }
-
-        		if(isAndroid)response.sendError(HttpServletResponse.SC_OK,"INVALID_PASSWORD");
-                else response.sendRedirect(response.encodeRedirectURL("/main_page.jsp?error=" + "Wrong login or password"));
+                response.sendRedirect(response.encodeRedirectURL("/main_page.jsp?error=" + "Wrong login or password"));
             }
-
         }
-
-
     }
 }
