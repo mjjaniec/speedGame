@@ -55,6 +55,7 @@ public class RegisterActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+
         update = !AppState.getInstance().isCreatingNewAccount();
 
         info = (TextView) findViewById(R.id.register__info);
@@ -67,6 +68,7 @@ public class RegisterActivity extends AbstractActivity {
         findViewById(R.id.register__ring).setEnabled(false);
 
         if (update) {
+            setTitle(R.string.register__update_title);
             login.setEnabled(false);
             oldUser = UsersController.getInstance().getUsers().get(0);
             //updated user is always first user

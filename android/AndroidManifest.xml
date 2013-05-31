@@ -22,12 +22,12 @@
 
         <activity android:name=".RanksActivity"/>
         <activity android:name=".LoginActivity"/>
-        <activity android:name=".OfflineActivity"/>
-        <activity android:name=".RegisterActivity"/>
+        <activity android:name=".OfflineActivity" android:label="@string/offline__title"/>
+        <activity android:name=".RegisterActivity" android:label="@string/register__title"/>
         <activity android:name=".ChooseFileActivity"/>
-        <activity android:name=".NewGameActivity"/>
-        <activity android:name=".UsersActivity"/>
-        <activity android:name=".GameActivity"/>
+        <activity android:name=".NewGameActivity" android:label="@string/newgame__title"/>
+        <activity android:name=".UsersActivity" android:label="@string/users__title"/>
+        <activity android:name=".GameActivity" android:label="@string/game__title"/>
 
     </application>
 </manifest>

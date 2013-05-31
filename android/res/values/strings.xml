@@ -15,20 +15,22 @@
     <string name="common__field_to_long2">characters.</string>
 
 
-    <string name="newgame__number_of_players">Number of players</string>
-    <string name="newgame__time_per_player">Time per player</string>
+    <string name="newgame__title">New Game</string>
+    <string name="newgame__time_per_player">Choose time</string>
     <string name="newgame__sound">Sounds</string>
-    <string name="newgame__on_timeout">After timeout</string>
+    <string name="newgame__on_timeout">Choose game mode</string>
     <string name="newgame__change_account">Change profile</string>
     <string name="newgame__next">Next</string>
     <string name="newgame__proper_time">Incorrect time</string>
-    <string name="newgame__loose_game">Loose game</string>
-    <string name="newgame__negative_time">Negative time</string>
+    <string name="newgame__loose_game">Till end of time</string>
+    <string name="newgame__negative_time">Penalty points</string>
     <string name="newgame__game_ends">Game ends when</string>
-    <string name="newgame__one">one player left</string>
-    <string name="newgame__none">none player left</string>
+    <string name="newgame__one">One player left</string>
+    <string name="newgame__none">None player left</string>
 
 
+
+    <string name="game__title">Game</string>
     <string name="game__loose_game">Loose game</string>
     <string name="game__game_name">Name of the Game</string>
     <string name="game__timeout_loose1">Player</string>
@@ -57,6 +59,9 @@
     </string>
 
 
+
+    <string name="register__title">Create new user</string>
+    <string name="register__update_title">Change profile</string>
     <string name="register__avatar">Avatar</string>
     <string name="register__ring">Ring</string>
     <string name="register__login">Login</string>
@@ -64,7 +69,7 @@
     <string name="register__email">Email</string>
     <string name="register__retype">Retype</string>
     <string name="register__register">Create an account</string>
-    <string name="register__change">Change</string>
+    <string name="register__change">Select</string>
     <string name="register__default_avatar">avatar.jpg</string>
     <string name="register__default_ring">ring.mp3</string>
     <string name="register__choose_avatar">Please select an avatar.</string>
@@ -87,8 +92,9 @@
     <string name="choosefile__pick">Pick</string>
 
 
+    <string name="offline__title">Offline</string>
     <string name="offline__nick">Nick</string>
-    <string name="offline__change">Change</string>
+    <string name="offline__change">Select</string>
     <string name="offline__play">Add</string>
     <string name="offline__warning">Warning! You are currently offline. Your settings will not be saved on server.
     </string>
@@ -96,6 +102,7 @@
 
     <string name="users__play">Play</string>
     <string name="users__back">Back</string>
+    <string name="users__title">Game Setup</string>
     <string name="users__at_least_two">You need at least two players to start the game.</string>
     <string name="users__at_least_one">You need at least one player to start the game.</string>
 

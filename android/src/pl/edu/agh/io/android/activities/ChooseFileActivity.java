@@ -29,8 +29,7 @@ public class ChooseFileActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choosefile);
 
-        ((TextView) findViewById(R.id.choosefile_what)).setText(
-                AppState.getInstance().getFilesViewTitleId());
+        setTitle(AppState.getInstance().getFilesViewTitleId());
 
         myPath = (TextView) findViewById(R.id.choosefile_path);
 
